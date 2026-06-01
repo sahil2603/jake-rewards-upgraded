@@ -11,6 +11,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+<style>
+@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes shimmerLine{0%{left:-100%}100%{left:100%}}
+@keyframes codeGlow{0%,100%{text-shadow:0 0 20px rgba(230,180,50,0.3)}50%{text-shadow:0 0 40px rgba(230,180,50,0.7),0 0 80px rgba(230,180,50,0.3)}}
+@keyframes rewardPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes socialFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+</style>
 </head>
 <body>
 
@@ -53,7 +60,7 @@
     <canvas id="particles"></canvas>
   </div>
   <div class="hero-content">
-    <div class="hero-badge">🎰 Stake Affiliate · Code: JAKE</div>
+    <div class="hero-badge" style="animation:badgeFloat 3s ease-in-out infinite;">🎰 Stake Affiliate · Code: JAKE</div>
     <h1 class="hero-title">
       TAKE ADVANTAGE OF THE MOST
       <span class="hero-accent">REWARDING</span>
@@ -72,9 +79,10 @@
       <div class="stat"><span class="stat-num">$10</span><span class="stat-label">Free Signup Bonus</span></div>
     </div>
   </div>
-  <div class="hero-code-card">
+  <div class="hero-code-card" style="position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:-100%;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(230,180,50,0.8),transparent);animation:shimmerLine 2.5s linear infinite;z-index:10;"></div>
     <div class="code-card-label">Your Affiliate Code</div>
-    <div class="code-card-value">JAKE</div>
+    <div class="code-card-value" style="animation:codeGlow 2s ease-in-out infinite;">JAKE</div>
     <button class="code-copy-btn" onclick="copyCode()">Copy Code</button>
     <div class="code-card-sub">Enter on Stake to unlock all rewards</div>
   </div>
@@ -87,7 +95,7 @@
     <h2>EVERY REWARD, EXPLAINED</h2>
   </div>
   <div class="rewards-grid">
-    <div class="reward-card featured">
+    <div class="reward-card featured" style="position:relative;overflow:hidden;">
       <div class="reward-icon">🏆</div>
       <div class="reward-amount">$75,000</div>
       <div class="reward-name">Monthly Leaderboard</div>
@@ -192,19 +200,19 @@
   </div>
   <div class="socials-grid">
     <a href="https://discord.gg/jakethedegen" target="_blank" class="social-card discord">
-      <div class="social-icon">💬</div>
+      <div class="social-icon"><svg width="36" height="36" viewBox="0 0 127.14 96.36" fill="#5865F2" xmlns="http://www.w3.org/2000/svg"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg></div>
       <div class="social-name">Discord</div>
       <div class="social-handle">Jake's Community</div>
       <div class="social-cta">Join Server →</div>
     </a>
     <a href="https://kick.com/itsjakeuwu" target="_blank" class="social-card kick">
-      <div class="social-icon">▶</div>
+      <div class="social-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="#53FC18" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h4v6.5L10.5 2H16l-6 8 6 8h-5.5L6 11.5V18H2V2z"/><path d="M16 2h4v6.5L22 6v4l-2 2 2 2v4l-2-2.5V18h-4V2z"/></svg></div>
       <div class="social-name">Kick</div>
       <div class="social-handle">itsjakeuwu</div>
       <div class="social-cta">Watch Live →</div>
     </a>
     <a href="https://www.youtube.com/@itsjakeuwu" target="_blank" class="social-card youtube">
-      <div class="social-icon">📺</div>
+      <div class="social-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
       <div class="social-name">YouTube</div>
       <div class="social-handle">itsjakeuwu</div>
       <div class="social-cta">Subscribe →</div>
@@ -294,6 +302,41 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.1});
 document.querySelectorAll('.reward-card,.social-card,.podium-card').forEach(el=>observer.observe(el));
+
+// Staggered entrance animations
+document.querySelectorAll('.reward-card').forEach((card,i)=>{
+  card.style.transitionDelay = (i*0.1)+'s';
+});
+document.querySelectorAll('.social-card').forEach((card,i)=>{
+  card.style.transitionDelay = (i*0.12)+'s';
+  card.addEventListener('mouseenter',()=>card.style.animation='socialFloat 0.6s ease');
+  card.addEventListener('mouseleave',()=>card.style.animation='');
+});
+
+// Animate stat numbers counting up
+function animateCount(el, target, prefix='$', suffix=''){
+  let current=0; const step=target/60;
+  const timer=setInterval(()=>{
+    current=Math.min(current+step, target);
+    const val = target >= 1000 ? Math.round(current).toLocaleString() : Math.round(current);
+    el.textContent = prefix + val + suffix;
+    if(current>=target) clearInterval(timer);
+  },16);
+}
+const statNums = document.querySelectorAll('.stat-num');
+const statObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const txt=el.textContent;
+      if(txt.includes('75K')) animateCount(el,75,'$','K');
+      else if(txt.includes('500')) animateCount(el,500,'$');
+      else if(txt.includes('10')) animateCount(el,10,'$');
+      statObs.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+statNums.forEach(el=>statObs.observe(el));
 </script>
 </body>
 </html>

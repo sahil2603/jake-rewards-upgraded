@@ -63,20 +63,23 @@
 </div>
 
 <div class="bonus-grid">
-  <div class="bonus-card signup">
-    <div class="bonus-header">
-      <div class="bonus-icon">💸</div>
-      <div class="bonus-amount-badge">$10 FREE</div>
+  <div class="bonus-card signup" style="position:relative;overflow:hidden;">
+    <canvas id="signup-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <div style="position:relative;z-index:1;">
+      <div class="bonus-header">
+        <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite;">💸</div>
+        <div class="bonus-amount-badge" style="animation:goldPulse 2s ease-in-out infinite;">$10 FREE</div>
+      </div>
+      <div class="bonus-title">FREE SIGNUP BONUS</div>
+      <div class="bonus-desc">Sign up with code <strong style="color:var(--gold)">JAKE</strong> on Stake and receive a free $10 — no deposit required, no strings attached.</div>
+      <ul class="bonus-steps">
+        <li><div class="step-num">1</div>Sign up on Stake using code <strong>JAKE</strong></li>
+        <li><div class="step-num">2</div>Join the Discord server</li>
+        <li><div class="step-num">3</div>Create a support ticket and provide your ETH address + QR screenshot</li>
+        <li><div class="step-num">4</div>Receive your $10 — that's it!</li>
+      </ul>
+      <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary" style="animation:btnShine 3s ease-in-out infinite;">Claim on Discord</a>
     </div>
-    <div class="bonus-title">FREE SIGNUP BONUS</div>
-    <div class="bonus-desc">Sign up with code <strong style="color:var(--gold)">JAKE</strong> on Stake and receive a free $10 — no deposit required, no strings attached.</div>
-    <ul class="bonus-steps">
-      <li><div class="step-num">1</div>Sign up on Stake using code <strong>JAKE</strong></li>
-      <li><div class="step-num">2</div>Join the Discord server</li>
-      <li><div class="step-num">3</div>Create a support ticket and provide your ETH address + QR screenshot</li>
-      <li><div class="step-num">4</div>Receive your $10 — that's it!</li>
-    </ul>
-    <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary">Claim on Discord</a>
   </div>
 
   <div class="bonus-card giveaway">
@@ -122,10 +125,75 @@
   </div>
   <div class="footer-bottom">© 2026 JakeRewards — All rights reserved.</div>
 </footer>
+<style>
+@keyframes iconBounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+@keyframes goldPulse{0%,100%{box-shadow:0 0 0 0 rgba(230,180,50,0.4)}50%{box-shadow:0 0 20px 4px rgba(230,180,50,0.2)}}
+@keyframes btnShine{0%,100%{box-shadow:0 0 0 0 rgba(230,180,50,0)}50%{box-shadow:0 6px 24px rgba(230,180,50,0.4)}}
+@keyframes floatCoin{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(320px) rotate(720deg);opacity:0}}
+</style>
 <script>
 function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
 document.querySelectorAll('.bonus-card').forEach(el=>obs.observe(el));
+
+// Coin rain on signup card
+function initCoinRain(){
+  const canvas=document.getElementById('signup-coins');
+  if(!canvas)return;
+  const parent=canvas.parentElement;
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=parent.offsetWidth;canvas.height=parent.offsetHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  const coins=[];
+  const syms=['$','₿','Ξ','◎','💰','🪙'];
+  const cols=['rgba(230,180,50,','rgba(255,210,80,','rgba(0,212,255,','rgba(255,255,255,'];
+  function spawn(){
+    coins.push({
+      x:Math.random()*canvas.width,
+      y:-20,
+      vy:0.6+Math.random()*1.4,
+      vx:(Math.random()-.5)*0.8,
+      rot:Math.random()*360,
+      rotV:(Math.random()-.5)*5,
+      sym:syms[Math.floor(Math.random()*syms.length)],
+      col:cols[Math.floor(Math.random()*cols.length)],
+      size:10+Math.random()*8,
+      alpha:0.7+Math.random()*0.3
+    });
+  }
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    t++;
+    if(t%22===0)spawn();
+    for(let i=coins.length-1;i>=0;i--){
+      const c=coins[i];
+      c.y+=c.vy;c.x+=c.vx;c.rot+=c.rotV;
+      if(c.y>canvas.height+20){coins.splice(i,1);continue;}
+      ctx.save();
+      ctx.globalAlpha=c.alpha*(1-c.y/canvas.height*0.5);
+      ctx.translate(c.x,c.y);
+      ctx.rotate(c.rot*Math.PI/180);
+      ctx.font=`bold ${c.size}px monospace`;
+      ctx.fillStyle=c.col+'0.9)';
+      ctx.shadowColor=c.col+'0.6)';
+      ctx.shadowBlur=8;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText(c.sym,0,0);
+      ctx.restore();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+// Start coin rain when card becomes visible
+const signupObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)initCoinRain();});
+},{threshold:0.3});
+const signupCard=document.querySelector('.bonus-card.signup');
+if(signupCard)signupObs.observe(signupCard);
 </script>
 </body>
 </html>
