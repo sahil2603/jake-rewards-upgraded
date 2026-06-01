@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>$75,000 Leaderboard — JakeRewards</title>
+  <meta name="description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Track top grinders, prizes and your position. Use code JAKE to enter."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .lb-wrap{max-width:900px;margin:0 auto;padding:2rem 2.5rem 6rem;}
+    .lb-tabs{display:flex;gap:.5rem;margin-bottom:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.4rem;width:fit-content;}
+    .lb-tab{font-family:var(--font-head);font-size:.82rem;font-weight:700;padding:.5rem 1.4rem;border-radius:7px;cursor:pointer;color:var(--muted);transition:all .2s;border:none;background:transparent;}
+    .lb-tab.active{background:var(--gold);color:#000;}
+    .countdown-bar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+    .countdown-label{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-family:var(--font-head);font-weight:700;}
+    .countdown-val{font-family:var(--font-display);font-size:1.8rem;letter-spacing:3px;color:var(--gold);}
+    .lb-table{width:100%;border-collapse:collapse;}
+    .lb-table th{font-family:var(--font-head);font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);text-align:left;padding:.8rem 1rem;border-bottom:1px solid var(--border);}
+    .lb-table td{padding:.9rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.85rem;color:var(--text2);}
+    .lb-table tr:hover td{background:rgba(255,255,255,0.02);}
+    .lb-rank{font-family:var(--font-display);font-size:1.1rem;letter-spacing:1px;color:var(--muted);}
+    .lb-rank.r1{color:var(--gold);}
+    .lb-rank.r2{color:#c0c8d0;}
+    .lb-rank.r3{color:#c87040;}
+    .lb-user{font-family:var(--font-head);font-weight:700;color:#fff;}
+    .lb-prize{font-family:var(--font-head);font-weight:700;color:var(--gold);}
+    .lb-empty{text-align:center;padding:3rem;color:var(--muted);font-size:.9rem;}
+    .wager-rules{background:var(--card);border:1px solid rgba(0,212,255,0.15);border-radius:var(--radius);padding:1.5rem;margin-top:2rem;}
+    .wager-rules h4{font-family:var(--font-head);font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:.8rem;}
+    .wager-rules ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+    .wager-rules li{font-size:.8rem;color:var(--text2);padding-left:1.2rem;position:relative;}
+    .wager-rules li::before{content:'•';position:absolute;left:0;color:var(--accent);}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">J</div>
+    <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="rewards.html">Rewards ▾</a>
+      <div class="dropdown-menu">
+        <a href="leaderboard.html">$75,000 Leaderboard</a>
+        <a href="rankrewards.html">Rank-Up Rewards</a>
+        <a href="bonuses.html">Bonuses</a>
+      </div>
+    </li>
+    <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+    <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
+  </ul>
+  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="rankrewards.html">Rank-Up Rewards</a>
+  <a href="bonuses.html">Bonuses</a>
+  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+</div>
+
+<div class="page-hero">
+  <div class="section-tag">Monthly Race</div>
+  <h1>$75,000 LEADERBOARD</h1>
+  <p>Track the top grinders across Jake's community. Top players win serious prizes every month.</p>
+</div>
+
+<div class="lb-wrap">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <div class="lb-tabs">
+      <button class="lb-tab active" onclick="switchTab('current',this)">Current Month</button>
+      <button class="lb-tab" onclick="switchTab('previous',this)">Previous Month</button>
+    </div>
+  </div>
+
+  <div class="countdown-bar">
+    <div>
+      <div class="countdown-label">Leaderboard Ends In</div>
+      <div class="countdown-val" id="lb-countdown">--d --h --m --s</div>
+    </div>
+    <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary">Claim Rewards</a>
+  </div>
+
+  <table class="lb-table">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Wagered</th>
+        <th>Prize + Lossback</th>
+      </tr>
+    </thead>
+    <tbody id="lb-body">
+      <tr><td colspan="4" class="lb-empty">Loading leaderboard data…</td></tr>
+    </tbody>
+  </table>
+
+  <div class="wager-rules">
+    <h4>⚡ Weighted Wager System</h4>
+    <ul>
+      <li>Games with RTP of 98% or lower → 100% of wager is counted</li>
+      <li>Games with RTP between 98% and 99% → 50% of wager is counted</li>
+      <li>Games with RTP of 99% and over → 10% of wager is counted</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:1.2rem;font-size:.78rem;color:var(--muted);text-align:center;">Players must join the Discord to claim rewards and may need to submit a support ticket.</p>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="logo-icon">J</div><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
+      <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
+      <div class="footer-socials">
+        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
+        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
+    <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div class="footer-responsible"><div class="responsible-badge">⚠️ GambleAware</div><p>Please gamble responsibly. Visit <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></p></div>
+  </div>
+  <div class="footer-bottom">© 2026 JakeRewards — All rights reserved.</div>
+</footer>
+
+<script>
+function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
+function switchTab(type,btn){
+  document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+// Countdown to end of month
+function updateCountdown(){
+  const now=new Date();
+  const end=new Date(now.getFullYear(),now.getMonth()+1,1,0,0,0);
+  const diff=end-now;
+  const d=Math.floor(diff/864e5);
+  const h=Math.floor((diff%864e5)/36e5);
+  const m=Math.floor((diff%36e5)/6e4);
+  const s=Math.floor((diff%6e4)/1e3);
+  document.getElementById('lb-countdown').textContent=`${d}d ${h}h ${m}m ${s}s`;
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>

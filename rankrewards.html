@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rank-Up Rewards — JakeRewards</title>
+  <meta name="description" content="Hit every Stake VIP rank under code JAKE and claim a one-time cash bonus. Bronze $25 all the way to Obsidian $650,000."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .tiers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:1100px;margin:0 auto;}
+    .tier-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;transition:all .3s;opacity:0;transform:translateY(16px);}
+    .tier-card.visible{opacity:1;transform:translateY(0);}
+    .tier-card:hover{transform:translateY(-4px);}
+    .tier-card.bronze{border-color:rgba(180,110,50,0.3);}
+    .tier-card.silver{border-color:rgba(180,190,200,0.25);}
+    .tier-card.gold{border-color:rgba(230,180,50,0.3);}
+    .tier-card.plat{border-color:rgba(100,160,230,0.25);}
+    .tier-card.diamond{border-color:rgba(150,220,255,0.3);background:linear-gradient(135deg,var(--card),rgba(150,220,255,0.03));}
+    .tier-card.obsidian{border-color:rgba(180,100,255,0.35);background:linear-gradient(135deg,var(--card),rgba(180,100,255,0.05));}
+    .tier-icon{font-size:2rem;margin-bottom:.7rem;}
+    .tier-name{font-family:var(--font-head);font-size:.85rem;font-weight:700;color:var(--text2);margin-bottom:.4rem;}
+    .tier-reward{font-family:var(--font-display);font-size:1.8rem;letter-spacing:2px;color:var(--gold);}
+    .tier-card.obsidian .tier-reward{color:#b464ff;}
+    .tier-card.diamond .tier-reward{color:#96dcff;}
+    .rules-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;max-width:700px;margin:3rem auto 0;}
+    .rules-box h3{font-family:var(--font-display);font-size:1.5rem;letter-spacing:2px;color:#fff;margin-bottom:1rem;}
+    .rules-box ul{list-style:none;display:flex;flex-direction:column;gap:.7rem;}
+    .rules-box li{font-size:.85rem;color:var(--text2);padding-left:1.2rem;position:relative;}
+    .rules-box li::before{content:'→';position:absolute;left:0;color:var(--gold);}
+    .rules-box a{color:var(--gold);text-decoration:underline;}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">J</div>
+    <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="rewards.html" class="active">Rewards ▾</a>
+      <div class="dropdown-menu">
+        <a href="leaderboard.html">$75,000 Leaderboard</a>
+        <a href="rankrewards.html">Rank-Up Rewards</a>
+        <a href="bonuses.html">Bonuses</a>
+      </div>
+    </li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
+  </ul>
+  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="rankrewards.html">Rank-Up Rewards</a>
+  <a href="bonuses.html">Bonuses</a>
+  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+</div>
+
+<div class="page-hero">
+  <div class="section-tag">VIP Ladder</div>
+  <h1>RANK-UP REWARDS</h1>
+  <p>Hit each Stake VIP rank while playing under code <strong style="color:var(--gold)">JAKE</strong> and claim a one-time cash bonus for every step you climb.</p>
+</div>
+
+<section style="padding:2rem 2.5rem 6rem;">
+  <div class="tiers-grid">
+    <div class="tier-card bronze"><div class="tier-icon">🥉</div><div class="tier-name">Bronze VIP</div><div class="tier-reward">$25</div></div>
+    <div class="tier-card silver"><div class="tier-icon">🥈</div><div class="tier-name">Silver VIP</div><div class="tier-reward">$75</div></div>
+    <div class="tier-card gold"><div class="tier-icon">🥇</div><div class="tier-name">Gold VIP</div><div class="tier-reward">$125</div></div>
+    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum I</div><div class="tier-reward">$250</div></div>
+    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum II</div><div class="tier-reward">$400</div></div>
+    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum III</div><div class="tier-reward">$800</div></div>
+    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum IV</div><div class="tier-reward">$1,600</div></div>
+    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum V</div><div class="tier-reward">$3,200</div></div>
+    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum VI</div><div class="tier-reward">$6,400</div></div>
+    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond I</div><div class="tier-reward">$15,625</div></div>
+    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond II</div><div class="tier-reward">$26,750</div></div>
+    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond III</div><div class="tier-reward">$56,500</div></div>
+    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond IV</div><div class="tier-reward">$164,250</div></div>
+    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond V</div><div class="tier-reward">$250,000</div></div>
+    <div class="tier-card obsidian"><div class="tier-icon">⬛</div><div class="tier-name">Obsidian I</div><div class="tier-reward">$650,000</div></div>
+  </div>
+
+  <div class="rules-box">
+    <h3>VIP RULES & CLAIMS</h3>
+    <ul>
+      <li>All values are displayed in USD.</li>
+      <li>Rewards are paid once per VIP level reached while playing under Jake.</li>
+      <li>Sports betting and wager manipulation may render you ineligible.</li>
+      <li>We retain the right to deny anyone we believe is cheating or abusing the system.</li>
+      <li>To claim your reward, create a ticket in the <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="logo-icon">J</div>
+        <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
+      </div>
+      <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
+      <div class="footer-socials">
+        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
+        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <a href="index.html">Home</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="rankrewards.html">Rank-Up Rewards</a>
+      <a href="rewards.html">Rewards Hub</a>
+    </div>
+    <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div class="footer-responsible">
+      <div class="responsible-badge">⚠️ GambleAware</div>
+      <p>Please gamble responsibly. Visit <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 JakeRewards — All rights reserved.</div>
+</footer>
+<script>
+function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.tier-card').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

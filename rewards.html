@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rewards Hub — JakeRewards</title>
+  <meta name="description" content="Choose your JakeRewards experience — $75,000 leaderboard, rank-up VIP rewards, or deposit bonuses and giveaways."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;padding:2rem 2.5rem 6rem;}
+    .hub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;display:flex;flex-direction:column;gap:1rem;transition:all .3s;opacity:0;transform:translateY(20px);}
+    .hub-card.visible{opacity:1;transform:translateY(0);}
+    .hub-card:hover{transform:translateY(-6px);border-color:rgba(230,180,50,0.3);box-shadow:0 20px 50px rgba(0,0,0,.3);}
+    .hub-card-tag{font-size:.62rem;text-transform:uppercase;letter-spacing:2.5px;font-weight:700;color:var(--gold);font-family:var(--font-head);}
+    .hub-card-title{font-family:var(--font-display);font-size:2rem;letter-spacing:2px;color:#fff;line-height:1.1;}
+    .hub-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;flex:1;}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">J</div>
+    <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="rewards.html" class="active">Rewards ▾</a>
+      <div class="dropdown-menu">
+        <a href="leaderboard.html">$75,000 Leaderboard</a>
+        <a href="rankrewards.html">Rank-Up Rewards</a>
+        <a href="bonuses.html">Bonuses</a>
+      </div>
+    </li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
+  </ul>
+  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="rankrewards.html">Rank-Up Rewards</a>
+  <a href="bonuses.html">Bonuses</a>
+  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+</div>
+
+<div class="page-hero">
+  <div class="section-tag">All Rewards</div>
+  <h1>REWARDS HUB</h1>
+  <p>Pick the reward system you want to explore. Everything is free, everything is real.</p>
+</div>
+
+<div class="hub-grid">
+  <a href="leaderboard.html" class="hub-card">
+    <div class="hub-card-tag">Monthly Grind</div>
+    <div class="hub-card-title">$75,000 LEADERBOARD</div>
+    <div class="hub-card-desc">See the full hybrid leaderboard, podium, prizes and rules for Jake's $75,000 monthly race. Top grinders compete for a massive prize pool.</div>
+    <div class="reward-link">Open Leaderboard →</div>
+  </a>
+  <a href="rankrewards.html" class="hub-card">
+    <div class="hub-card-tag">VIP Ladder</div>
+    <div class="hub-card-title">RANK-UP REWARDS</div>
+    <div class="hub-card-desc">View one-time cash bonuses for every Stake VIP rank from Bronze ($25) all the way up to Obsidian ($650,000). Hit a rank, claim your cash.</div>
+    <div class="reward-link">View VIP Payouts →</div>
+  </a>
+  <a href="bonuses.html" class="hub-card">
+    <div class="hub-card-tag">Boosts</div>
+    <div class="hub-card-title">BONUSES & GIVEAWAYS</div>
+    <div class="hub-card-desc">$10 free signup bonus, daily $500 giveaway for active players, and help accessing Stake. All delivered through Discord.</div>
+    <div class="reward-link">View Bonuses →</div>
+  </a>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="logo-icon">J</div><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
+      <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
+      <div class="footer-socials">
+        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
+        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
+    <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div class="footer-responsible"><div class="responsible-badge">⚠️ GambleAware</div><p>Please gamble responsibly. Visit <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></p></div>
+  </div>
+  <div class="footer-bottom">© 2026 JakeRewards — All rights reserved.</div>
+</footer>
+<script>
+function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.hub-card').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

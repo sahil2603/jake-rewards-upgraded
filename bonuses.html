@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bonuses — JakeRewards</title>
+  <meta name="description" content="Claim your $10 free signup bonus, enter the daily $500 giveaway and get help accessing Stake. Use code JAKE."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;padding:2rem 2.5rem 6rem;}
+    .bonus-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;transition:all .3s;opacity:0;transform:translateY(20px);}
+    .bonus-card.visible{opacity:1;transform:translateY(0);}
+    .bonus-card:hover{transform:translateY(-4px);}
+    .bonus-card.signup{border-color:rgba(230,180,50,0.3);background:linear-gradient(135deg,var(--card),rgba(230,180,50,0.04));}
+    .bonus-card.giveaway{border-color:rgba(0,212,255,0.2);background:linear-gradient(135deg,var(--card),rgba(0,212,255,0.03));}
+    .bonus-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem;gap:1rem;}
+    .bonus-icon{font-size:2.5rem;}
+    .bonus-amount-badge{background:rgba(230,180,50,0.12);border:1px solid rgba(230,180,50,0.25);color:var(--gold);font-family:var(--font-display);font-size:1.4rem;letter-spacing:2px;padding:.3rem .8rem;border-radius:8px;}
+    .bonus-card.giveaway .bonus-amount-badge{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.2);color:var(--accent);}
+    .bonus-title{font-family:var(--font-display);font-size:1.8rem;letter-spacing:2px;color:#fff;margin-bottom:.8rem;}
+    .bonus-desc{font-size:.87rem;color:var(--text2);line-height:1.7;margin-bottom:1.5rem;}
+    .bonus-steps{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem;}
+    .bonus-steps li{display:flex;align-items:flex-start;gap:.7rem;font-size:.83rem;color:var(--text2);}
+    .step-num{width:20px;height:20px;border-radius:50%;background:rgba(230,180,50,0.15);border:1px solid rgba(230,180,50,0.3);color:var(--gold);font-family:var(--font-head);font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">J</div>
+    <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="rewards.html" class="active">Rewards ▾</a>
+      <div class="dropdown-menu">
+        <a href="leaderboard.html">$75,000 Leaderboard</a>
+        <a href="rankrewards.html">Rank-Up Rewards</a>
+        <a href="bonuses.html">Bonuses</a>
+      </div>
+    </li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
+  </ul>
+  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="rankrewards.html">Rank-Up Rewards</a>
+  <a href="bonuses.html">Bonuses</a>
+  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+</div>
+
+<div class="page-hero">
+  <div class="section-tag">Free Money</div>
+  <h1>BONUSES</h1>
+  <p>Everything Jake gives you on top of Stake's own offers. All free, all real.</p>
+</div>
+
+<div class="bonus-grid">
+  <div class="bonus-card signup">
+    <div class="bonus-header">
+      <div class="bonus-icon">💸</div>
+      <div class="bonus-amount-badge">$10 FREE</div>
+    </div>
+    <div class="bonus-title">FREE SIGNUP BONUS</div>
+    <div class="bonus-desc">Sign up with code <strong style="color:var(--gold)">JAKE</strong> on Stake and receive a free $10 — no deposit required, no strings attached.</div>
+    <ul class="bonus-steps">
+      <li><div class="step-num">1</div>Sign up on Stake using code <strong>JAKE</strong></li>
+      <li><div class="step-num">2</div>Join the Discord server</li>
+      <li><div class="step-num">3</div>Create a support ticket and provide your ETH address + QR screenshot</li>
+      <li><div class="step-num">4</div>Receive your $10 — that's it!</li>
+    </ul>
+    <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary">Claim on Discord</a>
+  </div>
+
+  <div class="bonus-card giveaway">
+    <div class="bonus-header">
+      <div class="bonus-icon">🎁</div>
+      <div class="bonus-amount-badge">$500/DAY</div>
+    </div>
+    <div class="bonus-title">DAILY GIVEAWAY</div>
+    <div class="bonus-desc">Every day, <strong style="color:#fff">5 winners of $100</strong> are chosen from active players under code JAKE. The giveaway runs inside Discord — just stay active and you're in.</div>
+    <ul class="bonus-steps">
+      <li><div class="step-num">1</div>Play on Stake under code <strong>JAKE</strong></li>
+      <li><div class="step-num">2</div>Stay active in the Discord community</li>
+      <li><div class="step-num">3</div>Winners are selected daily — check Discord for announcements</li>
+    </ul>
+    <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary" style="background:var(--accent);color:#000;">Join Discord Giveaway</a>
+  </div>
+
+  <div class="bonus-card" style="grid-column:1/-1;border-color:rgba(180,100,255,0.2);background:linear-gradient(135deg,var(--card),rgba(180,100,255,0.03));">
+    <div class="bonus-header">
+      <div class="bonus-icon">🔓</div>
+      <div class="bonus-amount-badge" style="background:rgba(180,100,255,0.1);border-color:rgba(180,100,255,0.25);color:#c87aff;">NEED HELP?</div>
+    </div>
+    <div class="bonus-title">ACCESSING STAKE</div>
+    <div class="bonus-desc">Having trouble accessing Stake from your region? Jake's team has you covered. Join the Discord and create a ticket — the team will get you set up quickly and securely.</div>
+    <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary" style="background:#c87aff;color:#000;">Get Help on Discord</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="logo-icon">J</div><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
+      <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
+      <div class="footer-socials">
+        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
+        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
+    <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a></div>
+    <div class="footer-responsible"><div class="responsible-badge">⚠️ GambleAware</div><p>Please gamble responsibly. Visit <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></p></div>
+  </div>
+  <div class="footer-bottom">© 2026 JakeRewards — All rights reserved.</div>
+</footer>
+<script>
+function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.bonus-card').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
