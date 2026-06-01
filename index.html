@@ -96,32 +96,44 @@
   </div>
   <div class="rewards-grid">
     <div class="reward-card featured" style="position:relative;overflow:hidden;">
-      <div class="reward-icon">🏆</div>
-      <div class="reward-amount">$75,000</div>
-      <div class="reward-name">Monthly Leaderboard</div>
-      <p class="reward-desc">Compete every month for your share of Jake's massive prize pool. Top grinders take home serious cash.</p>
-      <a href="leaderboard.html" class="reward-link">View Leaderboard →</a>
+      <canvas class="card-rain" data-colors="#e6b432,#f5c842,#fff" data-syms="₿,🏆,$,Ξ,◎"></canvas>
+      <div style="position:relative;z-index:1;">
+        <div class="reward-icon">🏆</div>
+        <div class="reward-amount">$75,000</div>
+        <div class="reward-name">Monthly Leaderboard</div>
+        <p class="reward-desc">Compete every month for your share of Jake's massive prize pool. Top grinders take home serious cash.</p>
+        <a href="leaderboard.html" class="reward-link">View Leaderboard →</a>
+      </div>
     </div>
-    <div class="reward-card">
-      <div class="reward-icon">🎁</div>
-      <div class="reward-amount">$500</div>
-      <div class="reward-name">Daily Giveaway</div>
-      <p class="reward-desc">5 winners of $100 chosen every single day from active players under code JAKE. Join Discord to enter.</p>
-      <a href="bonuses.html" class="reward-link">Learn More →</a>
+    <div class="reward-card" style="position:relative;overflow:hidden;">
+      <canvas class="card-rain" data-colors="#00d4ff,#fff,#e6b432" data-syms="🎁,$,💎,◎,Ξ"></canvas>
+      <div style="position:relative;z-index:1;">
+        <div class="reward-icon">🎁</div>
+        <div class="reward-amount">$500</div>
+        <div class="reward-name">Daily Giveaway</div>
+        <p class="reward-desc">5 winners of $100 chosen every single day from active players under code JAKE. Join Discord to enter.</p>
+        <a href="bonuses.html" class="reward-link">Learn More →</a>
+      </div>
     </div>
-    <div class="reward-card">
-      <div class="reward-icon">💸</div>
-      <div class="reward-amount">$10</div>
-      <div class="reward-name">Free Signup Bonus</div>
-      <p class="reward-desc">Sign up with code JAKE and claim $10 completely free — no strings attached. Create a ticket on Discord.</p>
-      <a href="bonuses.html" class="reward-link">Claim Now →</a>
+    <div class="reward-card" style="position:relative;overflow:hidden;">
+      <canvas class="card-rain" data-colors="#e6b432,#00ff88,#fff" data-syms="$,💸,₿,🪙,◎"></canvas>
+      <div style="position:relative;z-index:1;">
+        <div class="reward-icon">💸</div>
+        <div class="reward-amount">$10</div>
+        <div class="reward-name">Free Signup Bonus</div>
+        <p class="reward-desc">Sign up with code JAKE and claim $10 completely free — no strings attached. Create a ticket on Discord.</p>
+        <a href="bonuses.html" class="reward-link">Claim Now →</a>
+      </div>
     </div>
-    <div class="reward-card">
-      <div class="reward-icon">🚀</div>
-      <div class="reward-amount">$25–$650K</div>
-      <div class="reward-name">Rank-Up Rewards</div>
-      <p class="reward-desc">Every time you hit a new Stake VIP rank, Jake pays you out — from Bronze all the way to Obsidian.</p>
-      <a href="rankrewards.html" class="reward-link">See All Tiers →</a>
+    <div class="reward-card" style="position:relative;overflow:hidden;">
+      <canvas class="card-rain" data-colors="#b464ff,#e6b432,#00d4ff" data-syms="🚀,◆,💎,$,Ξ"></canvas>
+      <div style="position:relative;z-index:1;">
+        <div class="reward-icon">🚀</div>
+        <div class="reward-amount">$25–$650K</div>
+        <div class="reward-name">Rank-Up Rewards</div>
+        <p class="reward-desc">Every time you hit a new Stake VIP rank, Jake pays you out — from Bronze all the way to Obsidian.</p>
+        <a href="rankrewards.html" class="reward-link">See All Tiers →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -337,6 +349,68 @@ const statObs = new IntersectionObserver(entries=>{
   });
 },{threshold:0.5});
 statNums.forEach(el=>statObs.observe(el));
+</script>
+<style>
+.card-rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;}
+</style><script>
+function initCardRain(canvas){
+  const parent = canvas.parentElement;
+  const ctx = canvas.getContext('2d');
+  const colors = canvas.dataset.colors.split(',');
+  const syms = canvas.dataset.syms.split(',');
+  function resize(){canvas.width=parent.offsetWidth;canvas.height=parent.offsetHeight;}
+  resize();
+  window.addEventListener('resize', resize);
+  const coins = [];
+  function spawn(){
+    coins.push({
+      x: Math.random()*canvas.width,
+      y: -16,
+      vy: 0.5 + Math.random()*1.2,
+      vx: (Math.random()-.5)*0.5,
+      rot: Math.random()*360,
+      rotV: (Math.random()-.5)*4,
+      sym: syms[Math.floor(Math.random()*syms.length)],
+      col: colors[Math.floor(Math.random()*colors.length)],
+      size: 9 + Math.random()*7,
+      alpha: 0.6 + Math.random()*0.4
+    });
+  }
+  let t = 0, active = true;
+  function draw(){
+    if(!active) return;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    t++;
+    if(t % 30 === 0) spawn();
+    for(let i=coins.length-1;i>=0;i--){
+      const c=coins[i];
+      c.y+=c.vy; c.x+=c.vx; c.rot+=c.rotV;
+      if(c.y > canvas.height+20){coins.splice(i,1);continue;}
+      ctx.save();
+      ctx.globalAlpha = c.alpha * (1 - c.y/canvas.height*0.4);
+      ctx.translate(c.x,c.y);
+      ctx.rotate(c.rot*Math.PI/180);
+      ctx.font = `bold ${c.size}px monospace`;
+      ctx.fillStyle = c.col;
+      ctx.shadowColor = c.col;
+      ctx.shadowBlur = 6;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(c.sym,0,0);
+      ctx.restore();
+    }
+    requestAnimationFrame(draw);
+  }
+  // Start when card enters viewport
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      active = e.isIntersecting;
+      if(active) draw();
+    });
+  },{threshold:0.2});
+  obs.observe(parent);
+}
+document.querySelectorAll('.card-rain').forEach(initCardRain);
 </script>
 </body>
 </html>
