@@ -32,12 +32,328 @@
     .wager-rules ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
     .wager-rules li{font-size:.8rem;color:var(--text2);padding-left:1.2rem;position:relative;}
     .wager-rules li::before{content:'•';position:absolute;left:0;color:var(--accent);}
+
+    .lb-table td{vertical-align:middle;}
+    .lb-userwrap{display:flex;align-items:center;gap:10px;}
+    .lb-avatar{width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:.95rem;color:var(--gold);flex-shrink:0;}
+    .lb-row.top1 .lb-avatar{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border-color:var(--gold);}
+    .lb-row.top2 .lb-avatar{border-color:#c0c8d0;color:#c0c8d0;}
+    .lb-row.top3 .lb-avatar{border-color:#c87040;color:#c87040;}
+    .lb-wagered{display:flex;flex-direction:column;gap:5px;min-width:130px;}
+    .lb-wagered-num{font-family:var(--font-head);font-weight:700;color:var(--text);font-size:.85rem;}
+    .lb-row.top2 .lb-bar-fill{background:linear-gradient(90deg,#8a93a0,#c0c8d0);}
+    .lb-row.top3 .lb-bar-fill{background:linear-gradient(90deg,#9a5a2e,#c87040);}
+    .lb-row{opacity:1;}  /* removed per-row animation for performance */
+    .lb-medal{display:inline-block;margin-right:4px;}
+    .lb-pool-strip{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem;}
+    .lb-pool-card{flex:1;min-width:150px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;}
+    .lb-pool-card .pc-label{font-size:.62rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-family:var(--font-head);font-weight:700;}
+    .lb-pool-card .pc-val{font-family:var(--font-display);font-size:1.9rem;letter-spacing:2px;color:var(--gold);line-height:1.1;margin-top:.2rem;}
+
+    /* ── CHAMPION ANIMATIONS (match homepage podium) ── */
+    .lb-row.top1 .lb-avatar{animation:lbChampGlow 2.6s ease-in-out infinite;}
+    @keyframes lbChampGlow{0%,100%{box-shadow:0 0 0 0 rgba(230,180,50,0);}50%{box-shadow:0 0 16px 2px rgba(230,180,50,0.6);}}
+    .lb-row.top1 .lb-bar-fill{box-shadow:0 0 10px rgba(230,180,50,0.5);}
+    .lb-medal{display:inline-block;}
+    .lb-row.top1 .lb-medal,.lb-row.top2 .lb-medal,.lb-row.top3 .lb-medal{animation:lbMedalPulse 2.6s ease-in-out infinite;}
+    .lb-row.top2 .lb-medal{animation-delay:.25s;}
+    .lb-row.top3 .lb-medal{animation-delay:.5s;}
+    @keyframes lbMedalPulse{0%,100%{transform:scale(1) rotate(0);}50%{transform:scale(1.18) rotate(-5deg);}}
+    .lb-table-wrap{width:100%;}
+    .lb-podium-wrap{margin:0 0 2.6rem;}
+
+    /* ── MOBILE: keep the table inside the screen ── */
+    @media(max-width:560px){
+      .lb-wrap{padding:1rem 1rem 4rem;}
+      .lb-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;}
+      .lb-table td,.lb-table th{padding:.6rem .3rem;}
+      .lb-table th{font-size:.52rem;letter-spacing:.8px;}
+      .lb-rank{font-size:.85rem;}
+      .lb-medal{margin-right:1px;font-size:.8rem;}
+      .lb-avatar{width:24px;height:24px;font-size:.72rem;}
+      .lb-userwrap{gap:5px;}
+      .lb-user{font-size:.72rem;}
+      .lb-wagered{min-width:70px;gap:3px;}
+      .lb-wagered-num{font-size:.7rem;}
+      .lb-prize{font-size:.7rem;}
+      .lb-pool-card{min-width:calc(50% - .4rem);padding:.7rem .8rem;}
+      .lb-pool-card .pc-val{font-size:1.3rem;}
+      .lb-pool-card .pc-label{font-size:.55rem;}
+      .podium-card{padding:1.2rem .9rem;}
+      .podium-name{font-size:.75rem;}
+      .podium-wager{font-size:.68rem;}
+      .podium-prize{font-size:.72rem;}
+      .countdown-val{font-size:1.4rem;}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .lb-row.top1 .lb-avatar,.lb-medal{animation:none!important;}
+      .flame-inner,.row-wave::before,.row-wave::after{animation:none!important;}
+    }
+
+
+
+
+
+
+
+    /* ── PODIUM CARD ANIMATIONS (replaces flames) ── */
+    /* Gold #1: rotating golden border + inner glow pulse */
+    .podium-card.gold{
+      border:2px solid transparent;
+      background-clip:padding-box;
+      position:relative;
+    }
+    .podium-card.gold::before{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      border-radius:inherit;
+      padding:2px;
+      background:conic-gradient(from var(--angle,0deg),#ffd700,#ff8c00,#ffd700,#fff176,#ffd700);
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      animation:borderRotate 3s linear infinite;
+      z-index:0;
+      will-change:transform;
+    }
+    @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+    @keyframes borderRotate{to{--angle:360deg;}}
+
+    .podium-card.gold::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      background:radial-gradient(ellipse at 50% 120%,rgba(255,180,0,0.22) 0%,transparent 65%);
+      animation:goldPulse 2.2s ease-in-out infinite alternate;
+      z-index:0;pointer-events:none;
+    }
+    @keyframes goldPulse{
+      0%{opacity:0.6;transform:scaleY(0.95);}
+      100%{opacity:1;transform:scaleY(1.05);}
+    }
+
+    /* Silver #2: cool blue shimmer border + glow */
+    .podium-card.silver{position:relative;}
+    .podium-card.silver::before{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      border-radius:inherit;
+      background:linear-gradient(135deg,#b0bec5,#90a4ae,#cfd8dc,#78909c,#b0bec5);
+      background-size:300% 300%;
+      animation:silverShimmer 2.5s ease-in-out infinite;
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      padding:2px;z-index:0;
+    }
+    @keyframes silverShimmer{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+    .podium-card.silver::after{
+      content:'';
+      position:absolute;inset:0;border-radius:inherit;
+      background:radial-gradient(ellipse at 50% 120%,rgba(176,190,197,0.18) 0%,transparent 65%);
+      animation:silverPulse 2.6s ease-in-out infinite alternate;
+      z-index:0;pointer-events:none;
+    }
+    @keyframes silverPulse{0%{opacity:0.5;}100%{opacity:1;}}
+
+    /* Bronze #3: warm copper border + glow */
+    .podium-card.bronze{position:relative;}
+    .podium-card.bronze::before{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      border-radius:inherit;
+      background:linear-gradient(135deg,#bf8970,#8d5524,#d4956a,#6d4c41,#bf8970);
+      background-size:300% 300%;
+      animation:bronzeShimmer 3s ease-in-out infinite;
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      padding:2px;z-index:0;
+    }
+    @keyframes bronzeShimmer{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+    .podium-card.bronze::after{
+      content:'';
+      position:absolute;inset:0;border-radius:inherit;
+      background:radial-gradient(ellipse at 50% 120%,rgba(191,137,112,0.18) 0%,transparent 65%);
+      animation:bronzePulse 2.8s ease-in-out infinite alternate;
+      z-index:0;pointer-events:none;
+    }
+    @keyframes bronzePulse{0%{opacity:0.5;}100%{opacity:1;}}
+
+    /* Keep card content above pseudo elements */
+    .podium-card .podium-slash,.podium-card .podium-body,.podium-card .podium-aura{position:relative;z-index:1;}
+    @media(prefers-reduced-motion:reduce){
+      .podium-card::before,.podium-card::after{animation:none!important;}
+    }
+
+    /* ── Table header (non-sticky to avoid covering rows) ── */
+    .lb-table-wrap{border-radius:12px;overflow-x:auto;}
+    .lb-table thead th{background:var(--bg2);border-bottom:2px solid var(--border);}
+
+    /* ── FEATURE: Thicker dramatic wagered bar ── */
+    .lb-bar{height:8px;border-radius:6px;background:rgba(255,255,255,0.06);overflow:hidden;margin-top:4px;}
+    .lb-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),#ffee88);width:0;transition:width 1.2s cubic-bezier(.16,1,.3,1);box-shadow:0 0 8px rgba(252,194,0,0.4);}
+
+    /* ── FEATURE: Top 3 row border glow ── */
+    .lb-row.top1 td:first-child{box-shadow:inset 4px 0 0 var(--gold);}
+    .lb-row.top2 td:first-child{box-shadow:inset 4px 0 0 #b0bec5;}
+    .lb-row.top3 td:first-child{box-shadow:inset 4px 0 0 #c87040;}
+    .lb-row.top1 td{background:linear-gradient(90deg,rgba(252,194,0,0.10),transparent 60%);}
+    .lb-row.top2 td{background:linear-gradient(90deg,rgba(176,190,197,0.08),transparent 60%);}
+    .lb-row.top3 td{background:linear-gradient(90deg,rgba(200,112,64,0.08),transparent 60%);}
+
+    /* ── FEATURE: Rank change indicators ── */
+    .rank-up{color:#00e676;font-size:.7rem;font-weight:700;margin-left:4px;}
+    .rank-dn{color:#ff5252;font-size:.7rem;font-weight:700;margin-left:4px;}
+    .rank-nc{color:var(--muted);font-size:.7rem;margin-left:4px;}
+
+    /* ── FEATURE: Heat indicator ── */
+    .heat-badge{font-size:.85rem;margin-left:3px;animation:heatPulse 1.2s ease-in-out infinite alternate;}
+    @keyframes heatPulse{0%{transform:scale(1);}100%{transform:scale(1.3);}}
+
+    /* ── FEATURE: Expandable row ── */
+    .lb-row{cursor:pointer;}
+    .lb-row:hover td{background:rgba(255,255,255,0.03)!important;}
+    .lb-expand{display:none;background:rgba(252,194,0,0.03);border-top:1px solid rgba(252,194,0,0.1);}
+    .lb-expand.open{display:table-row;}
+    .lb-expand td{padding:.8rem 1rem 1rem 3.5rem!important;background:rgba(252,194,0,0.03)!important;}
+    .lb-expand-inner{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;}
+    .lb-expand-stat{display:flex;flex-direction:column;gap:.2rem;}
+    .lb-expand-stat .es-label{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-family:var(--font-head);}
+    .lb-expand-stat .es-val{font-family:var(--font-display);font-size:1.1rem;letter-spacing:1px;color:#fff;}
+
+    /* ── FEATURE: Live rank change ticker ── */
+    .rank-ticker{display:flex;align-items:center;gap:1rem;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;padding:.6rem 1rem;margin-bottom:1.5rem;overflow:hidden;}
+    .rank-ticker-label{font-family:var(--font-head);font-size:.62rem;font-weight:800;letter-spacing:2px;color:var(--gold);white-space:nowrap;flex-shrink:0;text-transform:uppercase;}
+    .rank-ticker-track-wrap{flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);}
+    .rank-ticker-track{display:flex;gap:2rem;width:max-content;animation:tickerScroll 30s linear infinite;}
+    .rank-ticker-track:hover{animation-play-state:paused;}
+    @keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+    .ticker-item{display:flex;align-items:center;gap:.4rem;white-space:nowrap;font-size:.78rem;color:var(--text2);}
+    .ticker-item .ti-name{color:#fff;font-weight:600;}
+    .ticker-item .ti-up{color:#00e676;}
+    .ticker-item .ti-dn{color:#ff5252;}
+
+    /* ── FEATURE: Cutoff banner ── */
+    .cutoff-banner{background:linear-gradient(90deg,rgba(252,194,0,0.06),rgba(252,194,0,0.02));border:1px solid rgba(252,194,0,0.2);border-radius:10px;padding:.8rem 1.2rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--text2);display:none;}
+    .cutoff-banner.ready{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+    .cutoff-banner strong{color:var(--gold);}
+    .cutoff-sep{color:var(--border);margin:0 .3rem;}
+
+    /* ── TROPHY BEAM: slow gold spotlight sweeping the page ── */
+    .lb-beam{
+      position:fixed;
+      top:0;left:-30%;
+      width:18%;height:100vh;
+      background:linear-gradient(90deg,
+        transparent 0%,
+        rgba(252,194,0,0.03) 20%,
+        rgba(252,194,0,0.07) 50%,
+        rgba(252,194,0,0.03) 80%,
+        transparent 100%
+      );
+      transform:skewX(-12deg);
+      animation:beamSweep 9s ease-in-out infinite;
+      pointer-events:none;
+      z-index:0;
+      will-change:left;
+    }
+    @keyframes beamSweep{
+      0%  {left:-30%;opacity:0;}
+      8%  {opacity:1;}
+      50% {left:115%;opacity:1;}
+      58% {opacity:0;}
+      100%{left:115%;opacity:0;}
+    }
+    /* Second beam, delayed */
+    .lb-beam-2{
+      position:fixed;
+      top:0;left:-30%;
+      width:10%;height:100vh;
+      background:linear-gradient(90deg,
+        transparent 0%,
+        rgba(252,194,0,0.015) 30%,
+        rgba(252,194,0,0.04) 50%,
+        rgba(252,194,0,0.015) 70%,
+        transparent 100%
+      );
+      transform:skewX(-8deg);
+      animation:beamSweep 9s ease-in-out 2.5s infinite;
+      pointer-events:none;
+      z-index:0;
+      will-change:left;
+    }
+    /* Make sure content sits above beams */
+    .lb-wrap,.page-hero,.countdown-bar,.lb-pool-strip,.lb-podium-wrap,.lb-tabs-wrap{position:relative;z-index:1;}
+
+    /* ── PODIUM CARD FLIP ── */
+    .podium-card{cursor:pointer;perspective:1200px;}
+    .podium-flip{
+      position:relative;z-index:1;
+      width:100%;height:100%;
+      transition:transform .6s cubic-bezier(.16,1,.3,1);
+      transform-style:preserve-3d;
+      min-height:230px;
+    }
+    .podium-card.flipped .podium-flip{transform:rotateY(180deg);}
+    .podium-face{
+      position:absolute;inset:0;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+    }
+    .podium-back{
+      transform:rotateY(180deg);
+      padding:1.4rem .6rem;
+      gap:.7rem;
+      justify-content:center;
+    }
+    .podium-back .pb-row{
+      display:flex;flex-direction:column;align-items:center;gap:.15rem;
+      width:100%;
+    }
+    .podium-back .pb-label{
+      font-family:var(--font-head);font-size:.58rem;font-weight:700;
+      text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);
+    }
+    .podium-back .pb-val{
+      font-family:var(--font-display);font-size:1.15rem;letter-spacing:1px;color:#fff;
+    }
+    .podium-back .pb-val.up{color:#00e676;}
+    .podium-back .pb-val.dn{color:#ff7043;}
+    .podium-back .pb-hint{
+      font-size:.6rem;color:var(--muted);margin-top:.4rem;font-style:italic;
+    }
+    .podium-flip-hint{
+      font-size:.58rem;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;
+      opacity:.75;pointer-events:none;font-family:var(--font-head);font-weight:700;
+      white-space:nowrap;margin-top:.9rem;
+    }
+    /* Back face hint anchored at bottom */
+    .podium-back .podium-flip-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);margin-top:0;}
+    /* Front hint slightly dimmer than back */
+    .podium-front .podium-flip-hint{color:var(--muted);opacity:.5;}
+    /* Front face content flows naturally */
+    .podium-front .podium-body{display:flex;flex-direction:column;align-items:center;padding-bottom:.5rem;}
   </style>
 </head>
 <body>
-<nav class="nav">
+<canvas id="star-canvas" style="position:fixed;top:0;left:0;width:100%;height:55vh;pointer-events:none;z-index:0;"></canvas>
+<nav class="nav" style="position:relative;z-index:100;">
   <a href="index.html" class="nav-logo">
-    <div class="logo-icon">J</div>
+    <img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40">
     <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
   </a>
   <ul class="nav-links">
@@ -51,17 +367,20 @@
       </div>
     </li>
     <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+    <li><a href="refer.html">Refer a Friend</a></li>
     <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
   </ul>
-  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank" class="nav-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.249.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.369a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
   <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
 </nav>
+<div class="lb-beam"></div><div class="lb-beam-2"></div>
 <div class="mobile-nav" id="mobile-nav">
   <a href="index.html">Home</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="refer.html">Refer a Friend</a>
   <a href="rankrewards.html">Rank-Up Rewards</a>
   <a href="bonuses.html">Bonuses</a>
-  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank">Discord</a>
 </div>
 
 <div class="page-hero">
@@ -83,10 +402,32 @@
       <div class="countdown-label">Leaderboard Ends In</div>
       <div class="countdown-val" id="lb-countdown">--d --h --m --s</div>
     </div>
-    <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary">Claim Rewards</a>
+    <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary">Claim Rewards</a>
   </div>
 
+
+  <div class="lb-pool-strip">
+    <div class="lb-pool-card"><div class="pc-label">Prize Pool</div><div class="pc-val">$75,000</div></div>
+    <div class="lb-pool-card"><div class="pc-label">Paid Places</div><div class="pc-val">100</div></div>
+    <div class="lb-pool-card"><div class="pc-label">1st Place</div><div class="pc-val">$22,000</div></div>
+    <div class="lb-pool-card"><div class="pc-label">Players Competing</div><div class="pc-val" id="lb-playercount">—</div></div>
+  </div>
+
+  <div class="rank-ticker" id="rank-ticker" style="display:none;">
+    <span class="rank-ticker-label">⚡ Live</span>
+    <div class="rank-ticker-track-wrap"><div class="rank-ticker-track" id="rank-ticker-track"></div></div>
+  </div>
+  <div class="cutoff-banner" id="cutoff-banner"></div>
+  <div class="lb-podium-wrap"><div class="podium" id="lb-podium"></div></div>
+
+  <div class="lb-table-wrap">
   <table class="lb-table">
+    <colgroup>
+      <col style="width:80px">
+      <col style="width:35%">
+      <col style="width:auto">
+      <col style="width:28%">
+    </colgroup>
     <thead>
       <tr>
         <th>Rank</th>
@@ -99,6 +440,7 @@
       <tr><td colspan="4" class="lb-empty">Loading leaderboard data…</td></tr>
     </tbody>
   </table>
+  </div>
 
   <div class="wager-rules">
     <h4>⚡ Weighted Wager System</h4>
@@ -115,15 +457,16 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><div class="logo-icon">J</div><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
+      <div class="footer-logo"><img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40"><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
       <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
       <div class="footer-socials">
-        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://discord.com/invite/jakethedegen" target="_blank">💬</a>
         <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
-        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@itsjakex" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@jakeplaysbj" target="_blank">🃏</a>
       </div>
     </div>
-    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
+    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="refer.html">Refer a Friend</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
     <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a></div>
     <div class="footer-responsible"><div class="responsible-badge">⚠️ GambleAware</div><p>Please gamble responsibly. Visit <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></p></div>
   </div>
@@ -131,24 +474,384 @@
 </footer>
 
 <script>
+const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/14Sr_hmd2CnwPJDrzndiXP1kP9VDF6gArjZQbRxFlBuQ/export?format=csv&gid=235680015';
+const SHEET_CSV_PREV = 'https://docs.google.com/spreadsheets/d/14Sr_hmd2CnwPJDrzndiXP1kP9VDF6gArjZQbRxFlBuQ/export?format=csv&gid=1502602180';
+const DISPLAY_ROWS = 110;
+const _LB_PRIZES = [
+  {cash:20000,lb:true},{cash:10000,lb:true},{cash:5000,lb:true},
+  {cash:4000,lb:true},{cash:3500,lb:true},{cash:3000,lb:true},
+  {cash:2500,lb:true},{cash:2250,lb:true},{cash:2000,lb:true},{cash:1650,lb:true},
+  1400,1300,1250,1200,1100,1000,950,900,850,800,
+  750,700,650,600,550,500,450,400,350,300,
+  250,200,195,190,180,170,160,150,140,125,
+  120,115,110,105,100,100,100,100,100,100,
+  95,90,85,80,75,75,75,75,75,75,
+  70,65,60,55,50,50,50,50,50,50,
+  50,50,50,50,50,45,40,35,30,
+  25,25,25,25,25,25,25,25,25,25,
+  25,25,25,25,25,25,25,25,25,25,
+  25
+];
+let _liveData=null, _prevData=null, _liveMode=false, _prevMode=false, _lbObs=null, _currentTab='current';
+
 function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
+function fmtShort(n){if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return '$'+(n/1e3).toFixed(1)+'K';return '$'+Math.round(n);}
+function _getPrizeLabel(idx){const p=_LB_PRIZES[idx];if(!p)return '—';if(typeof p==='object')return '$'+p.cash.toLocaleString()+' + 5% lossback';return '$'+p.toLocaleString();}
+function maskUser(n){if(!n)return '—';if(n.length<=5)return '*'.repeat(n.length);return '*'.repeat(5)+n.slice(5);}
+
+// Store prev ranks for change indicators
+let _prevRanks={};
+
+function getRankChange(user, currentRank){
+  if(!_prevRanks[user]) return null;
+  return _prevRanks[user] - currentRank; // positive = moved up
+}
+
+function buildTicker(data){
+  const items=[];
+  data.slice(0,20).forEach(p=>{
+    const chg=getRankChange(p.user, p.rank);
+    if(chg===null) return;
+    if(chg>0) items.push(`<span class="ticker-item"><span class="ti-name">${maskUser(p.user)}</span><span class="ti-up">↑${chg}</span></span>`);
+    else if(chg<0) items.push(`<span class="ticker-item"><span class="ti-name">${maskUser(p.user)}</span><span class="ti-dn">↓${Math.abs(chg)}</span></span>`);
+  });
+  const ticker=document.getElementById('rank-ticker');
+  const track=document.getElementById('rank-ticker-track');
+  if(items.length>0 && track){
+    const html=items.join('');
+    track.innerHTML=html+html; // duplicate for seamless loop
+    ticker.style.display='flex';
+  }
+}
+
+function buildCutoff(data){
+  const banner=document.getElementById('cutoff-banner');
+  if(!banner||data.length<100) return;
+  const cutoff100=data[99]?data[99].wagered:0;
+  const cutoff10=data[9]?data[9].wagered:0;
+  if(!cutoff100) return;
+  banner.innerHTML=`💡 <strong>Cutoff to enter Top 100:</strong> ${fmtShort(cutoff100)} wagered
+    <span class="cutoff-sep">|</span>
+    <strong>Top 10 cutoff:</strong> ${fmtShort(cutoff10)} wagered`;
+  banner.classList.add('ready');
+}
+
+function renderBoard(){
+  const isPrev=(_currentTab==='previous');
+  const data=(isPrev?((_prevMode&&_prevData)?_prevData.slice(0,DISPLAY_ROWS):[]):((_liveMode&&_liveData)?_liveData.slice(0,DISPLAY_ROWS):[]));
+  const max=data[0]?data[0].wagered:1;
+
+  // ── Podium ──
+  const podium=document.getElementById('lb-podium');
+  podium.innerHTML='';
+  const order=[1,0,2],cls=['gold','silver','bronze'],delays=['0.12s','0s','0.24s'];
+  order.forEach((idx,pos)=>{
+    const p=data[idx];if(!p)return;
+    const rank=idx+1,c=cls[idx];
+    const card=document.createElement('div');
+    card.className='podium-card '+c;
+    card.style.transitionDelay=delays[pos];
+
+    // Gap calculations
+    const above=idx>0?data[idx-1]:null;       // higher rank (better)
+    const below=data[idx+1]||null;            // lower rank (worse)
+    const gapAbove=above?above.wagered-p.wagered:0;
+    const leadBelow=below?p.wagered-below.wagered:0;
+
+    const frontHTML='<div class="podium-face podium-front">'+
+      (c==='gold'?'<div class="podium-aura"></div>':'')+
+      '<div class="podium-slash"></div><div class="podium-body">'+
+      (rank===1?'<div class="podium-crown">\u{1F451}</div>':'')+
+      '<div class="podium-rank">'+rank+'</div>'+
+      '<div class="podium-avatar">'+p.user.charAt(0).toUpperCase()+'</div>'+
+      '<div class="podium-name">'+maskUser(p.user)+'</div>'+
+      '<div class="podium-wager">Wagered: '+fmtShort(p.wagered)+'</div>'+
+      '<div class="podium-prize">'+_getPrizeLabel(idx)+'</div>'+
+      '<div class="podium-flip-hint">tap for stats ⟳</div>'+
+      '</div></div>';
+
+    const backHTML='<div class="podium-face podium-back">'+
+      '<div class="pb-row"><span class="pb-label">Total Wagered</span><span class="pb-val">$'+Math.round(p.wagered).toLocaleString()+'</span></div>'+
+      '<div class="pb-row"><span class="pb-label">Prize</span><span class="pb-val" style="color:var(--gold);font-size:.95rem">'+_getPrizeLabel(idx)+'</span></div>'+
+      (above?'<div class="pb-row"><span class="pb-label">Gap to Rank '+(rank-1)+'</span><span class="pb-val dn">'+fmtShort(gapAbove)+' behind</span></div>':'<div class="pb-row"><span class="pb-label">Position</span><span class="pb-val up">\u{1F451} Leader</span></div>')+
+      (below?'<div class="pb-row"><span class="pb-label">Lead over Rank '+(rank+1)+'</span><span class="pb-val up">+'+fmtShort(leadBelow)+' ahead</span></div>':'')+
+      '</div>';
+
+    card.innerHTML='<div class="podium-flip">'+frontHTML+backHTML+'</div>';
+
+    // Flip on click
+    card.addEventListener('click',()=>{ card.classList.toggle('flipped'); });
+
+    podium.appendChild(card);
+  });
+  requestAnimationFrame(()=>{
+    podium.querySelectorAll('.podium-card').forEach(c=>{
+      c.classList.add('visible');c.classList.add('anim-active');
+    });
+  });
+
+  // ── Table ──
+  const body=document.getElementById('lb-body');
+  body.innerHTML='';
+  if(!data.length){body.innerHTML='<tr><td colspan="4" class="lb-empty">Loading leaderboard data…</td></tr>';return;}
+
+  for(let i=3;i<data.length;i++){
+    const p=data[i];
+    const rank=i+1,prizeLabel=_getPrizeLabel(i);
+    const chg=getRankChange(p.user, rank);
+    const isHot=chg!==null&&chg>=5;
+    let rankChgHtml='';
+    if(chg===null) rankChgHtml='';
+    else if(chg>0) rankChgHtml=`<span class="rank-up">↑${chg}</span>`;
+    else if(chg<0) rankChgHtml=`<span class="rank-dn">↓${Math.abs(chg)}</span>`;
+    else rankChgHtml='<span class="rank-nc">—</span>';
+    const heatHtml=isHot?'<span class="heat-badge">🔥</span>':'';
+
+    const tr=document.createElement('tr');
+    tr.className='lb-row'+(rank<=3?' top'+rank:'');
+
+    tr.dataset.idx=i;
+
+    tr.innerHTML=`
+      <td><span class="lb-rank">#${rank}</span>${rankChgHtml}</td>
+      <td><div class="lb-userwrap"><div class="lb-avatar">${p.user.charAt(0).toUpperCase()}</div><span class="lb-user">${maskUser(p.user)}</span>${heatHtml}</div></td>
+      <td><div class="lb-wagered"><span class="lb-wagered-num" data-target="${p.wagered}">$0</span><div class="lb-bar"><div class="lb-bar-fill" data-pct="${(p.wagered/max*100).toFixed(1)}"></div></div></div></td>
+      <td><span class="lb-prize">${prizeLabel}</span></td>`;
+
+    // Expandable detail row
+    const exp=document.createElement('tr');
+    exp.className='lb-expand';
+    const nextCutoff=data[i+1]?data[i+1].wagered:0;
+    const gapToNext=nextCutoff>0?p.wagered-nextCutoff:0;
+    const gapAbove=i>0?data[i-1].wagered-p.wagered:0;
+    exp.innerHTML=`<td colspan="4">
+      <div class="lb-expand-inner">
+        <div class="lb-expand-stat"><span class="es-label">Total Wagered</span><span class="es-val">${'$'+Math.round(p.wagered).toLocaleString()}</span></div>
+        <div class="lb-expand-stat"><span class="es-label">Prize</span><span class="es-val">${prizeLabel}</span></div>
+        ${gapAbove>0?`<div class="lb-expand-stat"><span class="es-label">Gap to Rank ${rank-1}</span><span class="es-val" style="color:#ff7043">${fmtShort(gapAbove)} behind</span></div>`:''}
+        ${gapToNext>0?`<div class="lb-expand-stat"><span class="es-label">Lead over Rank ${rank+1}</span><span class="es-val" style="color:#00e676">+${fmtShort(gapToNext)} ahead</span></div>`:''}
+        ${chg!==null?`<div class="lb-expand-stat"><span class="es-label">Rank Change</span><span class="es-val">${chg>0?'↑'+chg+' up':chg<0?'↓'+Math.abs(chg)+' down':'No change'}</span></div>`:''}
+      </div>
+    </td>`;
+
+    // Toggle expand on click
+    tr.addEventListener('click',()=>{
+      const isOpen=exp.classList.contains('open');
+      // Close all others
+      document.querySelectorAll('.lb-expand.open').forEach(e=>e.classList.remove('open'));
+      if(!isOpen){
+        exp.classList.add('open');
+      }
+    });
+
+    body.appendChild(tr);
+    body.appendChild(exp);
+  }
+
+  // ── Ticker + Cutoff ──
+  buildTicker(data);
+  buildCutoff(data);
+
+  // ── Animations ──
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.lb-table .lb-bar-fill').forEach(b=>{b.style.width=b.dataset.pct+'%';});
+    document.querySelectorAll('.lb-table .lb-wagered-num').forEach(el=>{
+      const target=+el.dataset.target;let cur=0;const step=target/45;
+      const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=fmtShort(cur);if(cur>=target){el.textContent=fmtShort(target);clearInterval(t);}},22);
+    });
+  });
+}
+
+function parseCSV(raw){
+  // Strip carriage returns, split lines
+  const lines=raw.replace(/\r/g,'').trim().split('\n');
+  if(lines.length<2)return[];
+  function parseLine(line){
+    const cols=[];let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      const ch=line[i];
+      if(ch==='"'){inQ=!inQ;continue;}
+      if(ch===','&&!inQ){cols.push(cur.trim());cur='';continue;}
+      cur+=ch;
+    }
+    cols.push(cur.trim());
+    return cols;
+  }
+  const headers=parseLine(lines[0]).map(h=>h.toLowerCase().replace(/\s+/g,'_').trim());
+  const out=[];
+  for(let i=1;i<lines.length;i++){
+    if(!lines[i].trim())continue;
+    const cols=parseLine(lines[i]);
+    const row={};
+    headers.forEach((h,j)=>row[h]=(cols[j]||'').trim());
+    out.push(row);
+  }
+  return out;
+}
+
+async function loadLiveSheet(){
+  try{
+    const res=await fetch(SHEET_CSV);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const text=await res.text();
+    const rows=parseCSV(text);
+    if(!rows.length)throw new Error('empty');
+    // Sheet columns: affiliate_name, campaign_code, user_name, wagered, rank, start_date_utc, end_date_utc
+    _liveData=rows.slice(0,DISPLAY_ROWS).map((r,i)=>({
+      user: r['user_name']||r['username']||r['user']||('Player '+(i+1)),
+      wagered: parseFloat((r['wagered']||r['wager']||'0').replace(/[$,]/g,''))||0,
+      rank: parseInt(r['rank'])||i+1,
+    })).filter(r=>r.wagered>0).sort((a,b)=>a.rank-b.rank);
+    _liveMode=true;
+    renderBoard();
+    document.getElementById('lb-playercount').textContent=rows.length+'+';
+  }catch(e){
+    console.error('Sheet error:',e.message);
+
+    document.getElementById('lb-body').innerHTML='<tr><td colspan="4" style="text-align:center;color:#ff6060;padding:2rem;">Failed: '+e.message+'</td></tr>';
+  }
+}
+
+async function loadPrevSheet(){
+  try{
+    const res=await fetch(SHEET_CSV_PREV);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const text=await res.text();
+    const rows=parseCSV(text);
+    if(!rows.length)throw new Error('empty');
+    _prevData=rows.slice(0,DISPLAY_ROWS).map((r,i)=>({
+      user: r['user_name']||r['username']||r['user']||('Player '+(i+1)),
+      wagered: parseFloat((r['wagered']||r['wager']||'0').replace(/[$,]/g,''))||0,
+      rank: parseInt(r['rank'])||i+1,
+    })).filter(r=>r.wagered>0).sort((a,b)=>a.rank-b.rank);
+    _prevMode=true;
+
+    renderBoard();
+    document.getElementById('lb-playercount').textContent=rows.length+'+';
+  }catch(e){
+    console.error('Prev sheet error:',e.message);
+
+    document.getElementById('lb-body').innerHTML='<tr><td colspan="4" style="text-align:center;color:#ff6060;padding:2rem;">Failed to load previous month: '+e.message+'</td></tr>';
+  }
+}
+
 function switchTab(type,btn){
   document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
+  _currentTab=type;
+  if(type==='previous'&&!_prevMode){
+    loadPrevSheet();
+  } else {
+    renderBoard();
+  }
 }
-// Countdown to end of month
+
 function updateCountdown(){
-  const now=new Date();
-  const end=new Date(now.getFullYear(),now.getMonth()+1,1,0,0,0);
-  const diff=end-now;
-  const d=Math.floor(diff/864e5);
-  const h=Math.floor((diff%864e5)/36e5);
-  const m=Math.floor((diff%36e5)/6e4);
-  const s=Math.floor((diff%6e4)/1e3);
-  document.getElementById('lb-countdown').textContent=`${d}d ${h}h ${m}m ${s}s`;
+  const now=new Date(),end=new Date(now.getFullYear(),now.getMonth()+1,1);
+  const d=end-now,days=Math.floor(d/864e5),hrs=Math.floor((d%864e5)/36e5),mins=Math.floor((d%36e5)/6e4),secs=Math.floor((d%6e4)/1e3);
+  document.getElementById('lb-countdown').textContent=`${days}d ${hrs}h ${mins}m ${secs}s`;
 }
 updateCountdown();
-setInterval(updateCountdown,1000);
+// Pause countdown when tab is hidden to save resources
+let _cdInterval=setInterval(updateCountdown,1000);
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){clearInterval(_cdInterval);}
+  else{updateCountdown();_cdInterval=setInterval(updateCountdown,1000);}
+});
+
+renderBoard();
+loadLiveSheet();
+
+// ── SHOOTING STARS (hero + podium area only) ──
+(function(){
+  const canvas=document.getElementById('star-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W=canvas.offsetWidth, H=canvas.offsetHeight;
+  function resize(){
+    canvas.width=W=canvas.offsetWidth;
+    canvas.height=H=canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  const stars=[];
+  function spawnStar(){
+    const angle=Math.PI/6+Math.random()*Math.PI/8; // mostly diagonal down-right
+    const speed=6+Math.random()*10;
+    const len=80+Math.random()*140;
+    stars.push({
+      x:Math.random()*W*1.3-W*0.15,
+      y:Math.random()*H*0.4-20,
+      vx:Math.cos(angle)*speed,
+      vy:Math.sin(angle)*speed,
+      len,
+      life:1,
+      decay:0.012+Math.random()*0.018,
+      width:1+Math.random()*1.5,
+      hue:Math.random()<0.6?45:185, // gold or cyan
+    });
+  }
+
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    frame++;
+    // Spawn 1 star every ~80 frames
+    if(frame%120===0) spawnStar();
+    // Occasional burst
+    if(frame%500===0){ for(let i=0;i<2;i++) spawnStar(); }
+
+    for(let i=stars.length-1;i>=0;i--){
+      const s=stars[i];
+      s.x+=s.vx; s.y+=s.vy; s.life-=s.decay;
+      if(s.life<=0||s.y>H+20){stars.splice(i,1);continue;}
+
+      const tail={x:s.x-s.vx*(s.len/12),y:s.y-s.vy*(s.len/12)};
+      const grad=ctx.createLinearGradient(tail.x,tail.y,s.x,s.y);
+      grad.addColorStop(0,'hsla('+s.hue+',100%,70%,0)');
+      grad.addColorStop(0.6,'hsla('+s.hue+',100%,80%,'+(s.life*0.6)+')');
+      grad.addColorStop(1,'hsla('+s.hue+',100%,95%,'+(s.life*0.9)+')');
+
+      ctx.beginPath();
+      ctx.moveTo(tail.x,tail.y);
+      ctx.lineTo(s.x,s.y);
+      ctx.strokeStyle=grad;
+      ctx.lineWidth=s.width*s.life;
+      ctx.lineCap='round';
+      ctx.stroke();
+
+      // Tip glow
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.width*s.life*1.5,0,Math.PI*2);
+      ctx.fillStyle='hsla('+s.hue+',100%,90%,'+(s.life*0.8)+')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+  // Spawn a few immediately on load
+  for(let i=0;i<2;i++) setTimeout(spawnStar, i*600);
+})();
+
+// Poll every 5 minutes
+setInterval(loadLiveSheet, 5*60*1000);
+
+// Smart refresh: fire immediately at midnight UTC (when Jake's sheet updates)
+// and at 00:01 UTC as a safety net
+function scheduleUTCMidnightRefresh(){
+  const now = new Date();
+  // ms until next midnight UTC
+  const msToMidnight = new Date(Date.UTC(
+    now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 10
+  )) - now;
+  setTimeout(()=>{
+    loadLiveSheet();   // fetch at 00:00:10 UTC
+    setTimeout(loadLiveSheet, 60*1000); // fetch again at 00:01:10 UTC as safety
+    scheduleUTCMidnightRefresh(); // reschedule for next midnight
+  }, msToMidnight);
+}
+scheduleUTCMidnightRefresh();
 </script>
 </body>
 </html>
