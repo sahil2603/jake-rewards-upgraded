@@ -10,32 +10,57 @@
   <link rel="stylesheet" href="style.css"/>
   <style>
     .tiers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:1100px;margin:0 auto;}
-    .tier-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;transition:all .3s;opacity:0;transform:translateY(16px);}
+    .tier-card{position:relative;overflow:hidden;background:linear-gradient(165deg,rgba(255,255,255,0.045),rgba(255,255,255,0.01) 60%);border:1px solid var(--border);border-radius:18px;padding:1.8rem 1.2rem 1.5rem;text-align:center;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;opacity:0;transform:translateY(16px);}
     .tier-card.visible{opacity:1;transform:translateY(0);}
-    .tier-card:hover{transform:translateY(-4px);}
-    .tier-card.bronze{border-color:rgba(180,110,50,0.3);}
-    .tier-card.silver{border-color:rgba(180,190,200,0.25);}
-    .tier-card.gold{border-color:rgba(230,180,50,0.3);}
-    .tier-card.plat{border-color:rgba(100,160,230,0.25);}
-    .tier-card.diamond{border-color:rgba(150,220,255,0.3);background:linear-gradient(135deg,var(--card),rgba(150,220,255,0.03));}
-    .tier-card.obsidian{border-color:rgba(180,100,255,0.35);background:linear-gradient(135deg,var(--card),rgba(180,100,255,0.05));}
-    .tier-icon{font-size:2rem;margin-bottom:.7rem;}
-    .tier-name{font-family:var(--font-head);font-size:.85rem;font-weight:700;color:var(--text2);margin-bottom:.4rem;}
-    .tier-reward{font-family:var(--font-display);font-size:1.8rem;letter-spacing:2px;color:var(--gold);}
-    .tier-card.obsidian .tier-reward{color:#b464ff;}
-    .tier-card.diamond .tier-reward{color:#96dcff;}
+    .tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:18px 18px 0 0;opacity:.65;transition:opacity .3s;}
+    .tier-card:hover{transform:translateY(-7px);}
+    .tier-card:hover::before{opacity:1;}
+    .tier-card.bronze{border-color:rgba(180,110,50,0.35);} .tier-card.bronze::before{background:linear-gradient(90deg,#7a4010,#e8a24a,#7a4010);}
+    .tier-card.bronze:hover{box-shadow:0 18px 44px rgba(180,110,50,0.22);}
+    .tier-card.silver{border-color:rgba(180,195,210,0.3);} .tier-card.silver::before{background:linear-gradient(90deg,#5a6e80,#d8e4f0,#5a6e80);}
+    .tier-card.silver:hover{box-shadow:0 18px 44px rgba(160,185,210,0.18);}
+    .tier-card.gold{border-color:rgba(252,194,0,0.35);} .tier-card.gold::before{background:linear-gradient(90deg,#9a6000,#ffe066,#9a6000);}
+    .tier-card.gold:hover{box-shadow:0 18px 44px rgba(252,194,0,0.22);}
+    .tier-card.plat{border-color:rgba(180,200,225,0.32);background:linear-gradient(165deg,rgba(200,215,235,0.07),rgba(255,255,255,0.01) 60%);} .tier-card.plat::before{background:linear-gradient(90deg,#607888,#f0f4f8,#607888);}
+    .tier-card.plat:hover{box-shadow:0 18px 44px rgba(180,205,228,0.2);}
+    .tier-card.diamond{border-color:rgba(56,180,232,0.38);background:linear-gradient(165deg,rgba(56,180,232,0.08),rgba(255,255,255,0.01) 60%);} .tier-card.diamond::before{background:linear-gradient(90deg,#0660a0,#c0f0ff,#0660a0);}
+    .tier-card.diamond:hover{box-shadow:0 18px 44px rgba(56,180,232,0.26);}
+    .tier-card.obsidian{border-color:rgba(144,64,224,0.42);background:linear-gradient(165deg,rgba(112,48,192,0.12),rgba(0,0,0,0.2) 60%);} .tier-card.obsidian::before{background:linear-gradient(90deg,#0d0020,#9040e0,#0d0020);}
+    .tier-card.obsidian:hover{box-shadow:0 18px 44px rgba(144,64,224,0.32);}
+    .tier-icon{display:flex;align-items:center;justify-content:center;margin-bottom:1rem;height:54px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));}
+    .tier-name{font-family:var(--font-head);font-size:.8rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:.6rem;}
+    .tier-reward{font-family:var(--font-display);font-size:1.85rem;letter-spacing:2px;color:var(--gold);}
+    .tier-card.gold .tier-reward{text-shadow:0 0 16px rgba(252,194,0,0.35);}
+    .tier-card.diamond .tier-reward{color:#96dcff;text-shadow:0 0 16px rgba(56,180,232,0.38);}
+    .tier-card.obsidian .tier-reward{color:#c080ff;text-shadow:0 0 20px rgba(144,64,224,0.45);}
     .rules-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;max-width:700px;margin:3rem auto 0;}
     .rules-box h3{font-family:var(--font-display);font-size:1.5rem;letter-spacing:2px;color:#fff;margin-bottom:1rem;}
     .rules-box ul{list-style:none;display:flex;flex-direction:column;gap:.7rem;}
     .rules-box li{font-size:.85rem;color:var(--text2);padding-left:1.2rem;position:relative;}
     .rules-box li::before{content:'→';position:absolute;left:0;color:var(--gold);}
     .rules-box a{color:var(--gold);text-decoration:underline;}
+
+    .vip-rules-section{padding:3rem 2.5rem 5rem;}
+    .vip-rules-inner{max-width:760px;margin:0 auto;}
+    .vip-rules-card{background:rgba(255,255,255,0.03);border:1px solid rgba(230,180,50,0.2);border-radius:16px;padding:2rem 2.4rem;position:relative;overflow:hidden;}
+    .vip-rules-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),#b06bff);}
+    .vip-rules-title{font-family:var(--font-head);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);margin-bottom:1.2rem;}
+    .vip-rules-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;padding:0;margin:0;}
+    .vip-rules-list li{font-size:.87rem;color:var(--text2);line-height:1.6;padding-left:1.2rem;position:relative;}
+    .vip-rules-list li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:.75rem;top:.1rem;}
+    .vip-rules-list li strong{color:#fff;}
+    .vip-rules-list li a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(230,180,50,0.3);}
+    .vip-rules-list li a:hover{border-color:var(--gold);}
+  @media(max-width:560px){
+    .rr-wrap{padding:1.5rem 1rem 4rem;}
+    .rr-table td,.rr-table th{padding:.6rem .4rem;font-size:.75rem;}
+  }
   </style>
 </head>
 <body>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
-    <div class="logo-icon">J</div>
+    <img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40">
     <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
   </a>
   <ul class="nav-links">
@@ -49,17 +74,19 @@
       </div>
     </li>
     <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="refer.html">Refer a Friend</a></li>
     <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
   </ul>
-  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank" class="nav-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.249.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.369a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
   <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
 </nav>
 <div class="mobile-nav" id="mobile-nav">
   <a href="index.html">Home</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="refer.html">Refer a Friend</a>
   <a href="rankrewards.html">Rank-Up Rewards</a>
   <a href="bonuses.html">Bonuses</a>
-  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank">Discord</a>
 </div>
 
 <div class="page-hero">
@@ -69,48 +96,158 @@
 </div>
 
 <section style="padding:2rem 2.5rem 6rem;">
-  <div class="tiers-grid">
-    <div class="tier-card bronze"><div class="tier-icon">🥉</div><div class="tier-name">Bronze VIP</div><div class="tier-reward">$25</div></div>
-    <div class="tier-card silver"><div class="tier-icon">🥈</div><div class="tier-name">Silver VIP</div><div class="tier-reward">$75</div></div>
-    <div class="tier-card gold"><div class="tier-icon">🥇</div><div class="tier-name">Gold VIP</div><div class="tier-reward">$125</div></div>
-    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum I</div><div class="tier-reward">$250</div></div>
-    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum II</div><div class="tier-reward">$400</div></div>
-    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum III</div><div class="tier-reward">$800</div></div>
-    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum IV</div><div class="tier-reward">$1,600</div></div>
-    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum V</div><div class="tier-reward">$3,200</div></div>
-    <div class="tier-card plat"><div class="tier-icon">◆</div><div class="tier-name">Platinum VI</div><div class="tier-reward">$6,400</div></div>
-    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond I</div><div class="tier-reward">$15,625</div></div>
-    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond II</div><div class="tier-reward">$26,750</div></div>
-    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond III</div><div class="tier-reward">$56,500</div></div>
-    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond IV</div><div class="tier-reward">$164,250</div></div>
-    <div class="tier-card diamond"><div class="tier-icon">💎</div><div class="tier-name">Diamond V</div><div class="tier-reward">$250,000</div></div>
-    <div class="tier-card obsidian"><div class="tier-icon">⬛</div><div class="tier-name">Obsidian I</div><div class="tier-reward">$650,000</div></div>
+              <div class="tiers-grid">
+    <div class="tier-card bronze"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="brig" cx="38%" cy="30%"><stop offset="0%" stop-color="#f0b060"/><stop offset="55%" stop-color="#c07828"/><stop offset="100%" stop-color="#7a4010"/></radialGradient><filter id="brif"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(200,120,30,0.55)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#brig)" stroke="#d4903a" stroke-width=".8" filter="url(#brif)"/></svg></div><div class="tier-name">Bronze VIP</div><div class="tier-reward">$25</div></div>
+    <div class="tier-card silver"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="srig" cx="38%" cy="30%"><stop offset="0%" stop-color="#eef4fa"/><stop offset="55%" stop-color="#9ab0c4"/><stop offset="100%" stop-color="#506070"/></radialGradient><filter id="srif"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(140,170,200,0.45)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#srig)" stroke="rgba(200,220,240,0.8)" stroke-width="1.2" filter="url(#srif)"/></svg></div><div class="tier-name">Silver VIP</div><div class="tier-reward">$75</div></div>
+    <div class="tier-card gold"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="grig" cx="38%" cy="30%"><stop offset="0%" stop-color="#fff080"/><stop offset="45%" stop-color="#fcc200"/><stop offset="100%" stop-color="#a06800"/></radialGradient><filter id="grif"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(252,194,0,0.55)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#grig)" stroke="#e8b000" stroke-width=".8" filter="url(#grif)"/></svg></div><div class="tier-name">Gold VIP</div><div class="tier-reward">$125</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp1" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp1"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp1)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp1)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">I</text></svg></div><div class="tier-name">Platinum I</div><div class="tier-reward">$250</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp2" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp2"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp2)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp2)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">II</text></svg></div><div class="tier-name">Platinum II</div><div class="tier-reward">$400</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp3" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp3"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp3)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp3)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">III</text></svg></div><div class="tier-name">Platinum III</div><div class="tier-reward">$800</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp4" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp4"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp4)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp4)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">IV</text></svg></div><div class="tier-name">Platinum IV</div><div class="tier-reward">$1,600</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp5" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp5"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp5)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp5)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">V</text></svg></div><div class="tier-name">Platinum V</div><div class="tier-reward">$3,200</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp6" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp6"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp6)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp6)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">VI</text></svg></div><div class="tier-name">Platinum VI</div><div class="tier-reward">$6,400</div></div>
+    <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="dfd1"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
+  </defs>
+  <polygon points="10,4 54,4 63,22 50,44 32,64 14,44 1,22" fill="#1a8fb8" stroke="rgba(160,240,255,0.7)" stroke-width="1.2" filter="url(#dfd1)"/>
+  <polygon points="10,4 54,4 44,22 20,22" fill="#9ee4f8"/>
+  <polygon points="10,4 20,22 1,22" fill="#c8f0ff"/>
+  <polygon points="54,4 63,22 44,22" fill="#7dd0ec"/>
+  <polygon points="1,22 20,22 14,44 32,64" fill="#2ca8d0" opacity="0.85"/>
+  <polygon points="63,22 44,22 50,44 32,64" fill="#1880a8" opacity="0.85"/>
+  <polygon points="20,22 44,22 50,44 14,44" fill="#3bbce0" opacity="0.9"/>
+  <line x1="20" y1="22" x2="10" y2="4" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+  <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
+  <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">I</text>
+</svg></div><div class="tier-name">Diamond I</div><div class="tier-reward">$15,625</div></div>
+    <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="dfd2"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
+  </defs>
+  <polygon points="10,4 54,4 63,22 50,44 32,64 14,44 1,22" fill="#1a8fb8" stroke="rgba(160,240,255,0.7)" stroke-width="1.2" filter="url(#dfd2)"/>
+  <polygon points="10,4 54,4 44,22 20,22" fill="#9ee4f8"/>
+  <polygon points="10,4 20,22 1,22" fill="#c8f0ff"/>
+  <polygon points="54,4 63,22 44,22" fill="#7dd0ec"/>
+  <polygon points="1,22 20,22 14,44 32,64" fill="#2ca8d0" opacity="0.85"/>
+  <polygon points="63,22 44,22 50,44 32,64" fill="#1880a8" opacity="0.85"/>
+  <polygon points="20,22 44,22 50,44 14,44" fill="#3bbce0" opacity="0.9"/>
+  <line x1="20" y1="22" x2="10" y2="4" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+  <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
+  <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">II</text>
+</svg></div><div class="tier-name">Diamond II</div><div class="tier-reward">$26,750</div></div>
+    <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="dfd3"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
+  </defs>
+  <polygon points="10,4 54,4 63,22 50,44 32,64 14,44 1,22" fill="#1a8fb8" stroke="rgba(160,240,255,0.7)" stroke-width="1.2" filter="url(#dfd3)"/>
+  <polygon points="10,4 54,4 44,22 20,22" fill="#9ee4f8"/>
+  <polygon points="10,4 20,22 1,22" fill="#c8f0ff"/>
+  <polygon points="54,4 63,22 44,22" fill="#7dd0ec"/>
+  <polygon points="1,22 20,22 14,44 32,64" fill="#2ca8d0" opacity="0.85"/>
+  <polygon points="63,22 44,22 50,44 32,64" fill="#1880a8" opacity="0.85"/>
+  <polygon points="20,22 44,22 50,44 14,44" fill="#3bbce0" opacity="0.9"/>
+  <line x1="20" y1="22" x2="10" y2="4" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+  <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
+  <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">III</text>
+</svg></div><div class="tier-name">Diamond III</div><div class="tier-reward">$56,500</div></div>
+    <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="dfd4"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
+  </defs>
+  <polygon points="10,4 54,4 63,22 50,44 32,64 14,44 1,22" fill="#1a8fb8" stroke="rgba(160,240,255,0.7)" stroke-width="1.2" filter="url(#dfd4)"/>
+  <polygon points="10,4 54,4 44,22 20,22" fill="#9ee4f8"/>
+  <polygon points="10,4 20,22 1,22" fill="#c8f0ff"/>
+  <polygon points="54,4 63,22 44,22" fill="#7dd0ec"/>
+  <polygon points="1,22 20,22 14,44 32,64" fill="#2ca8d0" opacity="0.85"/>
+  <polygon points="63,22 44,22 50,44 32,64" fill="#1880a8" opacity="0.85"/>
+  <polygon points="20,22 44,22 50,44 14,44" fill="#3bbce0" opacity="0.9"/>
+  <line x1="20" y1="22" x2="10" y2="4" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+  <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
+  <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">IV</text>
+</svg></div><div class="tier-name">Diamond IV</div><div class="tier-reward">$164,250</div></div>
+    <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="dfd5"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
+  </defs>
+  <polygon points="10,4 54,4 63,22 50,44 32,64 14,44 1,22" fill="#1a8fb8" stroke="rgba(160,240,255,0.7)" stroke-width="1.2" filter="url(#dfd5)"/>
+  <polygon points="10,4 54,4 44,22 20,22" fill="#9ee4f8"/>
+  <polygon points="10,4 20,22 1,22" fill="#c8f0ff"/>
+  <polygon points="54,4 63,22 44,22" fill="#7dd0ec"/>
+  <polygon points="1,22 20,22 14,44 32,64" fill="#2ca8d0" opacity="0.85"/>
+  <polygon points="63,22 44,22 50,44 32,64" fill="#1880a8" opacity="0.85"/>
+  <polygon points="20,22 44,22 50,44 14,44" fill="#3bbce0" opacity="0.9"/>
+  <line x1="20" y1="22" x2="10" y2="4" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+  <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/>
+  <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
+  <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">V</text>
+</svg></div><div class="tier-name">Diamond V</div><div class="tier-reward">$250,000</div></div>
+    <div class="tier-card obsidian"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="ofo1"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="rgba(160,60,255,0.65)"/></filter>
+  </defs>
+  <polygon points="10,4 54,4 63,22 50,44 32,64 14,44 1,22" fill="#3a0878" stroke="rgba(200,100,255,0.75)" stroke-width="1.4" filter="url(#ofo1)"/>
+  <polygon points="10,4 54,4 44,22 20,22" fill="#9040d0" opacity="0.9"/>
+  <polygon points="10,4 20,22 1,22" fill="#c070ff" opacity="0.7"/>
+  <polygon points="54,4 63,22 44,22" fill="#7020b0" opacity="0.7"/>
+  <polygon points="1,22 20,22 14,44 32,64" fill="#280060" opacity="0.85"/>
+  <polygon points="63,22 44,22 50,44 32,64" fill="#1a0050" opacity="0.85"/>
+  <polygon points="20,22 44,22 50,44 14,44" fill="#4010a0" opacity="0.9"/>
+  <line x1="20" y1="22" x2="10" y2="4" stroke="rgba(220,160,255,0.5)" stroke-width="0.8"/>
+  <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(220,160,255,0.4)" stroke-width="0.8"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(220,160,255,0.35)" stroke-width="0.7"/>
+  <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(230,190,255,0.92)" font-family="Georgia,serif">I</text>
+</svg></div><div class="tier-name">Obsidian I</div><div class="tier-reward">$650,000</div></div>
   </div>
 
-  <div class="rules-box">
-    <h3>VIP RULES & CLAIMS</h3>
-    <ul>
-      <li>All values are displayed in USD.</li>
-      <li>Rewards are paid once per VIP level reached while playing under Jake.</li>
-      <li>Sports betting and wager manipulation may render you ineligible.</li>
-      <li>We retain the right to deny anyone we believe is cheating or abusing the system.</li>
-      <li>To claim your reward, create a ticket in the <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>.</li>
-    </ul>
+
+</section>
+
+<!-- DISCLAIMER + VIP RULES -->
+<section class="vip-rules-section">
+  <div class="vip-rules-inner">
+    <div class="vip-rules-card">
+      <div class="vip-rules-title">⚡ VIP Rules &amp; Claims</div>
+      <ul class="vip-rules-list">
+        <li>All values are displayed in USD.</li>
+        <li>Rank-up rewards never exceed <strong>65% of commission generated</strong> under code JAKE.</li>
+        <li>Rewards are paid once per VIP level reached while playing under Jake.</li>
+        <li>Sports betting and wager manipulation may render you ineligible.</li>
+        <li>We retain the right to deny anyone we believe is cheating or abusing the system.</li>
+        <li>To claim your reward, create a ticket in the <a href="https://discord.com/invite/jakethedegen" target="_blank">Discord</a>.</li>
+      </ul>
+    </div>
   </div>
 </section>
+
 
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <div class="logo-icon">J</div>
+        <img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40">
         <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
       </div>
       <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
       <div class="footer-socials">
-        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://discord.com/invite/jakethedegen" target="_blank">💬</a>
         <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
-        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@itsjakex" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@jakeplaysbj" target="_blank">🃏</a>
       </div>
     </div>
     <div class="footer-col">
