@@ -9,19 +9,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;padding:2rem 2.5rem 6rem;}
-    .hub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;display:flex;flex-direction:column;gap:1rem;transition:all .3s;opacity:0;transform:translateY(20px);}
+    .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.6rem;max-width:1040px;margin:0 auto;padding:2rem 2.5rem 6rem;}
+    .hub-card{position:relative;overflow:hidden;background:linear-gradient(165deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012) 60%);border:1px solid var(--border);border-radius:20px;padding:2.6rem 2rem 2.2rem;display:flex;flex-direction:column;gap:.9rem;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;opacity:0;transform:translateY(22px);}
     .hub-card.visible{opacity:1;transform:translateY(0);}
-    .hub-card:hover{transform:translateY(-6px);border-color:rgba(230,180,50,0.3);box-shadow:0 20px 50px rgba(0,0,0,.3);}
-    .hub-card-tag{font-size:.62rem;text-transform:uppercase;letter-spacing:2.5px;font-weight:700;color:var(--gold);font-family:var(--font-head);}
-    .hub-card-title{font-family:var(--font-display);font-size:2rem;letter-spacing:2px;color:#fff;line-height:1.1;}
-    .hub-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;flex:1;}
+    .hub-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#b06bff);opacity:.45;transition:opacity .3s;}
+    .hub-card::after{content:'';position:absolute;top:-40%;right:-30%;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle, rgba(176,107,255,0.10), transparent 70%);pointer-events:none;}
+    .hub-card:hover{transform:translateY(-7px);border-color:rgba(230,180,50,0.32);box-shadow:0 22px 55px rgba(0,0,0,.45);}
+    .hub-card:hover::before{opacity:1;}
+    .hub-icon-wrap{position:relative;z-index:1;width:64px;height:64px;border-radius:17px;display:flex;align-items:center;justify-content:center;margin-bottom:.5rem;background:radial-gradient(circle at 30% 22%, rgba(230,180,50,0.24), rgba(176,107,255,0.12));border:1px solid rgba(230,180,50,0.3);box-shadow:0 6px 22px rgba(230,180,50,0.12), inset 0 1px 10px rgba(255,255,255,0.06);}
+    .hub-card:hover .hub-icon-wrap{box-shadow:0 6px 26px rgba(230,180,50,0.22), inset 0 1px 10px rgba(255,255,255,0.08);}
+    .hub-icon{font-size:1.85rem;line-height:1;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.45));}
+    .hub-card-tag{position:relative;z-index:1;font-size:.62rem;text-transform:uppercase;letter-spacing:2.6px;font-weight:800;color:var(--gold);font-family:var(--font-head);}
+    .hub-card-title{position:relative;z-index:1;font-family:var(--font-display);font-size:2rem;letter-spacing:2px;color:#fff;line-height:1.1;}
+    .hub-card-desc{position:relative;z-index:1;font-size:.86rem;color:var(--text2);line-height:1.65;flex:1;}
+    .hub-card .reward-link{position:relative;z-index:1;}
   </style>
 </head>
 <body>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
-    <div class="logo-icon">J</div>
+    <img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40">
     <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
   </a>
   <ul class="nav-links">
@@ -35,17 +42,19 @@
       </div>
     </li>
     <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="refer.html">Refer a Friend</a></li>
     <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
   </ul>
-  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank" class="nav-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.249.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.369a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
   <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
 </nav>
 <div class="mobile-nav" id="mobile-nav">
   <a href="index.html">Home</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="refer.html">Refer a Friend</a>
   <a href="rankrewards.html">Rank-Up Rewards</a>
   <a href="bonuses.html">Bonuses</a>
-  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank">Discord</a>
 </div>
 
 <div class="page-hero">
@@ -56,18 +65,21 @@
 
 <div class="hub-grid">
   <a href="leaderboard.html" class="hub-card">
+    <div class="hub-icon-wrap"><span class="hub-icon">🏆</span></div>
     <div class="hub-card-tag">Monthly Grind</div>
     <div class="hub-card-title">$75,000 LEADERBOARD</div>
     <div class="hub-card-desc">See the full hybrid leaderboard, podium, prizes and rules for Jake's $75,000 monthly race. Top grinders compete for a massive prize pool.</div>
     <div class="reward-link">Open Leaderboard →</div>
   </a>
   <a href="rankrewards.html" class="hub-card">
+    <div class="hub-icon-wrap"><span class="hub-icon">👑</span></div>
     <div class="hub-card-tag">VIP Ladder</div>
     <div class="hub-card-title">RANK-UP REWARDS</div>
     <div class="hub-card-desc">View one-time cash bonuses for every Stake VIP rank from Bronze ($25) all the way up to Obsidian ($650,000). Hit a rank, claim your cash.</div>
     <div class="reward-link">View VIP Payouts →</div>
   </a>
   <a href="bonuses.html" class="hub-card">
+    <div class="hub-icon-wrap"><span class="hub-icon">🎁</span></div>
     <div class="hub-card-tag">Boosts</div>
     <div class="hub-card-title">BONUSES & GIVEAWAYS</div>
     <div class="hub-card-desc">$10 free signup bonus, daily $500 giveaway for active players, and help accessing Stake. All delivered through Discord.</div>
@@ -78,15 +90,16 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo"><div class="logo-icon">J</div><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
+      <div class="footer-logo"><img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40"><span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span></div>
       <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
       <div class="footer-socials">
-        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://discord.com/invite/jakethedegen" target="_blank">💬</a>
         <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
-        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@itsjakex" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@jakeplaysbj" target="_blank">🃏</a>
       </div>
     </div>
-    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
+    <div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="leaderboard.html">Leaderboard</a><a href="refer.html">Refer a Friend</a><a href="rankrewards.html">Rank-Up Rewards</a><a href="rewards.html">Rewards Hub</a></div>
     <div class="footer-col"><h4>Legal</h4><a href="#">Terms</a><a href="#">Privacy</a></div>
     <div class="footer-responsible"><div class="responsible-badge">⚠️ GambleAware</div><p>Please gamble responsibly. Visit <a href="https://www.begambleaware.org/" target="_blank">BeGambleAware.org</a></p></div>
   </div>
