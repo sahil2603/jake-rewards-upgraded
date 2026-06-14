@@ -132,10 +132,10 @@ img{max-width:100%;}
 .podium-card.silver{border-color:rgba(180,190,200,0.25);}
 .podium-card.bronze{border-color:rgba(180,110,50,0.25);}
 .podium-crown{font-size:1.5rem;margin-bottom:.3rem;}
-.podium-rank{font-family:var(--font-display);font-size:2rem;letter-spacing:2px;color:var(--muted);line-height:1;}
+.podium-rank{font-family:var(--font-head);font-weight:800;font-size:2.2rem;letter-spacing:0;color:var(--muted);line-height:1;}
 .podium-card.gold .podium-rank{color:var(--gold);}
-.podium-avatar{width:52px;height:52px;border-radius:50%;background:var(--card2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:.7rem auto;font-family:var(--font-display);font-size:1.5rem;color:var(--muted);}
-.podium-name{font-family:var(--font-head);font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.4rem;}
+.podium-avatar{width:52px;height:52px;border-radius:50%;background:var(--card2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:.7rem auto;font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--muted);}
+.podium-name{font-family:var(--font-head);font-size:.95rem;font-weight:700;letter-spacing:.3px;color:#fff;margin-bottom:.4rem;}
 .podium-wager{font-size:.73rem;color:var(--muted);margin-bottom:.2rem;}
 .podium-prize{font-family:var(--font-head);font-size:.85rem;font-weight:700;color:var(--gold);}
 
@@ -305,11 +305,13 @@ img{max-width:100%;}
 @keyframes slashSweep{0%,72%{transform:translateX(-220%) rotate(18deg);opacity:0;}74%{opacity:1;}82%{opacity:1;}90%,100%{transform:translateX(900%) rotate(18deg);opacity:0;}}
 
 /* champion power aura (radiating rays behind #1) */
-.podium-aura{position:absolute;inset:-55px;z-index:0;pointer-events:none;border-radius:50%;
-  background:repeating-conic-gradient(from 0deg, rgba(245,200,66,0.17) 0deg 4deg, transparent 4deg 15deg);
-  -webkit-mask:radial-gradient(circle, #000 16%, transparent 66%);mask:radial-gradient(circle, #000 16%, transparent 66%);
+.podium-aura{position:absolute;inset:-65px;z-index:0;pointer-events:none;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg, rgba(252,210,80,0.28) 0deg 4deg, transparent 4deg 13deg);
+  -webkit-mask:radial-gradient(circle, #000 14%, transparent 68%);mask:radial-gradient(circle, #000 14%, transparent 68%);
   opacity:0;transition:opacity 1s;animation:auraSpin 16s linear infinite;animation-play-state:paused;will-change:transform;}
-.podium-card.gold.visible .podium-aura{opacity:.9;}
+.podium-card.gold.visible .podium-aura{opacity:1;}
+/* Extra warm gold glow behind #1 card */
+.podium-card.gold{box-shadow:0 0 50px rgba(252,194,0,0.25),0 0 100px rgba(252,194,0,0.12);}
 .podium-card.gold.anim-active .podium-aura{animation-play-state:running;}
 @keyframes auraSpin{to{transform:rotate(360deg);}}
 
