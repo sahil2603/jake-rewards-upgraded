@@ -136,7 +136,7 @@ img{max-width:100%;}
 .podium-card.gold .podium-rank{color:var(--gold);}
 .podium-avatar{width:52px;height:52px;border-radius:50%;background:var(--card2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:.7rem auto;font-family:var(--font-head);font-weight:800;font-size:1.4rem;color:var(--muted);}
 .podium-name{font-family:var(--font-head);font-size:.95rem;font-weight:700;letter-spacing:.3px;color:#fff;margin-bottom:.4rem;}
-.podium-wager{font-size:.73rem;color:var(--muted);margin-bottom:.2rem;}
+.podium-wager{font-size:.78rem;color:#fff;font-weight:600;margin-bottom:.2rem;}
 .podium-prize{font-family:var(--font-head);font-size:.85rem;font-weight:700;color:var(--gold);}
 
 /* ── SOCIALS ──────────────────────────────────────────────────────────── */
