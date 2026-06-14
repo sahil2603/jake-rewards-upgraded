@@ -69,6 +69,22 @@
 </div>
 
 <div class="bonus-grid">
+  <!-- ACCESSING STAKE — moved to top, slimmer horizontal layout (big selling point) -->
+  <div class="access-stake-banner" style="grid-column:1/-1;border:1px solid rgba(180,100,255,0.25);background:linear-gradient(135deg,var(--card),rgba(180,100,255,0.05));border-radius:var(--radius);padding:1.2rem 1.6rem;position:relative;overflow:hidden;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;">
+    <canvas id="help-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <div style="position:relative;z-index:1;display:flex;align-items:center;gap:1rem;flex:1;min-width:260px;">
+      <div style="font-size:2rem;flex-shrink:0;">🔓</div>
+      <div>
+        <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.2rem;">
+          <span class="bonus-title" style="margin:0;font-size:1.2rem;">ACCESSING STAKE</span>
+          <span class="bonus-amount-badge" style="background:rgba(180,100,255,0.1);border-color:rgba(180,100,255,0.25);color:#c87aff;font-size:.6rem;padding:.2rem .5rem;">NEED HELP?</span>
+        </div>
+        <div class="bonus-desc" style="margin:0;font-size:.85rem;">Having trouble accessing Stake from your region? Jake's team has you covered — join the Discord, create a ticket, and get set up quickly and securely.</div>
+      </div>
+    </div>
+    <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="background:#c87aff;color:#000;position:relative;z-index:1;flex-shrink:0;white-space:nowrap;">Get Help on Discord</a>
+  </div>
+
   <!-- 100% DEPOSIT MATCH — Jake's biggest offer, placed first -->
   <div class="bonus-card deposit-match" style="position:relative;overflow:hidden;border-color:rgba(0,255,120,0.3);background:linear-gradient(135deg,var(--card),rgba(0,255,120,0.04));">
     <canvas id="deposit-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
@@ -126,18 +142,6 @@
     </div>
   </div>
 
-  <div class="bonus-card" style="grid-column:1/-1;border-color:rgba(180,100,255,0.2);background:linear-gradient(135deg,var(--card),rgba(180,100,255,0.03));position:relative;overflow:hidden;">
-    <canvas id="help-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
-    <div style="position:relative;z-index:1;">
-    <div class="bonus-header">
-      <div class="bonus-icon">🔓</div>
-      <div class="bonus-amount-badge" style="background:rgba(180,100,255,0.1);border-color:rgba(180,100,255,0.25);color:#c87aff;">NEED HELP?</div>
-    </div>
-    <div class="bonus-title">ACCESSING STAKE</div>
-    <div class="bonus-desc">Having trouble accessing Stake from your region? Jake's team has you covered. Join the Discord and create a ticket — the team will get you set up quickly and securely.</div>
-    <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="background:#c87aff;color:#000;">Get Help on Discord</a>
-    </div>
-  </div>
 </div>
 
 <footer class="footer">
