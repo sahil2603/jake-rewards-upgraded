@@ -9,7 +9,9 @@
   <meta property="og:title" content="JakeRewards — Most Rewarding Stake Affiliate 2026"/>
   <meta property="og:description" content="$75,000 monthly leaderboard, daily $500 giveaway, $10 free signup. Use code JAKE on Stake."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/></noscript>
   <link rel="stylesheet" href="style.css"/>
 <style>
 @keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
@@ -24,7 +26,7 @@
 <!-- NAV -->
 <nav class="nav">
   <a href="index.html" class="nav-logo">
-    <div class="logo-icon">J</div>
+    <img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40">
     <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
   </a>
   <ul class="nav-links">
@@ -38,17 +40,19 @@
       </div>
     </li>
     <li><a href="leaderboard.html">Leaderboard</a></li>
+    <li><a href="refer.html">Refer a Friend</a></li>
     <li><a href="https://t.me/jakethedegn" target="_blank">Contact</a></li>
   </ul>
-  <a href="https://discord.gg/jakethedegen" target="_blank" class="nav-cta">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank" class="nav-cta"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.249.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.369a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>Discord</a>
   <button class="nav-hamburger" onclick="toggleMobile()">☰</button>
 </nav>
 <div class="mobile-nav" id="mobile-nav">
   <a href="index.html">Home</a>
   <a href="leaderboard.html">Leaderboard</a>
+  <a href="refer.html">Refer a Friend</a>
   <a href="rankrewards.html">Rank-Up Rewards</a>
   <a href="bonuses.html">Bonuses</a>
-  <a href="https://discord.gg/jakethedegen" target="_blank">Discord</a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank">Discord</a>
 </div>
 
 <!-- HERO -->
@@ -58,9 +62,27 @@
     <div class="hero-orb orb2"></div>
     <div class="hero-orb orb3"></div>
     <canvas id="particles"></canvas>
+    <div class="hero-cards" aria-hidden="true">
+      <div class="hcard" style="left:7%;animation-delay:0s;animation-duration:15s;">
+        <div class="hc-face hc-front red"><span class="hc-corner tl">J<i>♥</i></span><span class="hc-pip">♥</span><span class="hc-corner br">J<i>♥</i></span></div>
+        <div class="hc-face hc-back">J</div>
+      </div>
+      <div class="hcard" style="left:22%;animation-delay:-9s;animation-duration:18s;">
+        <div class="hc-face hc-front"><span class="hc-corner tl">J<i>♠</i></span><span class="hc-pip">♠</span><span class="hc-corner br">J<i>♠</i></span></div>
+        <div class="hc-face hc-back">J</div>
+      </div>
+      <div class="hcard" style="left:76%;animation-delay:-4s;animation-duration:16.5s;">
+        <div class="hc-face hc-front red"><span class="hc-corner tl">J<i>♦</i></span><span class="hc-pip">♦</span><span class="hc-corner br">J<i>♦</i></span></div>
+        <div class="hc-face hc-back">J</div>
+      </div>
+      <div class="hcard" style="left:91%;animation-delay:-13s;animation-duration:19s;">
+        <div class="hc-face hc-front"><span class="hc-corner tl">J<i>♣</i></span><span class="hc-pip">♣</span><span class="hc-corner br">J<i>♣</i></span></div>
+        <div class="hc-face hc-back">J</div>
+      </div>
+    </div>
   </div>
   <div class="hero-content">
-    <div class="hero-badge" style="animation:badgeFloat 3s ease-in-out infinite;">🎰 Stake Affiliate · Code: JAKE</div>
+    <div class="hero-badge">🎰 Stake Affiliate · Code: JAKE</div>
     <h1 class="hero-title">
       TAKE ADVANTAGE OF THE MOST
       <span class="hero-accent">REWARDING</span>
@@ -68,7 +90,7 @@
     </h1>
     <p class="hero-sub">Daily giveaways, challenges, lossback, rank-up rewards and a <strong>$75,000 monthly leaderboard</strong>. There's something to excite every player.</p>
     <div class="hero-btns">
-      <a href="https://discord.gg/jakethedegen" target="_blank" class="btn-primary">Get Started</a>
+      <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary">Get Started</a>
       <a href="rewards.html" class="btn-ghost">View Rewards</a>
     </div>
     <div class="hero-stats">
@@ -76,7 +98,9 @@
       <div class="stat-divider"></div>
       <div class="stat"><span class="stat-num">$500</span><span class="stat-label">Daily Giveaway</span></div>
       <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num">$10</span><span class="stat-label">Free Signup Bonus</span></div>
+      <div class="stat"><span class="stat-num">$1M+</span><span class="stat-label">Rank Up Rewards</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">$10</span><span class="stat-label">Signup Bonus</span></div>
     </div>
     <div class="hero-code-card" style="position:relative;overflow:hidden;margin-top:.5rem;">
       <div style="position:absolute;top:0;left:-100%;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(230,180,50,0.8),transparent);animation:shimmerLine 2.5s linear infinite;z-index:10;"></div>
@@ -87,6 +111,12 @@
     <!-- code card now inside hero-content above -->
 </div>
 </section>
+
+<!-- LIVE WINS TICKER -->
+<div class="wins-ticker" aria-label="Recent community wins">
+  <div class="wins-ticker-tag"><span class="live-dot"></span> LIVE WINS</div>
+  <div class="wins-track-wrap"><div class="wins-track" id="wins-track"></div></div>
+</div>
 
 <!-- REWARDS GRID -->
 <section class="rewards-section">
@@ -138,6 +168,41 @@
   </div>
 </section>
 
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-header">
+    <div class="section-tag">Get Started</div>
+    <h2>HOW IT WORKS</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <span class="how-num">01</span>
+      <div class="how-icon-wrap"><span class="how-icon">📝</span></div>
+      <div class="how-eyebrow">Step 01</div>
+      <h3>Sign up with code JAKE</h3>
+      <p>Create your Stake account and enter code <strong>JAKE</strong> during signup, or set it under your settings. This links you to the rewards program.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">02</span>
+      <div class="how-icon-wrap"><span class="how-icon">🎰</span></div>
+      <div class="how-eyebrow">Step 02</div>
+      <h3>Play &amp; climb the board</h3>
+      <p>Every wager counts toward the $75,000 monthly leaderboard, your VIP rank-ups, daily giveaways and lossback. Just play how you normally do.</p>
+    </div>
+    <div class="how-step">
+      <span class="how-num">03</span>
+      <div class="how-icon-wrap"><span class="how-icon">💰</span></div>
+      <div class="how-eyebrow">Step 03</div>
+      <h3>Claim your rewards</h3>
+      <p>Join the Discord, open a ticket and collect — signup bonus, rank-up payouts, leaderboard prizes and giveaways all get sent straight to you.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="https://stake.com/?c=JAKE" target="_blank" class="btn-primary">Join with code JAKE</a>
+  </div>
+</section>
+
 <!-- LIVE STREAM -->
 <section class="stream-section">
   <div class="stream-inner">
@@ -153,17 +218,21 @@
       <a href="https://kick.com/itsjakeuwu" target="_blank" class="btn-primary">Watch on Kick</a>
     </div>
     <div class="stream-card">
-      <div class="stream-card-inner">
-        <div class="stream-preview">
-          <div class="stream-avatar">J</div>
-          <div class="stream-meta">
+      <div class="stream-frame">
+        <iframe class="stream-iframe" src="https://player.kick.com/itsjakeuwu"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+          title="Jake live on Kick"></iframe>
+      </div>
+      <div class="stream-footer">
+        <div class="stream-footer-id">
+          <div class="stream-avatar-sm">J</div>
+          <div>
             <div class="stream-name">itsjakeuwu</div>
-            <div class="stream-platform">kick.com</div>
+            <div class="stream-platform">Live on Kick · slots, bonus hunts &amp; giveaways</div>
           </div>
-          <div class="stream-status-pill"><span class="live-dot"></span>LIVE</div>
         </div>
-        <div class="stream-description">Slot grinding · Bonus hunts · Community giveaways</div>
-        <a href="https://kick.com/itsjakeuwu" target="_blank" class="stream-watch-btn">▶ Watch Stream</a>
+        <a href="https://kick.com/itsjakeuwu" target="_blank" class="stream-watch-btn">Open Kick ↗</a>
       </div>
     </div>
   </div>
@@ -175,32 +244,19 @@
     <div class="section-tag">Monthly Race</div>
     <h2>LEADERBOARD PREVIEW</h2>
   </div>
-  <div class="podium">
-    <div class="podium-card silver">
-      <div class="podium-rank">2</div>
-      <div class="podium-avatar">?</div>
-      <div class="podium-name">Loading…</div>
-      <div class="podium-wager">Wagered: —</div>
-      <div class="podium-prize">Prize: —</div>
-    </div>
-    <div class="podium-card gold">
-      <div class="podium-crown">👑</div>
-      <div class="podium-rank">1</div>
-      <div class="podium-avatar">?</div>
-      <div class="podium-name">Loading…</div>
-      <div class="podium-wager">Wagered: —</div>
-      <div class="podium-prize">Prize: —</div>
-    </div>
-    <div class="podium-card bronze">
-      <div class="podium-rank">3</div>
-      <div class="podium-avatar">?</div>
-      <div class="podium-name">Loading…</div>
-      <div class="podium-wager">Wagered: —</div>
-      <div class="podium-prize">Prize: —</div>
-    </div>
-  </div>
+  <div class="podium" id="home-podium"></div>
   <div style="text-align:center;margin-top:2rem;">
     <a href="leaderboard.html" class="btn-primary">View Full Leaderboard</a>
+  </div>
+</section>
+
+
+<!-- TOTAL PAID BAND -->
+<section class="paid-band">
+  <div class="paid-inner">
+    <div class="paid-label">Total Paid To Players</div>
+    <div class="paid-counter" id="paid-counter">$0</div>
+    <div class="paid-sub">Across leaderboards, rank-ups, giveaways &amp; lossback under code JAKE</div>
   </div>
 </section>
 
@@ -211,24 +267,61 @@
     <h2>CONNECT WITH JAKE</h2>
   </div>
   <div class="socials-grid">
-    <a href="https://discord.gg/jakethedegen" target="_blank" class="social-card discord">
+    <a href="https://discord.com/invite/jakethedegen" target="_blank" class="social-card discord">
       <div class="social-icon"><svg width="36" height="36" viewBox="0 0 127.14 96.36" fill="#5865F2" xmlns="http://www.w3.org/2000/svg"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg></div>
       <div class="social-name">Discord</div>
       <div class="social-handle">Jake's Community</div>
       <div class="social-cta">Join Server →</div>
     </a>
     <a href="https://kick.com/itsjakeuwu" target="_blank" class="social-card kick">
-      <div class="social-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="#53FC18" xmlns="http://www.w3.org/2000/svg"><path d="M2 2h4v6.5L10.5 2H16l-6 8 6 8h-5.5L6 11.5V18H2V2z"/><path d="M16 2h4v6.5L22 6v4l-2 2 2 2v4l-2-2.5V18h-4V2z"/></svg></div>
+      <div class="social-icon"><svg width="34" height="34" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="256" height="256" rx="60" fill="#53FC18"/><path transform="translate(61,28) scale(0.82)" fill="#0a0d0e" d="M0 0h54v54h27v-27h27v-27h54v81h-27v27h-27v27h27v27h27v81h-54v-27h-27v-27h-27v54h-54Z"/></svg></div>
       <div class="social-name">Kick</div>
       <div class="social-handle">itsjakeuwu</div>
       <div class="social-cta">Watch Live →</div>
     </a>
-    <a href="https://www.youtube.com/@itsjakeuwu" target="_blank" class="social-card youtube">
+    <a href="https://www.youtube.com/@itsjakex" target="_blank" class="social-card youtube">
       <div class="social-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
       <div class="social-name">YouTube</div>
-      <div class="social-handle">itsjakeuwu</div>
+      <div class="social-handle">jakewakey · main channel</div>
       <div class="social-cta">Subscribe →</div>
     </a>
+    <a href="https://www.youtube.com/@jakeplaysbj" target="_blank" class="social-card youtube">
+      <div class="social-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span class="yt-badge">🃏</span></div>
+      <div class="social-name">YouTube</div>
+      <div class="social-handle">jakeywakey2 · blackjack only</div>
+      <div class="social-cta">Subscribe →</div>
+    </a>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header">
+    <div class="section-tag">Questions</div>
+    <h2>FREQUENTLY ASKED</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">How do I use code JAKE?<span class="faq-chev">+</span></button>
+      <div class="faq-a"><p>When you register on Stake, enter <strong>JAKE</strong> in the referral/affiliate code field. Already have an account? You can add the code under your account settings, then join the Discord to start claiming rewards.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is the $10 signup bonus really free?<span class="faq-chev">+</span></button>
+      <div class="faq-a"><p>Yes. Sign up under code JAKE, make a first deposit of at least $10, then open a ticket in the Discord. The $10 is sent to you with no extra strings.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How does the $75,000 leaderboard work?<span class="faq-chev">+</span></button>
+      <div class="faq-a"><p>Every dollar you wager under code JAKE counts toward your monthly position. The board resets at the start of each month and the top 15 players split the prize pool. Wagers are weighted by game RTP — see the leaderboard page for the exact rules.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What are rank-up rewards?<span class="faq-chev">+</span></button>
+      <div class="faq-a"><p>Each time you hit a new Stake VIP rank (Bronze through Obsidian), Jake pays you a bonus on top of Stake's own reward — from $25 at the lower tiers up to massive payouts at the top. Check the Rank-Up Rewards page for the full list.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I actually get paid?<span class="faq-chev">+</span></button>
+      <div class="faq-a"><p>Everything runs through the Discord. Join the server, open a support ticket, and the team verifies your account and sends your rewards in crypto. It usually only takes a few minutes.</p></div>
+    </div>
   </div>
 </section>
 
@@ -237,14 +330,15 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <div class="logo-icon">J</div>
+        <img src="logo.png" class="logo-img" alt="Jake Rewards logo" width="40" height="40">
         <span class="logo-text">JAKE<span class="logo-accent">REWARDS</span></span>
       </div>
       <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
       <div class="footer-socials">
-        <a href="https://discord.gg/jakethedegen" target="_blank">💬</a>
+        <a href="https://discord.com/invite/jakethedegen" target="_blank">💬</a>
         <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
-        <a href="https://www.youtube.com/@itsjakeuwu" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@itsjakex" target="_blank">📺</a>
+        <a href="https://www.youtube.com/@jakeplaysbj" target="_blank">🃏</a>
       </div>
     </div>
     <div class="footer-col">
@@ -283,37 +377,266 @@ function copyCode(){
   });
 }
 
-// Particle canvas
+// ===== Leaderboard-driven homepage widgets =====
+function _fmtShort(n){
+  if(n>=1e6) return '$'+(n/1e6).toFixed(2)+'M';
+  if(n>=1e3) return '$'+(n/1e3).toFixed(0)+'K';
+  return '$'+Math.round(n);
+}
+// Podium (top 3) — wait for deferred data like ticker + counter
+// Real prize labels for home podium top 3
+const _HOME_PRIZES=[{cash:20000,lb:true},{cash:10000,lb:true},{cash:5000,lb:true}];
+function _homePrizeLabel(idx){const p=_HOME_PRIZES[idx];if(!p)return '';if(p.lb)return '$'+p.cash.toLocaleString()+' + 5% lossback';return '$'+p.cash.toLocaleString();}
+function _maskUser(n){if(!n)return '—';if(n.length<=5)return '*'.repeat(n.length);return '*'.repeat(5)+n.slice(5);}
+
+function initHomePodium(){
+  const el=document.getElementById('home-podium');
+  if(!el||!window._homeLiveData) return;
+  const data=window._homeLiveData.slice().sort((a,b)=>a.rank-b.rank);
+  const order=[1,0,2];
+  const cls=['gold','silver','bronze'];
+  const delays={gold:'0s',silver:'.12s',bronze:'.24s'};
+  order.forEach(idx=>{
+    const p=data[idx]; if(!p) return;
+    const rank=idx+1;
+    const c=cls[idx];
+    const card=document.createElement('div');
+    card.className='podium-card '+c;
+    card.style.transitionDelay=delays[c];
+    const aura=(c==='gold')?'<div class="podium-aura"></div>':'';
+    card.innerHTML=
+      aura+'<div class="podium-slash"></div>'+
+      '<div class="podium-body">'+
+      (rank===1?'<div class="podium-crown">👑</div>':'')+
+      '<div class="podium-rank">'+rank+'</div>'+
+      '<div class="podium-avatar">'+p.user.charAt(0).toUpperCase()+'</div>'+
+      '<div class="podium-name">'+_maskUser(p.user)+'</div>'+
+      '<div class="podium-wager">Wagered: '+_fmtShort(p.wagered)+'</div>'+
+      '<div class="podium-prize">'+_homePrizeLabel(idx)+'</div>'+
+      '</div>';
+    el.appendChild(card);
+  });
+  // Count up prize numbers when the podium scrolls into view
+  const pObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.pp-num').forEach(span=>{
+          const t=+span.dataset.target; let cur=0; const step=t/40;
+          const iv=setInterval(()=>{cur=Math.min(cur+step,t);span.textContent='$'+Math.round(cur).toLocaleString();if(cur>=t)clearInterval(iv);},22);
+        });
+        pObs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.5});
+  el.querySelectorAll('.podium-card').forEach(c=>pObs.observe(c));
+  // Perf: only run the looping podium animations while they're actually on screen
+  const animObs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      e.target.classList.toggle('anim-active', e.isIntersecting);
+      // also add visible when in view (cards created after page load miss the main observer)
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:0.05});
+  el.querySelectorAll('.podium-card').forEach(c=>animObs.observe(c));
+  // If already in viewport when created, add visible immediately
+  requestAnimationFrame(()=>{
+    el.querySelectorAll('.podium-card').forEach(c=>{
+      const r=c.getBoundingClientRect();
+      if(r.top < window.innerHeight && r.bottom > 0) c.classList.add('visible');
+    });
+  });
+}
+// Fetch live sheet data for homepage podium
+const HOME_SHEET_CSV='https://docs.google.com/spreadsheets/d/14Sr_hmd2CnwPJDrzndiXP1kP9VDF6gArjZQbRxFlBuQ/export?format=csv&gid=235680015';
+async function loadHomeLiveSheet(){
+  try{
+    const res=await fetch(HOME_SHEET_CSV);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const raw=await res.text();
+    // Strip \r, proper quoted CSV parser (handles "$850,246.60" in wagered column)
+    function parseLine(line){
+      const cols=[];let cur='',inQ=false;
+      for(let i=0;i<line.length;i++){
+        const ch=line[i];
+        if(ch==='"'){inQ=!inQ;continue;}
+        if(ch===','&&!inQ){cols.push(cur.trim());cur='';continue;}
+        cur+=ch;
+      }
+      cols.push(cur.trim());return cols;
+    }
+    const lines=raw.replace(/\r/g,'').trim().split('\n');
+    if(lines.length<2) throw new Error('empty');
+    const headers=parseLine(lines[0]).map(h=>h.toLowerCase().replace(/\s+/g,'_').trim());
+    const rows=[];
+    for(let i=1;i<lines.length;i++){
+      if(!lines[i].trim())continue;
+      const cols=parseLine(lines[i]);
+      const row={};
+      headers.forEach((h,j)=>row[h]=(cols[j]||'').trim());
+      rows.push(row);
+    }
+    // Exact sheet columns: affiliate_name | campaign_code | user_name | wagered | rank | start_date_utc | end_date_utc
+    const live=rows.map((r,i)=>({
+      user: r['user_name']||r['username']||r['user']||('Player '+(i+1)),
+      wagered: parseFloat((r['wagered']||r['wager']||'0').replace(/[$,]/g,''))||0,
+      rank: parseInt(r['rank'])||i+1,
+    })).filter(r=>r.wagered>0).sort((a,b)=>a.rank-b.rank);
+    if(live.length>0){
+      window._homeLiveData=live;
+      document.getElementById('home-podium').innerHTML='';
+      initHomePodium();
+    }
+  }catch(e){
+    console.warn('Home sheet load failed:',e.message);
+  }
+}
+// Load live sheet on page load
+if(document.readyState==='complete'){loadHomeLiveSheet();}
+else{window.addEventListener('load',loadHomeLiveSheet,{once:true});}
+// Wins ticker — hardcoded community wins
+(function(){
+  const track=document.getElementById('wins-track');
+  if(!track) return;
+  const wins=[
+    {user:'CryptoKing',amount:22000,game:'Stake Originals'},{user:'WagerWolf',amount:12000,game:'Slots'},
+    {user:'MoonGrinder',amount:8000,game:'Live Casino'},{user:'SlotSensei',amount:6000,game:'Pragmatic Play'},
+    {user:'DiamondHands',amount:5000,game:'Stake Originals'},{user:'NightRider',amount:4000,game:'Blackjack'},
+    {user:'LuckyCrypto',amount:3500,game:'Roulette'},{user:'HighRoller99',amount:3000,game:'Slots'},
+    {user:'BetKing',amount:2500,game:'Baccarat'},{user:'GoldRush',amount:2000,game:'Stake Dice'},
+    {user:'SpinMaster',amount:1700,game:'Book of Dead'},{user:'CasinoAce',amount:1500,game:'Blackjack'},
+    {user:'RollTheDice',amount:1400,game:'Plinko'},{user:'JackpotJoe',amount:1200,game:'Slots'},
+    {user:'BetBlitz',amount:1200,game:'Live Dealer'},{user:'WinStreak',amount:900,game:'Roulette'},
+    {user:'StackStar',amount:750,game:'Stake Originals'},{user:'FullSend',amount:600,game:'Slots'},
+    {user:'NovaBet',amount:500,game:'Crash'},{user:'PurpleAce',amount:450,game:'Baccarat'}
+  ];
+  const make=w=>'<div class="win-pill"><span class="win-dot"></span><span class="win-user">'+w.user+'</span> won <span class="win-amt">$'+w.amount.toLocaleString()+'</span> on <span class="win-game">'+w.game+'</span></div>';
+  const html=wins.map(make).join('');
+  track.innerHTML=html+html;
+})();
+// Total paid counter — wait for deferred data, then set up observer
+function initPaidCounter(){
+  const el=document.getElementById('paid-counter');
+  if(!el) return;
+  const target=1284500; // Update this number manually when needed
+  let done=false;
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting&&!done){
+        done=true; let cur=0; const step=target/80;
+        const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent='$'+Math.round(cur).toLocaleString();if(cur>=target)clearInterval(t);},18);
+      }
+    });
+  },{threshold:0.4});
+  obs.observe(el);
+}
+if(document.readyState==='complete'){initPaidCounter();}
+else{window.addEventListener('load',initPaidCounter,{once:true});}
+// Pause wins ticker when tab hidden
+document.addEventListener('visibilitychange',()=>{
+  const track=document.getElementById('wins-track');
+  if(track) track.style.animationPlayState=document.hidden?'paused':'running';
+});
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
+});
+
+
+// ===== Hero animated background =====
+// Flip BG_MODE to 'particles' to instantly restore the classic gold-dust background.
+const BG_MODE='storm';   // 'storm' | 'particles'
 const canvas=document.getElementById('particles');
 const ctx=canvas.getContext('2d');
-function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+let W,H;
+function resizeCanvas(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
 resizeCanvas();
 window.addEventListener('resize',resizeCanvas);
-const pts=Array.from({length:60},()=>({
-  x:Math.random()*canvas.width,y:Math.random()*canvas.height,
-  vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-  r:Math.random()*1.5+.5,alpha:Math.random()*.4+.1
-}));
-function drawParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  pts.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>canvas.width)p.vx*=-1;
-    if(p.y<0||p.y>canvas.height)p.vy*=-1;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(230,180,50,${p.alpha})`;
-    ctx.fill();
-  });
-  requestAnimationFrame(drawParticles);
+let _heroVisible=true;
+const _heroSec=document.querySelector('.hero');
+if(_heroSec&&'IntersectionObserver'in window){
+  new IntersectionObserver(es=>{_heroVisible=es[0].isIntersecting;},{threshold:0}).observe(_heroSec);
 }
-drawParticles();
+const _reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const _rand=(a,b)=>a+Math.random()*(b-a);
+
+// --- classic gold dust (kept for instant revert) ---
+const pts=Array.from({length:34},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5,alpha:Math.random()*.4+.1}));
+function drawParticlesFrame(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(230,180,50,${p.alpha})`;ctx.fill();});
+}
+
+// --- storm: rain + embers + purple lightning ---
+function mkRain(){return {x:Math.random()*W,y:Math.random()*H,len:_rand(8,22),sp:_rand(7,13),a:_rand(.06,.22)};}
+function mkEmber(){return {x:Math.random()*W,y:H+_rand(0,H),r:_rand(1,2.6),sp:_rand(.4,1.1),drift:_rand(-.4,.4),a:_rand(.3,.85)};}
+let rain=[],embers=[];
+function initStorm(){rain=Array.from({length:80},mkRain);embers=Array.from({length:16},mkEmber);}
+// init storm data immediately — lightweight, no rendering yet
+initStorm();
+let bolt=null,boltLife=0,flash=0,nextBolt=performance.now()+_rand(1500,3500);
+function mkBolt(){
+  let x=_rand(W*0.12,W*0.88),y=0,segs=[{x,y}];
+  const endY=H*_rand(.5,.92);
+  while(y<endY){y+=_rand(16,40);x+=_rand(-36,36);segs.push({x,y});}
+  const branches=[];
+  if(Math.random()<.7){const s=segs[Math.floor(_rand(segs.length*.3,segs.length*.7))];let bx=s.x,by=s.y,b=[{x:bx,y:by}];const n=Math.floor(_rand(2,4));for(let i=0;i<n;i++){by+=_rand(14,30);bx+=_rand(-32,32);b.push({x:bx,y:by});}branches.push(b);}
+  return {segs,branches};
+}
+function strokePath(p){ctx.beginPath();ctx.moveTo(p[0].x,p[0].y);for(let i=1;i<p.length;i++)ctx.lineTo(p[i].x,p[i].y);ctx.stroke();}
+function drawStormFrame(now){
+  ctx.clearRect(0,0,W,H);
+  // rain
+  for(const d of rain){
+    d.y+=d.sp; d.x+=1.6;
+    if(d.y>H){d.y=-d.len;d.x=Math.random()*W;}
+    ctx.strokeStyle=`rgba(150,170,215,${d.a})`;ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-2.4,d.y+d.len);ctx.stroke();
+  }
+  // embers (fire) — solid fill with shadow glow, no per-frame gradient allocation
+  ctx.save();
+  ctx.shadowColor='rgba(255,140,40,0.6)';ctx.shadowBlur=6;
+  for(const e of embers){
+    e.y-=e.sp; e.x+=e.drift; e.a-=0.0022;
+    if(e.y<-12||e.a<=0)Object.assign(e,mkEmber()),e.y=H+8,e.a=_rand(.3,.85);
+    ctx.fillStyle=`rgba(255,170,70,${e.a})`;
+    ctx.beginPath();ctx.arc(e.x,e.y,e.r,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
+  // lightning
+  if(!_reduceMotion && now>=nextBolt){bolt=mkBolt();boltLife=1;flash=1;nextBolt=now+_rand(2600,6500);}
+  if(bolt&&boltLife>0){
+    ctx.save();
+    ctx.shadowColor='rgba(176,107,255,0.95)';ctx.shadowBlur=20;
+    ctx.strokeStyle=`rgba(200,170,255,${boltLife})`;ctx.lineWidth=2.4;
+    strokePath(bolt.segs);bolt.branches.forEach(strokePath);
+    ctx.shadowBlur=8;ctx.strokeStyle=`rgba(255,255,255,${boltLife*0.92})`;ctx.lineWidth=1;
+    strokePath(bolt.segs);
+    ctx.restore();
+    boltLife-=0.055;
+  }
+  if(flash>0){ctx.fillStyle=`rgba(150,120,225,${flash*0.10})`;ctx.fillRect(0,0,W,H);flash-=0.035;}
+}
+
+let _bgLast=0;
+function bgLoop(now){
+  requestAnimationFrame(bgLoop);
+  if(now-_bgLast<25) return; // cap ~40fps to leave headroom for UI
+  _bgLast=now;
+  if(_heroVisible){ (BG_MODE==='storm') ? drawStormFrame(now||performance.now()) : drawParticlesFrame(); }
+}
+// start bg loop after first paint
+requestAnimationFrame(bgLoop);
 
 // Scroll animations
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.1});
-document.querySelectorAll('.reward-card,.social-card,.podium-card').forEach(el=>observer.observe(el));
+document.querySelectorAll('.reward-card,.social-card,.podium-card,.how-step,.faq-item').forEach(el=>observer.observe(el));
 
 // Staggered entrance animations
 document.querySelectorAll('.reward-card').forEach((card,i)=>{
@@ -341,9 +664,11 @@ const statObs = new IntersectionObserver(entries=>{
     if(e.isIntersecting){
       const el=e.target;
       const txt=el.textContent;
-      if(txt.includes('75K')) animateCount(el,75,'$','K');
-      else if(txt.includes('500')) animateCount(el,500,'$');
-      else if(txt.includes('10')) animateCount(el,10,'$');
+      setTimeout(()=>{
+        if(txt.includes('75K')) animateCount(el,75,'$','K');
+        else if(txt.includes('500')) animateCount(el,500,'$');
+        else if(txt.includes('10')) animateCount(el,10,'$');
+      }, 1000);
       statObs.unobserve(el);
     }
   });
@@ -376,9 +701,12 @@ function initCardRain(canvas){
       alpha: 0.6 + Math.random()*0.4
     });
   }
-  let t = 0, active = true;
-  function draw(){
+  let t = 0, active = true, lastFrame = 0;
+  function draw(now){
     if(!active) return;
+    requestAnimationFrame(draw);
+    if(now - lastFrame < 33) return; // cap ~30fps
+    lastFrame = now;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     t++;
     if(t % 30 === 0) spawn();
@@ -392,23 +720,24 @@ function initCardRain(canvas){
       ctx.rotate(c.rot*Math.PI/180);
       ctx.font = `bold ${c.size}px monospace`;
       ctx.fillStyle = c.col;
-      ctx.shadowColor = c.col;
-      ctx.shadowBlur = 6;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(c.sym,0,0);
       ctx.restore();
     }
-    requestAnimationFrame(draw);
   }
   // Start when card enters viewport
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{
-      active = e.isIntersecting;
-      if(active) draw();
+      active = e.isIntersecting && !_hovering;
+      if(active) requestAnimationFrame(draw);
     });
   },{threshold:0.2});
   obs.observe(parent);
+  // Pause rain while hovering so the hover animation stays buttery
+  let _hovering=false;
+  parent.addEventListener('mouseenter',()=>{ _hovering=true; active=false; });
+  parent.addEventListener('mouseleave',()=>{ _hovering=false; active=true; requestAnimationFrame(draw); });
 }
 document.querySelectorAll('.card-rain').forEach(initCardRain);
 </script>
