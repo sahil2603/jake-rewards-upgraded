@@ -40,7 +40,7 @@
     .lb-row.top2 .lb-avatar{border-color:#c0c8d0;color:#c0c8d0;}
     .lb-row.top3 .lb-avatar{border-color:#c87040;color:#c87040;}
     .lb-wagered{display:flex;flex-direction:column;gap:5px;min-width:130px;}
-    .lb-wagered-num{font-family:var(--font-head);font-weight:700;color:var(--text);font-size:.85rem;}
+    .lb-wagered-num{font-family:var(--font-head);font-weight:800;color:#7b2ff7;background:#fff;font-size:.85rem;padding:3px 10px;border-radius:20px;display:inline-block;width:fit-content;box-shadow:0 2px 8px rgba(123,47,247,0.25);}
     .lb-row.top2 .lb-bar-fill{background:linear-gradient(90deg,#8a93a0,#c0c8d0);}
     .lb-row.top3 .lb-bar-fill{background:linear-gradient(90deg,#9a5a2e,#c87040);}
     .lb-row{opacity:1;}  /* removed per-row animation for performance */
@@ -74,7 +74,7 @@
       .lb-userwrap{gap:5px;}
       .lb-user{font-size:.72rem;}
       .lb-wagered{min-width:70px;gap:3px;}
-      .lb-wagered-num{font-size:.7rem;}
+      .lb-wagered-num{font-size:.7rem;padding:2px 7px;}
       .lb-prize{font-size:.7rem;}
       .lb-pool-card{min-width:calc(50% - .4rem);padding:.7rem .8rem;}
       .lb-pool-card .pc-val{font-size:1.3rem;}
@@ -347,6 +347,24 @@
     .podium-front .podium-flip-hint{color:var(--muted);opacity:.5;}
     /* Front face content flows naturally */
     .podium-front .podium-body{display:flex;flex-direction:column;align-items:center;padding-bottom:.5rem;}
+
+    /* ── DRAMATIC SUNBURST AURA on #1 (matches homepage) ── */
+    .podium-card.gold{overflow:visible;}
+    .podium-card.gold .podium-aura{
+      position:absolute;
+      top:50%;left:50%;
+      width:140%;height:140%;
+      transform:translate(-50%,-50%);
+      z-index:0;pointer-events:none;border-radius:50%;
+      background:repeating-conic-gradient(from 0deg, rgba(252,210,80,0.30) 0deg 3deg, transparent 3deg 11deg);
+      -webkit-mask:radial-gradient(circle, #000 8%, rgba(0,0,0,0.6) 35%, transparent 72%);
+      mask:radial-gradient(circle, #000 8%, rgba(0,0,0,0.6) 35%, transparent 72%);
+      opacity:0;transition:opacity 1.2s;
+      animation:auraSpin 22s linear infinite;
+      will-change:transform;
+    }
+    .podium-card.gold .podium-aura{opacity:1;}
+    .podium-flip{position:relative;z-index:2;}
   </style>
 </head>
 <body>
@@ -559,7 +577,6 @@ function renderBoard(){
     const leadBelow=below?p.wagered-below.wagered:0;
 
     const frontHTML='<div class="podium-face podium-front">'+
-      (c==='gold'?'<div class="podium-aura"></div>':'')+
       '<div class="podium-slash"></div><div class="podium-body">'+
       (rank===1?'<div class="podium-crown">\u{1F451}</div>':'')+
       '<div class="podium-rank">'+rank+'</div>'+
@@ -577,7 +594,7 @@ function renderBoard(){
       (below?'<div class="pb-row"><span class="pb-label">Lead over Rank '+(rank+1)+'</span><span class="pb-val up">+'+fmtShort(leadBelow)+' ahead</span></div>':'')+
       '</div>';
 
-    card.innerHTML='<div class="podium-flip">'+frontHTML+backHTML+'</div>';
+    card.innerHTML=(c==='gold'?'<div class="podium-aura"></div>':'')+'<div class="podium-flip">'+frontHTML+backHTML+'</div>';
 
     // Flip on click
     card.addEventListener('click',()=>{ card.classList.toggle('flipped'); });
