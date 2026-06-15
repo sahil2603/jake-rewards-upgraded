@@ -87,10 +87,10 @@
       /* Mobile: contain aura inside #1 card so it doesn't bleed onto stacked neighbors */
       .podium-card.gold{overflow:hidden;}
       .podium-card.gold .podium-aura{
-        width:160%;height:160%;
-        margin-top:-80%;margin-left:-80%;
-        -webkit-mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 30%, transparent 60%);
-        mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 30%, transparent 60%);
+        width:auto;height:135%;
+        aspect-ratio:1/1;
+        -webkit-mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 32%, transparent 64%);
+        mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 32%, transparent 64%);
       }
     }
     @media(prefers-reduced-motion:reduce){
@@ -369,14 +369,15 @@
     .podium-card.gold .podium-aura{
       position:absolute;
       top:50%;left:50%;
-      width:135%;height:135%;
-      margin-top:-67.5%;margin-left:-67.5%;
+      width:135%;
+      aspect-ratio:1/1;
+      transform:translate(-50%,-50%);
       z-index:0;pointer-events:none;border-radius:50%;
       background:repeating-conic-gradient(from 0deg, rgba(252,210,80,0.30) 0deg 3deg, transparent 3deg 11deg);
       -webkit-mask:radial-gradient(circle, #000 8%, rgba(0,0,0,0.6) 35%, transparent 72%);
       mask:radial-gradient(circle, #000 8%, rgba(0,0,0,0.6) 35%, transparent 72%);
       opacity:0;transition:opacity 1.2s;
-      animation:auraSpinCentered 22s linear infinite;
+      animation:auraSpinTranslate 22s linear infinite;
       will-change:transform;
     }
     .podium-card.gold .podium-aura{opacity:1;}
@@ -387,7 +388,7 @@
     .pw-pill.r2{color:#2f7ff7;box-shadow:0 2px 8px rgba(47,127,247,0.35);}
     .pw-pill.r3{color:#7b2ff7;box-shadow:0 2px 8px rgba(123,47,247,0.35);}
     /* Centered spin — uses margin offsets for centering so rotate() doesn't break it */
-    @keyframes auraSpinCentered{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    @keyframes auraSpinTranslate{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
   </style>
 </head>
 <body>
