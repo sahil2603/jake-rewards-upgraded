@@ -316,6 +316,8 @@
       transform-style:preserve-3d;
       min-height:230px;
     }
+    /* #1 card is taller (has crown) - give its flip more height so the hint isn't clipped */
+    .podium-card.gold .podium-flip{min-height:265px;}
     .podium-card.flipped .podium-flip{transform:rotateY(180deg);}
     .podium-face{
       position:absolute;inset:0;
@@ -360,9 +362,9 @@
     /* Back face hint anchored at bottom */
     .podium-back .podium-flip-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);margin-top:0;}
     /* Front hint slightly dimmer than back */
-    .podium-front .podium-flip-hint{color:var(--muted);opacity:.5;}
+    .podium-front .podium-flip-hint{color:var(--muted);opacity:.65;position:relative;z-index:3;}
     /* Front face content flows naturally */
-    .podium-front .podium-body{display:flex;flex-direction:column;align-items:center;padding-bottom:.5rem;}
+    .podium-front .podium-body{display:flex;flex-direction:column;align-items:center;padding-bottom:1.4rem;}
 
     /* ── DRAMATIC SUNBURST AURA on #1 (matches homepage) ── */
     .podium-card.gold{overflow:visible;}
