@@ -84,6 +84,14 @@
       .podium-wager{font-size:.68rem;}
       .podium-prize{font-size:.72rem;}
       .countdown-val{font-size:1.4rem;}
+      /* Mobile: contain aura inside #1 card so it doesn't bleed onto stacked neighbors */
+      .podium-card.gold{overflow:hidden;}
+      .podium-card.gold .podium-aura{
+        width:160%;height:160%;
+        margin-top:-80%;margin-left:-80%;
+        -webkit-mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 30%, transparent 60%);
+        mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 30%, transparent 60%);
+      }
     }
     @media(prefers-reduced-motion:reduce){
       .lb-row.top1 .lb-avatar,.lb-medal{animation:none!important;}
