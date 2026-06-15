@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>$75,000 Leaderboard — JakeRewards</title>
   <meta name="description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Track top grinders, prizes and your position. Use code JAKE to enter."/>
+  <meta property="og:title" content="$75,000 Leaderboard — JakeRewards"/>
+  <meta property="og:description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Use code JAKE."/>
+  <meta property="og:image" content="https://jakerewards.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://jakerewards.com/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="$75,000 Leaderboard — JakeRewards"/>
+  <meta name="twitter:description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Use code JAKE."/>
+  <meta name="twitter:image" content="https://jakerewards.com/og-image.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
@@ -84,14 +95,6 @@
       .podium-wager{font-size:.68rem;}
       .podium-prize{font-size:.72rem;}
       .countdown-val{font-size:1.4rem;}
-      /* Mobile: contain aura inside #1 card so it doesn't bleed onto stacked neighbors */
-      .podium-card.gold{overflow:hidden;}
-      .podium-card.gold .podium-aura{
-        width:auto;height:135%;
-        aspect-ratio:1/1;
-        -webkit-mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 32%, transparent 64%);
-        mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 32%, transparent 64%);
-      }
     }
     @media(prefers-reduced-motion:reduce){
       .lb-row.top1 .lb-avatar,.lb-medal{animation:none!important;}
@@ -367,17 +370,16 @@
     .podium-front .podium-body{display:flex;flex-direction:column;align-items:center;padding-bottom:1.4rem;}
 
     /* ── DRAMATIC SUNBURST AURA on #1 (matches homepage) ── */
-    .podium-card.gold{overflow:visible;}
+    .podium-card.gold{overflow:hidden;}
     .podium-card.gold .podium-aura{
       position:absolute;
       top:50%;left:50%;
-      width:135%;
-      aspect-ratio:1/1;
+      width:170%;height:170%;
       transform:translate(-50%,-50%);
       z-index:0;pointer-events:none;border-radius:50%;
       background:repeating-conic-gradient(from 0deg, rgba(252,210,80,0.30) 0deg 3deg, transparent 3deg 11deg);
-      -webkit-mask:radial-gradient(circle, #000 8%, rgba(0,0,0,0.6) 35%, transparent 72%);
-      mask:radial-gradient(circle, #000 8%, rgba(0,0,0,0.6) 35%, transparent 72%);
+      -webkit-mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 30%, transparent 62%);
+      mask:radial-gradient(circle, #000 6%, rgba(0,0,0,0.55) 30%, transparent 62%);
       opacity:0;transition:opacity 1.2s;
       animation:auraSpinTranslate 22s linear infinite;
       will-change:transform;
