@@ -393,3 +393,36 @@ img{max-width:100%;}
 @media(prefers-reduced-motion:reduce){ .hcard{animation:none;opacity:0;} }
 @media(max-width:560px){ .hcard{width:32px;height:45px;opacity:.28 !important;} .hc-pip{font-size:1.1rem;} .hc-corner{font-size:.48rem;} .hc-back{font-size:1.1rem;} }
 
+
+
+/* ───────────────────────────────────────────────
+   MOBILE TAP FEEDBACK — "lift then settle"
+   Touch devices don't fire :hover reliably, so we
+   use :active (fires on press) with a pop animation.
+   ─────────────────────────────────────────────── */
+@keyframes cardTapPop{
+  0%{transform:translateY(0) scale(1);}
+  40%{transform:translateY(-7px) scale(1.015);}
+  100%{transform:translateY(-2px) scale(1);}
+}
+@media(hover:none){
+  .reward-card:active,
+  .social-card:active,
+  .how-step:active,
+  .hub-card:active,
+  .tier-card:active,
+  .refer-hero-card:active,
+  .rg-card:active,
+  .lb-pool-card:active,
+  .bonus-card:active,
+  .access-stake-banner:active,
+  .faq-item:active{
+    animation:cardTapPop .4s cubic-bezier(.16,1,.3,1) forwards;
+    border-color:rgba(252,194,0,0.4)!important;
+    box-shadow:0 16px 40px rgba(0,0,0,0.45),0 0 30px rgba(252,194,0,0.12)!important;
+  }
+  /* Purple-accent cards keep their color on tap */
+  .social-card.discord:active{border-color:rgba(88,101,242,0.5)!important;box-shadow:0 16px 40px rgba(88,101,242,0.18)!important;}
+  .social-card.kick:active{border-color:rgba(83,252,25,0.4)!important;box-shadow:0 16px 40px rgba(83,252,25,0.15)!important;}
+  .social-card.youtube:active{border-color:rgba(255,0,0,0.4)!important;box-shadow:0 16px 40px rgba(255,0,0,0.15)!important;}
+}
