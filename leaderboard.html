@@ -999,5 +999,38 @@ function scheduleUTCMidnightRefresh(){
 }
 scheduleUTCMidnightRefresh();
 </script>
+<!-- GA4 conversion event tracking -->
+<script>
+(function(){
+  function track(name, params){
+    if(typeof gtag === 'function'){ gtag('event', name, params || {}); }
+  }
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('a, button');
+    if(!el) return;
+    var href = (el.getAttribute('href') || '').toLowerCase();
+    var txt  = (el.textContent || '').trim().slice(0, 50);
+
+    // 1) Affiliate code copied
+    if(el.classList.contains('code-copy-btn') || /copy code/i.test(txt)){
+      track('affiliate_code_copied', { code: 'JAKE', page: document.title });
+      return;
+    }
+    // 2) Stake affiliate link click — the real signup conversion
+    if(href.indexOf('stake.com') > -1){
+      track('stake_signup_click', { link_text: txt, link_url: href, page: document.title });
+      return;
+    }
+    // 3) Discord link click (claim ticket / join / get started)
+    if(href.indexOf('discord.com/invite') > -1 || href.indexOf('discord.gg') > -1){
+      var label = /claim/i.test(txt) ? 'claim_button'
+                : /get started/i.test(txt) ? 'get_started'
+                : 'discord_join';
+      track('discord_click', { button_text: txt, label: label, page: document.title });
+      return;
+    }
+  }, true);
+})();
+</script>
 </body>
 </html>
