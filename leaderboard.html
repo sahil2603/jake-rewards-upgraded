@@ -410,9 +410,14 @@
       .podium-card{ min-width:0; }
       #lb-podium{ gap:.7rem; }
     }
-    /* ≤560px: mobile padding shrinks card height to ≈303px → reserve 315px; tighter gap. */
+    /* ≤560px: HYBRID podium — gold #1 full-width on top, silver + bronze share the row below.
+       Deterministic height → still zero layout shift, but far roomier than 3 tiny cards. */
     @media(max-width:560px){
-      #lb-podium{ gap:.5rem; min-height:315px; }
+      #lb-podium{ flex-wrap:wrap; gap:.6rem; min-height:600px; align-items:stretch; }
+      .podium-card{ min-width:0; }
+      .podium-card.gold{ flex:0 0 100%; order:-1; }            /* champion full-width, on top */
+      .podium-card.silver,.podium-card.bronze{ flex:1 1 0; }   /* #2 and #3 side-by-side below */
+      .podium-flip-hint{ letter-spacing:.5px; font-size:.55rem; }  /* never clips now */
     }
     /* Table: hold a sensible height for the loading state so the first rows don't jump in. */
     #lb-body{ min-height:300px; }
@@ -471,7 +476,7 @@
       pointer-events:none;
       overflow:hidden;
       border-radius:inherit;
-      z-index:1;
+      z-index:0;            /* behind text/avatar so bills never overlap content */
     }
     .bill{
       position:absolute;
@@ -718,7 +723,8 @@ function renderBoard(){
       return '<div class="bill-container">'+bills+'</div>';
     }
 
-    const billsHTML=(rank===2||rank===3)?makeBills(8):'';
+    const billCount=(window.innerWidth<=560)?5:8;
+    const billsHTML=(rank===2||rank===3)?makeBills(billCount):'';
 
     const frontHTML='<div class="podium-face podium-front">'+
       billsHTML+
