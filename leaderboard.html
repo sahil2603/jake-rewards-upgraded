@@ -401,6 +401,22 @@
     /* Centered spin — uses margin offsets for centering so rotate() doesn't break it */
     @keyframes auraSpinTranslate{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
 
+    /* ── CLS FIX: reserve space + keep podium one row so layout never jumps ── */
+    /* Desktop: 3 cards in one row; tallest (gold) ≈ 322px → reserve 330px. */
+    #lb-podium{ min-height:330px; }
+    /* ≤700px: relax min-width so the 3 cards STAY in a single row (deterministic height)
+       instead of wrapping/stacking — this is what caused the big mobile shift. */
+    @media(max-width:700px){
+      .podium-card{ min-width:0; }
+      #lb-podium{ gap:.7rem; }
+    }
+    /* ≤560px: mobile padding shrinks card height to ≈303px → reserve 315px; tighter gap. */
+    @media(max-width:560px){
+      #lb-podium{ gap:.5rem; min-height:315px; }
+    }
+    /* Table: hold a sensible height for the loading state so the first rows don't jump in. */
+    #lb-body{ min-height:300px; }
+
     /* ── CROWN: realistic 3D look + multi-layer animation ── */
     .podium-crown{
       position:relative;
