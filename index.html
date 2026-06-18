@@ -36,6 +36,28 @@
 @keyframes codeGlow{0%,100%{text-shadow:0 0 20px rgba(230,180,50,0.3)}50%{text-shadow:0 0 40px rgba(230,180,50,0.7),0 0 80px rgba(230,180,50,0.3)}}
 @keyframes rewardPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes socialFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* ── "Over $1,000,000 given away" hero banner ── */
+.hero-givenaway{
+  display:inline-flex;align-items:center;gap:.55rem;
+  margin:.5rem 0 1.1rem;padding:.5rem 1.1rem;
+  background:linear-gradient(135deg, rgba(230,180,50,0.16), rgba(230,180,50,0.06));
+  border:1px solid rgba(230,180,50,0.45);
+  border-radius:999px;
+  font-family:'Bebas Neue',sans-serif;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  font-size:1.05rem;color:#e8edf3;
+  box-shadow:0 0 24px rgba(230,180,50,0.12);
+  animation:hgaPulse 2.6s ease-in-out infinite;
+}
+.hero-givenaway .hga-icon{font-size:1rem;filter:drop-shadow(0 0 6px rgba(230,180,50,0.6));}
+.hero-givenaway .hga-amount{color:#FCC200;text-shadow:0 0 14px rgba(230,180,50,0.5);}
+@keyframes hgaPulse{
+  0%,100%{box-shadow:0 0 18px rgba(230,180,50,0.10);border-color:rgba(230,180,50,0.40);}
+  50%{box-shadow:0 0 30px rgba(230,180,50,0.22);border-color:rgba(230,180,50,0.65);}
+}
+@media(max-width:560px){
+  .hero-givenaway{font-size:.82rem;letter-spacing:1px;padding:.45rem .9rem;}
+}
 </style>
 </head>
 <body>
@@ -100,6 +122,10 @@
   </div>
   <div class="hero-content">
     <div class="hero-badge">🎰 Stake Affiliate · Code: JAKE</div>
+    <div class="hero-givenaway">
+      <span class="hga-icon">💰</span>
+      <span class="hga-text">OVER <span class="hga-amount">$1,000,000</span> GIVEN AWAY</span>
+    </div>
     <h1 class="hero-title">
       TAKE ADVANTAGE OF THE MOST
       <span class="hero-accent">REWARDING</span>
