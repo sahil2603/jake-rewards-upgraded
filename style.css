@@ -31,8 +31,12 @@ img{max-width:100%;}
 .logo-text{font-family:var(--font-display);font-size:1.1rem;letter-spacing:3px;color:#fff;}
 .logo-accent{color:var(--gold);}
 .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
-.nav-links a{font-family:var(--font-head);font-size:.85rem;font-weight:600;color:var(--text2);transition:color .2s;letter-spacing:.5px;}
-.nav-links a:hover,.nav-links a.active{color:#fff;}
+.nav-links a{position:relative;font-family:var(--font-head);font-size:.85rem;font-weight:600;color:var(--text2);transition:color .25s ease,text-shadow .25s ease;letter-spacing:.5px;}
+/* Neon glow on hover/active — only top-level nav items (> a / dropdown trigger), not menu items */
+.nav-links>li>a:hover,.nav-links>li>a.active{color:var(--gold);text-shadow:0 0 8px rgba(252,194,0,0.7),0 0 18px rgba(252,194,0,0.45);}
+/* Flowing neon underline that grows from the centre */
+.nav-links>li>a::after{content:"";position:absolute;left:50%;bottom:-6px;width:0;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);box-shadow:0 0 8px rgba(252,194,0,0.8);transform:translateX(-50%);transition:width .3s ease;}
+.nav-links>li>a:hover::after,.nav-links>li>a.active::after{width:100%;}
 .dropdown{position:relative;}
 .dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.5rem;min-width:200px;flex-direction:column;gap:2px;padding-top:calc(.5rem + 10px);margin-top:0;}
 /* Invisible top padding bridges the gap so mouse can glide from nav item to menu */
