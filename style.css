@@ -401,24 +401,43 @@ img{max-width:100%;}
 
 
 /* ════════════════════════════════════════
-   BACK TO TOP BUTTON
+   BACK TO TOP BUTTON — premium glass
 ════════════════════════════════════════ */
 #back-to-top{
-  position:fixed;bottom:90px;right:20px;
-  width:44px;height:44px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),#ff9d2f);
-  color:#000;font-size:1.2rem;font-weight:900;
+  position:fixed;bottom:90px;right:22px;
+  width:48px;height:48px;border-radius:14px;
+  background:rgba(17,23,32,0.85);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(252,194,0,0.35);
+  color:var(--gold);font-size:0;
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;border:none;z-index:998;
-  opacity:0;transform:translateY(12px) scale(.9);
-  transition:opacity .3s ease,transform .3s ease,box-shadow .2s ease;
-  box-shadow:0 4px 18px rgba(252,194,0,0.35);
+  cursor:pointer;z-index:998;
+  opacity:0;transform:translateY(14px) scale(.92);
+  transition:opacity .3s ease,transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,border-color .25s ease;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5),0 0 0 0 rgba(252,194,0,0);
   pointer-events:none;
 }
-#back-to-top.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
-#back-to-top:hover{box-shadow:0 6px 28px rgba(252,194,0,0.6);transform:translateY(-2px) scale(1.05);}
-/* On desktop keep it above the footer, away from bottom */
-@media(min-width:561px){#back-to-top{bottom:28px;}}
+/* SVG arrow — sharp, modern, perfectly centred */
+#back-to-top::before{
+  content:"";
+  display:block;
+  width:14px;height:14px;
+  border-left:2.5px solid var(--gold);
+  border-top:2.5px solid var(--gold);
+  transform:rotate(45deg) translate(2px,2px);
+  border-radius:1px;
+}
+#back-to-top.visible{
+  opacity:1;transform:translateY(0) scale(1);pointer-events:auto;
+}
+#back-to-top:hover{
+  border-color:rgba(252,194,0,0.8);
+  box-shadow:0 6px 30px rgba(0,0,0,0.6),0 0 22px rgba(252,194,0,0.3);
+  transform:translateY(-3px) scale(1.04);
+  background:rgba(22,30,42,0.92);
+}
+#back-to-top:active{transform:translateY(0) scale(.97);}
+@media(min-width:561px){#back-to-top{bottom:32px;right:28px;}}
 
 /* ════════════════════════════════════════
    MOBILE BOTTOM NAV BAR
