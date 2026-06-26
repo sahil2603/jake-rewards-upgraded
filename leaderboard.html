@@ -1060,17 +1060,11 @@ scheduleUTCMidnightRefresh();
   }, true);
 })();
 </script>
-<!-- Scroll progress bar + page fade -->
+<!-- Scroll progress bar -->
 <script>
 (function(){
   var bar=document.getElementById('scroll-bar');
   if(bar){window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop||document.body.scrollTop;var t=(document.documentElement.scrollHeight-window.innerHeight)||1;bar.style.width=Math.min(100,(s/t)*100)+'%';},{passive:true});}
-  // Page fade-out on nav clicks
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var href=a.getAttribute('href');
-    if(!href||href.startsWith('#')||href.startsWith('http')||href.startsWith('mailto'))return;
-    a.addEventListener('click',function(e){e.preventDefault();document.body.style.opacity='0';document.body.style.transition='opacity .3s ease';setTimeout(function(){window.location.href=href;},300);});
-  });
 })();
 </script>
 </body>
