@@ -413,5 +413,49 @@ watchCard('.bonus-card:not(.signup):not(.giveaway):not(.deposit-match):not(.mult
   if(bar){window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop||document.body.scrollTop;var t=(document.documentElement.scrollHeight-window.innerHeight)||1;bar.style.width=Math.min(100,(s/t)*100)+'%';},{passive:true});}
 })();
 </script>
+<!-- Mobile bottom nav -->
+<nav id="mobile-bottom-nav">
+  <a href="index.html" class="mbn-item" data-page="home">
+    <span class="mbn-icon">🏠</span><span>Home</span>
+  </a>
+  <a href="leaderboard.html" class="mbn-item" data-page="leaderboard">
+    <span class="mbn-icon">🏆</span><span>Leaderboard</span>
+  </a>
+  <a href="bonuses.html" class="mbn-item" data-page="bonuses">
+    <span class="mbn-icon">🎁</span><span>Bonuses</span>
+  </a>
+  <a href="https://discord.com/invite/jakethedegen" target="_blank" class="mbn-item">
+    <span class="mbn-icon">💬</span><span>Discord</span>
+  </a>
+</nav>
+
+<!-- Back to top button -->
+<button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+<!-- Back to top + mobile bottom nav active state -->
+<script>
+(function(){
+  // Back to top — show after scrolling 400px
+  var btn=document.getElementById('back-to-top');
+  if(btn){
+    window.addEventListener('scroll',function(){
+      if((document.documentElement.scrollTop||document.body.scrollTop)>400){
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    },{passive:true});
+  }
+  // Mobile bottom nav — mark active item by matching current page
+  var path=window.location.pathname.split('/').pop()||'index.html';
+  var pageMap={'index.html':'home','leaderboard.html':'leaderboard','bonuses.html':'bonuses'};
+  var activePage=pageMap[path];
+  if(activePage){
+    var items=document.querySelectorAll('.mbn-item[data-page]');
+    items.forEach(function(item){
+      if(item.dataset.page===activePage) item.classList.add('active');
+    });
+  }
+})();
+</script>
 </body>
 </html>
