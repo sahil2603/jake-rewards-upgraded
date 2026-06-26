@@ -18,8 +18,7 @@
   --font-body:'DM Sans',sans-serif;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;overflow-x:hidden;animation:pageFadeIn .45s ease forwards;}
-@keyframes pageFadeIn{from{opacity:0;}to{opacity:1;}}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;overflow-x:hidden;}
 /* Scroll progress bar (shared, JS controls width per page) */
 #scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),#ff9d2f,var(--accent));z-index:9999;transition:width .1s linear;box-shadow:0 0 10px rgba(252,194,0,0.6);pointer-events:none;}
 a{text-decoration:none;color:inherit;}
