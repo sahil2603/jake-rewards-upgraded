@@ -317,7 +317,7 @@ function makeCoinRain(canvasId, palette){
   const syms=['$','\u20BF','\u039E','\u25CE'];   // lightweight glyphs (emoji removed — they were the heaviest to draw)
   function spawn(){
     if(coins.length>=MAX_COINS)return;
-    coins.push({x:Math.random()*W,y:-20,vy:0.5+Math.random()*1.1,vx:(Math.random()-.5)*0.6,rot:Math.random()*360,rotV:(Math.random()-.5)*4,sym:syms[(Math.random()*syms.length)|0],col:palette[(Math.random()*palette.length)|0],size:10+Math.random()*7,alpha:0.55+Math.random()*0.3});
+    coins.push({x:Math.random()*W,y:-20,vy:0.25+Math.random()*0.55,vx:(Math.random()-.5)*0.4,rot:Math.random()*360,rotV:(Math.random()-.5)*4,sym:syms[(Math.random()*syms.length)|0],col:palette[(Math.random()*palette.length)|0],size:10+Math.random()*7,alpha:0.55+Math.random()*0.3});
   }
   let t=0, running=true, rafId=null;
   function draw(){
