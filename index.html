@@ -799,26 +799,7 @@ document.querySelectorAll('.card-rain').forEach(initCardRain);
   }
   window.addEventListener('scroll', updateBar, {passive:true});
 
-  /* ─── 2. PAGE FADE-IN ON LOAD ─── */
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity .45s ease';
-  window.addEventListener('load', function(){
-    document.body.style.opacity = '1';
-  });
-
-  /* ─── 3. PAGE FADE-OUT ON NAVIGATION ─── */
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var href = a.getAttribute('href');
-    // Only internal same-site links (not anchors, not external, not discord/telegram)
-    if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
-    a.addEventListener('click', function(e){
-      e.preventDefault();
-      document.body.style.opacity = '0';
-      setTimeout(function(){ window.location.href = href; }, 300);
-    });
-  });
-
-  /* ─── 4. STAT COUNTER ANIMATION ─── */
+  /* ─── 2. STAT COUNTER ANIMATION ─── */
   function animateCounter(el){
     var target  = parseFloat(el.dataset.target);
     var prefix  = el.dataset.prefix  || '';
