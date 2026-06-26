@@ -465,6 +465,9 @@ function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('
   document.querySelectorAll('.refer-hero-card,.tier-card').forEach(function(el,i){
     el.style.transitionDelay=(i*0.08)+'s';obs.observe(el);
   });
+  // Clear stagger delay once visible so hover is instant
+  var mo=new MutationObserver(function(ms){ms.forEach(function(m){if(m.target.classList.contains('visible'))m.target.style.transitionDelay='0s';});});
+  document.querySelectorAll('.refer-hero-card,.tier-card').forEach(function(el){mo.observe(el,{attributeFilter:['class']});});
 })();
 </script>
 <!-- GA4 conversion event tracking -->
