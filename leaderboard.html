@@ -505,6 +505,7 @@
   </style>
 </head>
 <body>
+<div id="scroll-bar"></div>
 <canvas id="star-canvas" style="position:fixed;top:0;left:0;width:100%;height:55vh;pointer-events:none;z-index:0;"></canvas>
 <nav class="nav" style="position:relative;z-index:100;">
   <a href="index.html" class="nav-logo">
@@ -1057,6 +1058,19 @@ scheduleUTCMidnightRefresh();
       return;
     }
   }, true);
+})();
+</script>
+<!-- Scroll progress bar + page fade -->
+<script>
+(function(){
+  var bar=document.getElementById('scroll-bar');
+  if(bar){window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop||document.body.scrollTop;var t=(document.documentElement.scrollHeight-window.innerHeight)||1;bar.style.width=Math.min(100,(s/t)*100)+'%';},{passive:true});}
+  // Page fade-out on nav clicks
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var href=a.getAttribute('href');
+    if(!href||href.startsWith('#')||href.startsWith('http')||href.startsWith('mailto'))return;
+    a.addEventListener('click',function(e){e.preventDefault();document.body.style.opacity='0';document.body.style.transition='opacity .3s ease';setTimeout(function(){window.location.href=href;},300);});
+  });
 })();
 </script>
 </body>
