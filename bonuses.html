@@ -48,9 +48,9 @@
     .mc-toggle:hover{background:rgba(255,140,0,0.15);}
     .mc-chev{font-size:1.1rem;line-height:1;transition:transform .35s ease;}
     .mc-toggle.open .mc-chev{transform:rotate(180deg);}
-    .mc-details{max-height:0;overflow:hidden;transition:max-height .45s ease;}
-    .mc-details.open{max-height:1600px;}
-    .mc-details-inner{padding-top:1.3rem;}
+    .mc-details{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease;}
+    .mc-details.open{grid-template-rows:1fr;}
+    .mc-details-inner{overflow:hidden;min-height:0;padding-top:1.3rem;}
     .mc-section-label{font-family:var(--font-head);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-size:.72rem;color:#ff9d2f;margin:0 0 .55rem;}
     .mc-points{display:flex;flex-direction:column;gap:.4rem;margin:0 0 1.2rem;}
     .mc-point-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:.55rem .9rem;font-size:.85rem;}
@@ -293,6 +293,8 @@ function makeCoinRain(canvasId, palette){
   function resize(){canvas.width=parent.offsetWidth;canvas.height=parent.offsetHeight;}
   resize();
   window.addEventListener('resize',resize);
+  // Keep the canvas buffer matched to the card size (e.g. when the accordion expands) so coins never stretch
+  if(window.ResizeObserver){const ro=new ResizeObserver(resize);ro.observe(parent);}
   const coins=[];
   const syms=['$','\u20BF','\u039E','\u25CE','\uD83D\uDCB0','\uD83E\uDE99'];
   function spawn(){
