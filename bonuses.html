@@ -57,6 +57,27 @@
     .mc-point-row .bet{color:var(--text2);}
     .mc-point-row .pts{color:#ff9d2f;font-weight:700;font-family:var(--font-head);letter-spacing:.5px;}
     .mc-example{background:rgba(255,140,0,0.06);border:1px solid rgba(255,140,0,0.2);border-radius:10px;padding:.9rem 1rem;font-size:.82rem;color:var(--text2);line-height:1.65;}
+    /* ── Full-width horizontal Multiplier Challenge card ── */
+    .mc-wide{padding:2.2rem 2.5rem;}
+    .mc-new-tag{font-family:var(--font-head);font-weight:700;letter-spacing:1.5px;font-size:.62rem;color:#000;background:#ff9d2f;padding:.2rem .55rem;border-radius:6px;align-self:center;}
+    .mc-top{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+    .mc-top-left{flex:1;min-width:280px;}
+    .mc-cta{flex-shrink:0;white-space:nowrap;align-self:center;}
+    .mc-quickrow{display:flex;gap:1rem;flex-wrap:wrap;margin:1.4rem 0 .2rem;}
+    .mc-quick{flex:1;min-width:220px;display:flex;align-items:flex-start;gap:.55rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;font-size:.8rem;color:var(--text2);line-height:1.5;}
+    .mc-quick-ic{color:#ff9d2f;font-size:.9rem;flex-shrink:0;line-height:1.4;}
+    /* Expanded: two columns on desktop */
+    .mc-details-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;}
+    .mc-col .mc-points{margin-bottom:0;}
+    .mc-col .mc-example{height:auto;}
+    @media(max-width:760px){
+      .mc-wide{padding:1.5rem 1.3rem;}
+      .mc-top{flex-direction:column;align-items:flex-start;gap:1rem;}
+      .mc-cta{width:100%;text-align:center;}
+      .mc-quickrow{flex-direction:column;gap:.6rem;}
+      .mc-quick{min-width:0;}
+      .mc-details-grid{grid-template-columns:1fr;gap:1.2rem;}
+    }
   @media(max-width:560px){
     .bonus-grid{padding:1.5rem 1rem 4rem;gap:1rem;}
     .bonus-card{padding:1.5rem;}
@@ -138,48 +159,6 @@
     </div>
   </div>
 
-  <!-- WEEKLY MULTIPLIER CHALLENGE — new July offer, expandable -->
-  <div class="bonus-card multiplier" style="position:relative;overflow:hidden;border-color:rgba(255,140,0,0.3);background:linear-gradient(135deg,var(--card),rgba(255,140,0,0.05));">
-    <canvas id="multiplier-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
-    <div style="position:relative;z-index:1;">
-      <div class="bonus-header">
-        <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite 0.15s;">🏆</div>
-        <div class="bonus-amount-badge" style="background:rgba(255,140,0,0.12);border-color:rgba(255,140,0,0.3);color:#ff9d2f;animation:goldPulse 2s ease-in-out infinite;">$10,000 / MONTH</div>
-      </div>
-      <div class="bonus-title">WEEKLY MULTIPLIER CHALLENGE</div>
-      <div class="bonus-desc">Hit the <strong style="color:#ff9d2f">highest multiplier</strong> on the community-voted provider each week. <strong style="color:#ff9d2f">$2,500 in weekly prizes</strong> across 4 weeks — that's <strong style="color:var(--gold)">$10,000</strong> every month. New for July!</div>
-      <ul class="bonus-steps">
-        <li><div class="step-num">★</div>Runs <strong>Wednesday &rarr; Wednesday</strong> (00:00 EST), 1&ndash;3 winners each week</li>
-        <li><div class="step-num">★</div>The community votes the provider for each week</li>
-        <li><div class="step-num">★</div>Post your win in the dedicated chat channel to enter</li>
-      </ul>
-
-      <button class="mc-toggle" type="button" aria-expanded="false" onclick="var d=this.closest('.bonus-card').querySelector('.mc-details');var open=d.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);">
-        <span class="mc-toggle-label">View point system &amp; how to win</span><span class="mc-chev">⌄</span>
-      </button>
-
-      <div class="mc-details">
-        <div class="mc-details-inner">
-          <div class="mc-section-label">How it works</div>
-          <div class="bonus-desc" style="margin-bottom:1rem;">Each week the community votes on a slot provider. Hit the highest multiplier on that provider, post your win in the dedicated channel, and you're in. Bigger bets earn more points, so players of every size can win.</div>
-
-          <div class="mc-section-label">Point system (by bet size)</div>
-          <div class="mc-points">
-            <div class="mc-point-row"><span class="bet">$0.20 &ndash; $0.60</span><span class="pts">0.5 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$0.80 &ndash; $2.00</span><span class="pts">1 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$2.40 &ndash; $5.00</span><span class="pts">2 pts</span></div>
-            <div class="mc-point-row"><span class="bet">$5.01 +</span><span class="pts">3 pts</span></div>
-          </div>
-
-          <div class="mc-section-label">Example</div>
-          <div class="mc-example">Hit a <strong style="color:#ff9d2f">50,000x</strong> max win on a <strong>$0.20</strong> bet &rarr; score of <strong>25,000</strong>. That's the same score as hitting a <strong style="color:#ff9d2f">12,500x</strong> on a <strong>$2.40</strong> bet. The scaling keeps it fair and keeps every player &mdash; low-roller or high-roller &mdash; in the running.</div>
-        </div>
-      </div>
-
-      <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="background:#ff9d2f;color:#000;margin-top:1.2rem;">Join the Challenge on Discord</a>
-    </div>
-  </div>
-
   <div class="bonus-card signup" style="position:relative;overflow:hidden;">
     <canvas id="signup-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
     <div style="position:relative;z-index:1;">
@@ -217,6 +196,60 @@
       <li><div class="step-num">3</div>Winners are selected daily — check Discord for announcements</li>
     </ul>
     <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="background:var(--accent);color:#000;">Join Discord Giveaway</a>
+    </div>
+  </div>
+
+  <!-- WEEKLY MULTIPLIER CHALLENGE — full-width horizontal hero card, expandable -->
+  <div class="bonus-card multiplier mc-wide" style="position:relative;overflow:hidden;grid-column:1/-1;border-color:rgba(255,140,0,0.3);background:linear-gradient(135deg,var(--card),rgba(255,140,0,0.05));">
+    <canvas id="multiplier-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <div style="position:relative;z-index:1;">
+
+      <!-- Top row: title block (left) + Join button (right) -->
+      <div class="mc-top">
+        <div class="mc-top-left">
+          <div class="bonus-header" style="margin-bottom:.6rem;">
+            <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite 0.15s;">🏆</div>
+            <div class="bonus-amount-badge" style="background:rgba(255,140,0,0.12);border-color:rgba(255,140,0,0.3);color:#ff9d2f;animation:goldPulse 2s ease-in-out infinite;">$10,000 / MONTH</div>
+            <span class="mc-new-tag">NEW · JULY</span>
+          </div>
+          <div class="bonus-title" style="margin-bottom:.6rem;">WEEKLY MULTIPLIER CHALLENGE</div>
+          <div class="bonus-desc" style="margin-bottom:0;max-width:640px;">Hit the <strong style="color:#ff9d2f">highest multiplier</strong> on the community-voted provider each week. <strong style="color:#ff9d2f">$2,500 in weekly prizes</strong> across 4 weeks — that's <strong style="color:var(--gold)">$10,000</strong> every month.</div>
+        </div>
+        <a href="https://stake.com/?c=JAKE" target="_blank" class="btn-primary mc-cta" style="background:#ff9d2f;color:#000;">Join the Challenge</a>
+      </div>
+
+      <!-- Quick points in a horizontal row -->
+      <div class="mc-quickrow">
+        <div class="mc-quick"><span class="mc-quick-ic">★</span><span>Runs <strong>Wed &rarr; Wed</strong> · 00:00 EST · 1&ndash;3 winners/week</span></div>
+        <div class="mc-quick"><span class="mc-quick-ic">★</span><span>Community <strong>votes the provider</strong> each week</span></div>
+        <div class="mc-quick"><span class="mc-quick-ic">★</span><span>Post your win in the <strong>dedicated channel</strong> to enter</span></div>
+      </div>
+
+      <!-- Expandable details -->
+      <button class="mc-toggle" type="button" aria-expanded="false" onclick="var d=this.closest('.bonus-card').querySelector('.mc-details');var open=d.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);">
+        <span class="mc-toggle-label">View point system &amp; how to win</span><span class="mc-chev">⌄</span>
+      </button>
+
+      <div class="mc-details">
+        <div class="mc-details-inner mc-details-grid">
+          <div class="mc-col">
+            <div class="mc-section-label">How it works</div>
+            <div class="bonus-desc" style="margin-bottom:1.2rem;">Each week the community votes on a slot provider. Hit the highest multiplier on that provider, post your win in the dedicated channel, and you're in. Bigger bets earn more points, so players of every size can win.</div>
+            <div class="mc-section-label">Point system (by bet size)</div>
+            <div class="mc-points">
+              <div class="mc-point-row"><span class="bet">$0.20 &ndash; $0.60</span><span class="pts">0.5 pt</span></div>
+              <div class="mc-point-row"><span class="bet">$0.80 &ndash; $2.00</span><span class="pts">1 pt</span></div>
+              <div class="mc-point-row"><span class="bet">$2.40 &ndash; $5.00</span><span class="pts">2 pts</span></div>
+              <div class="mc-point-row"><span class="bet">$5.01 +</span><span class="pts">3 pts</span></div>
+            </div>
+          </div>
+          <div class="mc-col">
+            <div class="mc-section-label">Example</div>
+            <div class="mc-example">Hit a <strong style="color:#ff9d2f">50,000x</strong> max win on a <strong>$0.20</strong> bet &rarr; score of <strong>25,000</strong>. That's the same score as hitting a <strong style="color:#ff9d2f">12,500x</strong> on a <strong>$2.40</strong> bet.<br><br>The scaling keeps it fair and keeps every player &mdash; low-roller or high-roller &mdash; in the running.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
