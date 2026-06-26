@@ -29,9 +29,24 @@
   <link rel="stylesheet" href="style.css"/>
   <style>
     .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;padding:2rem 2.5rem 6rem;}
-    .bonus-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;transition:all .3s;opacity:0;transform:translateY(20px);}
+    .bonus-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 10px 30px -18px rgba(0,0,0,0.7);}
     .bonus-card.visible{opacity:1;transform:translateY(0);}
-    .bonus-card:hover{transform:translateY(-4px);}
+    .bonus-card:hover{transform:translateY(-6px);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 24px 50px -22px rgba(0,0,0,0.85);}
+    .bonus-card.deposit-match:hover{border-color:rgba(0,255,120,0.5);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 36px -10px rgba(0,255,120,0.35);}
+    .bonus-card.signup:hover{border-color:rgba(230,180,50,0.55);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 36px -10px rgba(230,180,50,0.35);}
+    .bonus-card.giveaway:hover{border-color:rgba(0,212,255,0.5);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 36px -10px rgba(0,212,255,0.3);}
+    .bonus-card.multiplier:hover{border-color:rgba(255,140,0,0.55);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 40px -10px rgba(255,140,0,0.4);}
+    /* refined badge + title polish */
+    .bonus-amount-badge{backdrop-filter:blur(2px);}
+    .bonus-title{background:linear-gradient(180deg,#fff,#cfd6df);-webkit-background-clip:text;background-clip:text;}
+    /* point rows get a subtle hover */
+    .mc-point-row{transition:background .2s ease,border-color .2s ease;}
+    .mc-point-row:hover{background:rgba(255,140,0,0.06);border-color:rgba(255,140,0,0.3);}
+    .mc-quick{transition:background .2s ease,border-color .2s ease,transform .2s ease;}
+    .mc-quick:hover{background:rgba(255,140,0,0.05);border-color:rgba(255,140,0,0.25);transform:translateY(-2px);}
+    /* soft top sheen line that picks up each card's accent on hover */
+    .bonus-card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,0.10),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.6;pointer-events:none;transition:opacity .35s ease;}
+    .bonus-card:hover::after{opacity:1;}
     .bonus-card.signup{border-color:rgba(230,180,50,0.3);background:linear-gradient(135deg,var(--card),rgba(230,180,50,0.04));}
     .bonus-card.giveaway{border-color:rgba(0,212,255,0.2);background:linear-gradient(135deg,var(--card),rgba(0,212,255,0.03));}
     .bonus-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem;gap:1rem;}
@@ -284,48 +299,66 @@ function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
 document.querySelectorAll('.bonus-card').forEach(el=>obs.observe(el));
 
-// Generalized coin rain — one factory for all cards
+// Optimized coin rain — capped, no per-frame shadowBlur, pauses when off-screen/hidden
+const _rains=[];   // registry of all rains so we can globally pause when tab hidden
 function makeCoinRain(canvasId, palette){
   const canvas=document.getElementById(canvasId);
   if(!canvas)return;
   const parent=canvas.parentElement;
-  const ctx=canvas.getContext('2d');
-  function resize(){canvas.width=parent.offsetWidth;canvas.height=parent.offsetHeight;}
+  const ctx=canvas.getContext('2d',{alpha:true});
+  const MAX_COINS=18;          // hard cap prevents unbounded growth
+  const SPAWN_EVERY=26;        // frames between spawns
+  let W=0,H=0;
+  function resize(){W=parent.offsetWidth;H=parent.offsetHeight;canvas.width=W;canvas.height=H;}
   resize();
   window.addEventListener('resize',resize);
-  // Keep the canvas buffer matched to the card size (e.g. when the accordion expands) so coins never stretch
   if(window.ResizeObserver){const ro=new ResizeObserver(resize);ro.observe(parent);}
   const coins=[];
-  const syms=['$','\u20BF','\u039E','\u25CE','\uD83D\uDCB0','\uD83E\uDE99'];
+  const syms=['$','\u20BF','\u039E','\u25CE'];   // lightweight glyphs (emoji removed — they were the heaviest to draw)
   function spawn(){
-    coins.push({x:Math.random()*canvas.width,y:-20,vy:0.6+Math.random()*1.4,vx:(Math.random()-.5)*0.8,rot:Math.random()*360,rotV:(Math.random()-.5)*5,sym:syms[Math.floor(Math.random()*syms.length)],col:palette[Math.floor(Math.random()*palette.length)],size:10+Math.random()*8,alpha:0.7+Math.random()*0.3});
+    if(coins.length>=MAX_COINS)return;
+    coins.push({x:Math.random()*W,y:-20,vy:0.5+Math.random()*1.1,vx:(Math.random()-.5)*0.6,rot:Math.random()*360,rotV:(Math.random()-.5)*4,sym:syms[(Math.random()*syms.length)|0],col:palette[(Math.random()*palette.length)|0],size:10+Math.random()*7,alpha:0.55+Math.random()*0.3});
   }
-  let t=0;
+  let t=0, running=true, rafId=null;
   function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    t++;
-    if(t%22===0)spawn();
+    if(!running){rafId=null;return;}
+    ctx.clearRect(0,0,W,H);
+    if((++t%SPAWN_EVERY)===0)spawn();
     for(let i=coins.length-1;i>=0;i--){
       const c=coins[i];
       c.y+=c.vy;c.x+=c.vx;c.rot+=c.rotV;
-      if(c.y>canvas.height+20){coins.splice(i,1);continue;}
+      if(c.y>H+20){coins.splice(i,1);continue;}
       ctx.save();
-      ctx.globalAlpha=c.alpha*(1-c.y/canvas.height*0.5);
+      ctx.globalAlpha=c.alpha*(1-c.y/H*0.5);
       ctx.translate(c.x,c.y);
-      ctx.rotate(c.rot*Math.PI/180);
+      ctx.rotate(c.rot*0.01745329);
       ctx.font='bold '+c.size+'px monospace';
-      ctx.fillStyle=c.col+'0.9)';
-      ctx.shadowColor=c.col+'0.6)';
-      ctx.shadowBlur=8;
+      ctx.fillStyle=c.col+'0.85)';
       ctx.textAlign='center';
       ctx.textBaseline='middle';
-      ctx.fillText(c.sym,0,0);
+      ctx.fillText(c.sym,0,0);   // no shadowBlur — the single biggest perf win
       ctx.restore();
     }
-    requestAnimationFrame(draw);
+    rafId=requestAnimationFrame(draw);
   }
+  const api={
+    start(){if(!running){running=true;if(!rafId)rafId=requestAnimationFrame(draw);}},
+    stop(){running=false;}
+  };
+  // Pause this rain whenever its card scrolls out of view (saves CPU/GPU)
+  if(window.IntersectionObserver){
+    const vis=new IntersectionObserver(es=>{es.forEach(e=>{e.isIntersecting?api.start():api.stop();});},{threshold:0});
+    vis.observe(parent);
+  }
+  _rains.push(api);
   draw();
+  return api;
 }
+// Pause ALL rains when the tab is hidden, resume when visible
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){_rains.forEach(r=>r.stop());}
+  else{_rains.forEach(r=>r.start());}
+});
 function watchCard(selector, canvasId, palette){
   const card=document.querySelector(selector);
   if(!card)return;
