@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .bonus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;padding:2rem 2.5rem 6rem;}
+    .bonus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:900px;margin:0 auto;padding:2rem 2.5rem 6rem;}
     .bonus-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 10px 30px -18px rgba(0,0,0,0.7);}
     .bonus-card.visible{opacity:1;transform:translateY(0);}
     .bonus-card:hover{transform:translateY(-6px);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 24px 50px -22px rgba(0,0,0,0.85);}
@@ -73,9 +73,9 @@
     .mc-point-row .pts{color:#ff9d2f;font-weight:700;font-family:var(--font-head);letter-spacing:.5px;}
     .mc-example{background:rgba(255,140,0,0.06);border:1px solid rgba(255,140,0,0.2);border-radius:10px;padding:.9rem 1rem;font-size:.82rem;color:var(--text2);line-height:1.65;}
     /* mc-new-tag badge */
-    .mc-new-tag{font-family:var(--font-head);font-weight:700;letter-spacing:1.5px;font-size:.62rem;color:#000;background:#ff9d2f;padding:.2rem .55rem;border-radius:6px;align-self:center;}
+    .mc-new-tag{font-family:var(--font-head);font-weight:700;letter-spacing:1px;font-size:.58rem;color:#000;background:#ff9d2f;padding:.2rem .5rem;border-radius:6px;align-self:center;white-space:nowrap;}
   @media(max-width:560px){
-    .bonus-grid{padding:1.5rem 1rem 4rem;gap:1rem;}
+    .bonus-grid{padding:1.5rem 1rem 4rem;gap:1rem;grid-template-columns:1fr;}
     .bonus-card{padding:1.5rem;}
   }
   </style>
