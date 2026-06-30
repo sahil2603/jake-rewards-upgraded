@@ -553,12 +553,12 @@
     </div>
   </div>
 
-  <div class="countdown-bar">
+  <div class="countdown-bar" id="lb-countdown-bar">
     <div>
-      <div class="countdown-label">Leaderboard Ends In</div>
+      <div class="countdown-label" id="lb-countdown-label">Leaderboard Ends In</div>
       <div class="countdown-val" id="lb-countdown">--d --h --m --s</div>
     </div>
-    <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary">Claim Rewards</a>
+    <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" id="lb-countdown-cta">Claim Rewards</a>
   </div>
 
 
@@ -913,12 +913,37 @@ function switchTab(type,btn){
   document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   _currentTab=type;
+
+  // Swap the countdown bar for a "final results" notice when viewing Previous Month —
+  // a live countdown doesn't make sense next to a closed competition's results.
+  const label=document.getElementById('lb-countdown-label');
+  const cta=document.getElementById('lb-countdown-cta');
+  const countdownVal=document.getElementById('lb-countdown');
+  if(type==='previous'){
+    if(label) label.textContent='Final Results — Previous Month';
+    if(countdownVal) countdownVal.style.display='none';
+    if(cta){ cta.textContent='View Current Leaderboard'; cta.href='#'; cta.onclick=function(e){e.preventDefault();document.querySelector('.lb-tab').click();}; }
+  } else {
+    if(label) label.textContent='Leaderboard Ends In';
+    if(countdownVal) countdownVal.style.display='';
+    if(cta){ cta.textContent='Claim Rewards'; cta.href='https://discord.com/invite/jakethedegen'; cta.target='_blank'; cta.onclick=null; }
+  }
+
   if(type==='previous'&&!_prevMode){
     loadPrevSheet();
   } else {
     renderBoard();
   }
 }
+
+// Always start fresh on Current Month, even if the browser restores a cached previous state
+// (e.g. via back/forward navigation or bfcache) — avoids landing on a stale "Previous Month" view.
+window.addEventListener('pageshow',function(e){
+  if(e.persisted){
+    const currentBtn=document.querySelector('.lb-tab');
+    if(currentBtn && _currentTab!=='current'){ switchTab('current', currentBtn); }
+  }
+});
 
 // Leaderboard ends at 12:00 AM (midnight) AEST on the LAST DAY of each month — confirmed by Jake
 // and matches the sheet's end_date_utc (e.g. "30-Jun-26 12:00 AM"). AEST = UTC+10, no daylight
