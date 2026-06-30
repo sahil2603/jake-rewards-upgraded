@@ -176,6 +176,16 @@ img{max-width:100%;}
 .footer-responsible p{font-size:.78rem;color:var(--muted);line-height:1.5;}
 .footer-responsible a{color:var(--gold);text-decoration:underline;}
 .footer-bottom{border-top:1px solid var(--border);padding:1.2rem 0;text-align:center;font-size:.75rem;color:var(--muted);max-width:1200px;margin:0 auto;}
+/* Site-wide fairness/anti-abuse disclaimer — sits above the copyright line */
+.footer-disclaimer{
+  max-width:1200px;margin:0 auto;padding:1.1rem 1.5rem;
+  border-top:1px solid var(--border);
+  font-size:.7rem;line-height:1.6;color:rgba(168,184,204,0.55);
+  text-align:center;
+}
+@media(max-width:600px){
+  .footer-disclaimer{padding:1rem 1.2rem;font-size:.68rem;}
+}
 
 /* ── TOAST ────────────────────────────────────────────────────────────── */
 .copy-toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gold);color:#000;font-family:var(--font-head);font-size:.85rem;font-weight:700;padding:.6rem 1.4rem;border-radius:20px;opacity:0;transition:all .3s;pointer-events:none;z-index:999;}
