@@ -920,9 +920,22 @@ function switchTab(type,btn){
   }
 }
 
+// Leaderboard ends at 12:00 PM (noon) AEST on the 1st of each month — confirmed by Jake.
+// AEST is UTC+10 with no daylight saving (Australia's DST runs Oct–Apr, so AEST is fixed in this window).
+// Noon AEST = 02:00 UTC — computed in UTC so every visitor worldwide sees the identical countdown,
+// regardless of their own timezone (fixes the previous version which used each visitor's local midnight).
+function getNextAESTNoonUTC(){
+  const now=new Date();
+  // Build a candidate: 1st of next month, 02:00 UTC (= 12:00 PM AEST)
+  let target=new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth()+1, 1, 2, 0, 0));
+  // If we're already past this month's reset moment but before the 1st (edge case), no adjustment needed —
+  // the formula above always lands on the *next* 1st, which is always in the future relative to "now".
+  return target;
+}
 function updateCountdown(){
-  const now=new Date(),end=new Date(now.getFullYear(),now.getMonth()+1,1);
-  const d=end-now,days=Math.floor(d/864e5),hrs=Math.floor((d%864e5)/36e5),mins=Math.floor((d%36e5)/6e4),secs=Math.floor((d%6e4)/1e3);
+  const now=new Date(), end=getNextAESTNoonUTC();
+  const d=end-now;
+  const days=Math.floor(d/864e5), hrs=Math.floor((d%864e5)/36e5), mins=Math.floor((d%36e5)/6e4), secs=Math.floor((d%6e4)/1e3);
   document.getElementById('lb-countdown').textContent=`${days}d ${hrs}h ${mins}m ${secs}s`;
 }
 updateCountdown();
