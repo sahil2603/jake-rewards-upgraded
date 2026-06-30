@@ -90,8 +90,54 @@
     .mc-rules strong{color:#fff;}
     /* mc-new-tag badge */
     .mc-new-tag{font-family:var(--font-head);font-weight:700;letter-spacing:1px;font-size:.58rem;color:#000;background:#ff9d2f;padding:.2rem .5rem;border-radius:6px;align-self:center;white-space:nowrap;}
+  /* ── MULTIPLIER CARD: purple hover override ── */
+  .bonus-card.multiplier:hover{
+    border-color:rgba(176,107,255,0.55) !important;
+    box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 40px -10px rgba(176,107,255,0.35) !important;
+  }
+  /* ── PRIZE PODIUM BLOCKS ── */
+  .mc-prize-row{
+    display:grid;grid-template-columns:1fr 1fr;gap:.7rem;
+    margin:.6rem 0 .2rem;
+  }
+  .mc-prize{
+    position:relative;
+    border-radius:12px;padding:.85rem .7rem;text-align:center;
+    border:1px solid;overflow:hidden;
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .mc-prize:hover{transform:translateY(-3px);}
+  .mc-prize-medal{font-size:1.4rem;line-height:1;margin-bottom:.25rem;}
+  .mc-prize-place{
+    font-family:var(--font-head);font-size:.6rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:1.5px;
+    margin-bottom:.25rem;opacity:.8;
+  }
+  .mc-prize-amount{
+    font-family:var(--font-display);font-size:1.45rem;
+    letter-spacing:1px;line-height:1;
+  }
+  /* Gold — 1st place */
+  .mc-prize-gold{
+    background:linear-gradient(160deg,rgba(252,194,0,0.18),rgba(13,17,24,0.9));
+    border-color:rgba(252,194,0,0.35);
+  }
+  .mc-prize-gold::before{content:'';position:absolute;top:0;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,rgba(252,194,0,0.7),transparent);}
+  .mc-prize-gold .mc-prize-place{color:var(--gold);}
+  .mc-prize-gold .mc-prize-amount{color:var(--gold);text-shadow:0 0 20px rgba(252,194,0,0.4);}
+  .mc-prize-gold:hover{box-shadow:0 8px 28px rgba(252,194,0,0.2);}
+  /* Silver — 2nd place */
+  .mc-prize-silver{
+    background:linear-gradient(160deg,rgba(180,195,210,0.15),rgba(13,17,24,0.9));
+    border-color:rgba(180,195,210,0.3);
+  }
+  .mc-prize-silver::before{content:'';position:absolute;top:0;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,rgba(200,215,230,0.6),transparent);}
+  .mc-prize-silver .mc-prize-place{color:#c8d8e8;}
+  .mc-prize-silver .mc-prize-amount{color:#dde8f0;text-shadow:0 0 16px rgba(180,200,220,0.3);}
+  .mc-prize-silver:hover{box-shadow:0 8px 28px rgba(180,195,210,0.15);}
   @media(max-width:560px){
     .bonus-grid{padding:1.5rem 1rem 4rem;gap:1rem;grid-template-columns:repeat(2,1fr);}
+    .mc-prize-amount{font-size:1.2rem;}
   }
   @media(max-width:480px){
     .bonus-grid{grid-template-columns:1fr;}
@@ -156,7 +202,8 @@
   </div>
 
   <!-- 200% DEPOSIT MATCH — Jake's biggest offer, placed first -->
-  <div class="bonus-card deposit-match" style="position:relative;overflow:hidden;border-color:rgba(0,255,120,0.3);background:linear-gradient(135deg,var(--card),rgba(0,255,120,0.04));">
+  <div class="bonus-card deposit-match" style="position:relative;overflow:hidden;border-color:rgba(0,255,120,0.3);background:linear-gradient(160deg,rgba(0,180,80,0.14) 0%,rgba(13,17,24,0.98) 60%);">
+    <div style="position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,220,100,0.7),transparent);border-radius:0 0 4px 4px;pointer-events:none;z-index:2;"></div>
     <canvas id="deposit-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
     <div style="position:relative;z-index:1;">
     <div class="bonus-header">
@@ -175,7 +222,8 @@
     </div>
   </div>
 
-  <div class="bonus-card signup" style="position:relative;overflow:hidden;">
+  <div class="bonus-card signup" style="position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(200,150,0,0.14) 0%,rgba(13,17,24,0.98) 60%);">
+    <div style="position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,rgba(252,194,0,0.7),transparent);border-radius:0 0 4px 4px;pointer-events:none;z-index:2;"></div>
     <canvas id="signup-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
     <div style="position:relative;z-index:1;">
       <div class="bonus-header">
@@ -197,7 +245,8 @@
     </div>
   </div>
 
-  <div class="bonus-card giveaway" style="position:relative;overflow:hidden;">
+  <div class="bonus-card giveaway" style="position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(0,150,200,0.14) 0%,rgba(13,17,24,0.98) 60%);">
+    <div style="position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.7),transparent);border-radius:0 0 4px 4px;pointer-events:none;z-index:2;"></div>
     <canvas id="giveaway-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
     <div style="position:relative;z-index:1;">
     <div class="bonus-header">
@@ -215,52 +264,77 @@
     </div>
   </div>
 
-  <!-- HIGHEST MULTIPLIER CHALLENGE — standard 4th card matching others -->
-  <div class="bonus-card multiplier" style="position:relative;overflow:hidden;border-color:rgba(255,140,0,0.3);background:linear-gradient(135deg,var(--card),rgba(255,140,0,0.05));">
+  <!-- HIGHEST MULTIPLIER CHALLENGE — purple/indigo premium theme -->
+  <div class="bonus-card multiplier" style="position:relative;overflow:hidden;border-color:rgba(176,107,255,0.35);background:linear-gradient(160deg,rgba(100,60,200,0.18) 0%,rgba(13,17,24,0.98) 60%);">
     <canvas id="multiplier-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <!-- top accent line in purple -->
+    <div style="position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,rgba(176,107,255,0.8),transparent);border-radius:0 0 4px 4px;pointer-events:none;z-index:2;"></div>
     <div style="position:relative;z-index:1;">
-      <div class="bonus-header">
+
+      <!-- Header row: icon + badge + LIVE tag -->
+      <div class="bonus-header" style="align-items:center;">
         <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite 0.15s;">🎰</div>
-        <div class="bonus-amount-badge" style="background:rgba(255,140,0,0.12);border-color:rgba(255,140,0,0.3);color:#ff9d2f;animation:goldPulse 2s ease-in-out infinite;">$10,000 / 4 WEEKS</div>
-        <span class="mc-new-tag mc-live-tag">🟢 LIVE</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;">
+          <div class="bonus-amount-badge" style="background:rgba(176,107,255,0.15);border-color:rgba(176,107,255,0.35);color:#c87aff;font-size:1rem;white-space:nowrap;">$10,000 · 4 WKS</div>
+          <span class="mc-live-tag" style="font-family:var(--font-head);font-size:.58rem;font-weight:700;letter-spacing:1px;color:#fff;background:#1fb863;padding:.2rem .55rem;border-radius:6px;white-space:nowrap;">🟢 LIVE</span>
+        </div>
       </div>
+
       <div class="bonus-title">HIGHEST MULTIPLIER CHALLENGE</div>
-      <div class="bonus-desc">Hit the <strong style="color:#ff9d2f">highest multiplier</strong> on this week's chosen provider. <strong style="color:#ff9d2f">$2,000 + $500</strong> in prizes every week.</div>
-      <div class="mc-provider-pill">🎯 Week 1 Provider: <strong>Paperclip Gaming</strong></div>
-      <ul class="bonus-steps">
-        <li><div class="step-num">★</div><strong>1st:</strong> $2,000 &nbsp;·&nbsp; <strong>2nd:</strong> $500</li>
-        <li><div class="step-num">★</div>Minimum bet <strong>$0.20</strong> · only wins <strong>333x+</strong> count</li>
-        <li><div class="step-num">★</div>Base spins only — <strong>no</strong> bonus buys / antes</li>
+      <div class="bonus-desc" style="margin-bottom:.9rem;">Hit the <strong style="color:#c87aff">highest multiplier</strong> on this week's provider — <strong style="color:#c87aff">Paperclip Gaming</strong>. Weekly prizes every Wednesday.</div>
+
+      <!-- Provider pill — purple theme -->
+      <div class="mc-provider-pill" style="background:rgba(176,107,255,0.1);border-color:rgba(176,107,255,0.3);">🎯 Week 1: <strong style="color:#c87aff">Paperclip Gaming</strong></div>
+
+      <!-- Prize podium blocks — the premium display Jake wanted -->
+      <div class="mc-prize-row">
+        <div class="mc-prize mc-prize-gold">
+          <div class="mc-prize-medal">🥇</div>
+          <div class="mc-prize-place">1st Place</div>
+          <div class="mc-prize-amount">$2,000</div>
+        </div>
+        <div class="mc-prize mc-prize-silver">
+          <div class="mc-prize-medal">🥈</div>
+          <div class="mc-prize-place">2nd Place</div>
+          <div class="mc-prize-amount">$500</div>
+        </div>
+      </div>
+
+      <ul class="bonus-steps" style="margin-top:.8rem;margin-bottom:1rem;">
+        <li><div class="step-num" style="background:rgba(176,107,255,0.15);border-color:rgba(176,107,255,0.3);color:#c87aff;">★</div>Min bet <strong>$0.20</strong> · wins <strong>333x+</strong> only</li>
+        <li><div class="step-num" style="background:rgba(176,107,255,0.15);border-color:rgba(176,107,255,0.3);color:#c87aff;">★</div>Base spins — <strong>no</strong> bonus buys / antes</li>
       </ul>
 
-      <!-- Accordion for full details -->
-      <button class="mc-toggle" type="button" aria-expanded="false" onclick="var d=this.closest('.bonus-card').querySelector('.mc-details');var open=d.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);">
+      <!-- Accordion -->
+      <button class="mc-toggle" type="button" aria-expanded="false"
+        style="background:rgba(176,107,255,0.1);border-color:rgba(176,107,255,0.3);color:#c87aff;"
+        onclick="var d=this.closest('.bonus-card').querySelector('.mc-details');var open=d.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);">
         <span class="mc-toggle-label">Scoring system &amp; rules</span><span class="mc-chev">⌄</span>
       </button>
       <div class="mc-details">
         <div class="mc-details-inner">
-          <div class="mc-section-label" style="margin-top:.2rem;">Score = Multiplier × Bet Points</div>
+          <div class="mc-section-label" style="margin-top:.2rem;color:#c87aff;">Score = Multiplier × Bet Points</div>
           <div class="mc-points">
-            <div class="mc-point-row"><span class="bet">$0.20 &ndash; $0.40</span><span class="pts">0.5 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$0.60 &ndash; $0.80</span><span class="pts">0.75 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$1.00 &ndash; $2.00</span><span class="pts">1 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$2.01 &ndash; $5.00</span><span class="pts">2 pts</span></div>
-            <div class="mc-point-row"><span class="bet">$5.01+</span><span class="pts">3 pts</span></div>
+            <div class="mc-point-row"><span class="bet">$0.20 &ndash; $0.40</span><span class="pts" style="color:#c87aff;">0.5 pt</span></div>
+            <div class="mc-point-row"><span class="bet">$0.60 &ndash; $0.80</span><span class="pts" style="color:#c87aff;">0.75 pt</span></div>
+            <div class="mc-point-row"><span class="bet">$1.00 &ndash; $2.00</span><span class="pts" style="color:#c87aff;">1 pt</span></div>
+            <div class="mc-point-row"><span class="bet">$2.01 &ndash; $5.00</span><span class="pts" style="color:#c87aff;">2 pts</span></div>
+            <div class="mc-point-row"><span class="bet">$5.01+</span><span class="pts" style="color:#c87aff;">3 pts</span></div>
           </div>
-          <div class="mc-example" style="margin-top:.9rem;">10,000x on $0.20 = 5,000 score. But 4,000x on $10 = 12,000 score — that wins.</div>
-
-          <div class="mc-section-label" style="margin-top:1.1rem;">Rules</div>
+          <div class="mc-example" style="background:rgba(176,107,255,0.06);border-color:rgba(176,107,255,0.2);margin-top:.9rem;">10,000x on $0.20 = 5,000 score. But 4,000x on $10 = 12,000 score — that wins.</div>
+          <div class="mc-section-label" style="margin-top:1.1rem;color:#c87aff;">Rules</div>
           <ul class="mc-rules">
-            <li>Only play slots on <strong>that week's provider</strong></li>
-            <li>Must play under code <strong>JAKE</strong></li>
-            <li>Play in <strong>USD, CAD, or EUR</strong> only</li>
-            <li>Post your win screenshot + bet link in the wins channel</li>
-            <li>Even sub-challenge wins of <strong>333x+</strong> can earn extra prizes</li>
+            <li style="padding-left:1.2rem;">Only play slots on <strong>that week's provider</strong></li>
+            <li style="padding-left:1.2rem;">Must play under code <strong>JAKE</strong></li>
+            <li style="padding-left:1.2rem;">Play in <strong>USD, CAD, or EUR</strong> only</li>
+            <li style="padding-left:1.2rem;">Post your win screenshot + bet link in the wins channel</li>
+            <li style="padding-left:1.2rem;">Wins of <strong>333x+</strong> can earn extra prizes too</li>
           </ul>
         </div>
       </div>
 
-      <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="background:#ff9d2f;color:#000;margin-top:1.2rem;">Join the Challenge</a>
+      <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary"
+        style="background:linear-gradient(135deg,#7b2ff7,#b06bff);color:#fff;margin-top:1.2rem;box-shadow:0 4px 20px rgba(176,107,255,0.35);">Join the Challenge</a>
     </div>
   </div>
 
