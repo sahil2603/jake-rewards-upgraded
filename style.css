@@ -176,15 +176,32 @@ img{max-width:100%;}
 .footer-responsible p{font-size:.78rem;color:var(--muted);line-height:1.5;}
 .footer-responsible a{color:var(--gold);text-decoration:underline;}
 .footer-bottom{border-top:1px solid var(--border);padding:1.2rem 0;text-align:center;font-size:.75rem;color:var(--muted);max-width:1200px;margin:0 auto;}
-/* Site-wide fairness/anti-abuse disclaimer — sits above the copyright line */
-.footer-disclaimer{
-  max-width:1200px;margin:0 auto;padding:1.1rem 1.5rem;
+/* Site-wide fairness/anti-abuse disclaimer — compact, centred, sky-blue neon glow */
+.footer-disclaimer-wrap{
   border-top:1px solid var(--border);
-  font-size:.7rem;line-height:1.6;color:rgba(168,184,204,0.55);
+  padding:1.6rem 1.5rem;
+  display:flex;justify-content:center;
+}
+.footer-disclaimer{
+  max-width:680px;
+  background:rgba(0,212,255,0.04);
+  border:1px solid rgba(0,212,255,0.25);
+  border-radius:12px;
+  padding:.9rem 1.3rem;
+  font-family:var(--font-head);
+  font-size:.68rem;font-weight:500;letter-spacing:.2px;
+  line-height:1.65;color:rgba(180,225,245,0.75);
   text-align:center;
+  box-shadow:0 0 0 0 rgba(0,212,255,0.15);
+  animation:disclaimerGlow 3s ease-in-out infinite;
+}
+@keyframes disclaimerGlow{
+  0%,100%{box-shadow:0 0 10px 0 rgba(0,212,255,0.08);border-color:rgba(0,212,255,0.2);}
+  50%{box-shadow:0 0 22px 2px rgba(0,212,255,0.22);border-color:rgba(0,212,255,0.45);}
 }
 @media(max-width:600px){
-  .footer-disclaimer{padding:1rem 1.2rem;font-size:.68rem;}
+  .footer-disclaimer-wrap{padding:1.2rem 1rem;}
+  .footer-disclaimer{font-size:.64rem;padding:.8rem 1rem;}
 }
 
 /* ── TOAST ────────────────────────────────────────────────────────────── */
