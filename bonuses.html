@@ -72,6 +72,22 @@
     .mc-point-row .bet{color:var(--text2);}
     .mc-point-row .pts{color:#ff9d2f;font-weight:700;font-family:var(--font-head);letter-spacing:.5px;}
     .mc-example{background:rgba(255,140,0,0.06);border:1px solid rgba(255,140,0,0.2);border-radius:10px;padding:.9rem 1rem;font-size:.82rem;color:var(--text2);line-height:1.65;}
+    /* Provider pill — shows the current week's slot provider */
+    .mc-provider-pill{
+      display:inline-flex;align-items:center;gap:.4rem;
+      background:rgba(255,140,0,0.08);border:1px solid rgba(255,140,0,0.25);
+      border-radius:20px;padding:.4rem .85rem;
+      font-size:.78rem;color:var(--text2);margin:.3rem 0 .9rem;
+    }
+    .mc-provider-pill strong{color:#ff9d2f;}
+    /* LIVE tag — pulses to signal an active challenge */
+    .mc-live-tag{background:#1fb863!important;animation:liveTagPulse 1.6s ease-in-out infinite;}
+    @keyframes liveTagPulse{0%,100%{box-shadow:0 0 0 0 rgba(31,184,99,0.45);}60%{box-shadow:0 0 0 7px rgba(31,184,99,0);}}
+    /* Rules list inside the accordion */
+    .mc-rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem;}
+    .mc-rules li{position:relative;padding-left:1.2rem;font-size:.8rem;color:var(--text2);line-height:1.5;}
+    .mc-rules li::before{content:'✓';position:absolute;left:0;color:#ff9d2f;font-weight:700;}
+    .mc-rules strong{color:#fff;}
     /* mc-new-tag badge */
     .mc-new-tag{font-family:var(--font-head);font-weight:700;letter-spacing:1px;font-size:.58rem;color:#000;background:#ff9d2f;padding:.2rem .5rem;border-radius:6px;align-self:center;white-space:nowrap;}
   @media(max-width:560px){
@@ -199,37 +215,48 @@
     </div>
   </div>
 
-  <!-- WEEKLY MULTIPLIER CHALLENGE — standard 4th card matching others -->
+  <!-- HIGHEST MULTIPLIER CHALLENGE — standard 4th card matching others -->
   <div class="bonus-card multiplier" style="position:relative;overflow:hidden;border-color:rgba(255,140,0,0.3);background:linear-gradient(135deg,var(--card),rgba(255,140,0,0.05));">
     <canvas id="multiplier-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
     <div style="position:relative;z-index:1;">
       <div class="bonus-header">
-        <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite 0.15s;">🏆</div>
-        <div class="bonus-amount-badge" style="background:rgba(255,140,0,0.12);border-color:rgba(255,140,0,0.3);color:#ff9d2f;animation:goldPulse 2s ease-in-out infinite;">$10,000 / MONTH</div>
-        <span class="mc-new-tag">NEW · JULY</span>
+        <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite 0.15s;">🎰</div>
+        <div class="bonus-amount-badge" style="background:rgba(255,140,0,0.12);border-color:rgba(255,140,0,0.3);color:#ff9d2f;animation:goldPulse 2s ease-in-out infinite;">$10,000 / 4 WEEKS</div>
+        <span class="mc-new-tag mc-live-tag">🟢 LIVE</span>
       </div>
-      <div class="bonus-title">WEEKLY MULTIPLIER CHALLENGE</div>
-      <div class="bonus-desc">Hit the <strong style="color:#ff9d2f">highest multiplier</strong> on the community-voted provider each week. <strong style="color:#ff9d2f">$2,500 weekly</strong> across 4 weeks — <strong style="color:var(--gold)">$10,000/month</strong>.</div>
+      <div class="bonus-title">HIGHEST MULTIPLIER CHALLENGE</div>
+      <div class="bonus-desc">Hit the <strong style="color:#ff9d2f">highest multiplier</strong> on this week's chosen provider. <strong style="color:#ff9d2f">$2,000 + $500</strong> in prizes every week.</div>
+      <div class="mc-provider-pill">🎯 Week 1 Provider: <strong>Paperclip Gaming</strong></div>
       <ul class="bonus-steps">
-        <li><div class="step-num">★</div>Runs <strong>Wed &rarr; Wed</strong> · 00:00 EST · 1&ndash;3 winners/week</li>
-        <li><div class="step-num">★</div>Community <strong>votes the provider</strong> each week</li>
-        <li><div class="step-num">★</div>Post your win in the <strong>dedicated channel</strong> to enter</li>
+        <li><div class="step-num">★</div><strong>1st:</strong> $2,000 &nbsp;·&nbsp; <strong>2nd:</strong> $500</li>
+        <li><div class="step-num">★</div>Minimum bet <strong>$0.20</strong> · only wins <strong>333x+</strong> count</li>
+        <li><div class="step-num">★</div>Base spins only — <strong>no</strong> bonus buys / antes</li>
       </ul>
 
       <!-- Accordion for full details -->
       <button class="mc-toggle" type="button" aria-expanded="false" onclick="var d=this.closest('.bonus-card').querySelector('.mc-details');var open=d.classList.toggle('open');this.classList.toggle('open',open);this.setAttribute('aria-expanded',open);">
-        <span class="mc-toggle-label">Point system &amp; how to win</span><span class="mc-chev">⌄</span>
+        <span class="mc-toggle-label">Scoring system &amp; rules</span><span class="mc-chev">⌄</span>
       </button>
       <div class="mc-details">
         <div class="mc-details-inner">
-          <div class="mc-section-label" style="margin-top:.2rem;">Point system (by bet size)</div>
+          <div class="mc-section-label" style="margin-top:.2rem;">Score = Multiplier × Bet Points</div>
           <div class="mc-points">
-            <div class="mc-point-row"><span class="bet">$0.20 &ndash; $0.60</span><span class="pts">0.5 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$0.80 &ndash; $2.00</span><span class="pts">1 pt</span></div>
-            <div class="mc-point-row"><span class="bet">$2.40 &ndash; $5.00</span><span class="pts">2 pts</span></div>
+            <div class="mc-point-row"><span class="bet">$0.20 &ndash; $0.40</span><span class="pts">0.5 pt</span></div>
+            <div class="mc-point-row"><span class="bet">$0.60 &ndash; $0.80</span><span class="pts">0.75 pt</span></div>
+            <div class="mc-point-row"><span class="bet">$1.00 &ndash; $2.00</span><span class="pts">1 pt</span></div>
+            <div class="mc-point-row"><span class="bet">$2.01 &ndash; $5.00</span><span class="pts">2 pts</span></div>
             <div class="mc-point-row"><span class="bet">$5.01+</span><span class="pts">3 pts</span></div>
           </div>
-          <div class="mc-example" style="margin-top:.9rem;">50,000x on $0.20 = same score as 12,500x on $2.40. Fair for every bet size.</div>
+          <div class="mc-example" style="margin-top:.9rem;">10,000x on $0.20 = 5,000 score. But 4,000x on $10 = 12,000 score — that wins.</div>
+
+          <div class="mc-section-label" style="margin-top:1.1rem;">Rules</div>
+          <ul class="mc-rules">
+            <li>Only play slots on <strong>that week's provider</strong></li>
+            <li>Must play under code <strong>JAKE</strong></li>
+            <li>Play in <strong>USD, CAD, or EUR</strong> only</li>
+            <li>Post your win screenshot + bet link in the wins channel</li>
+            <li>Even sub-challenge wins of <strong>333x+</strong> can earn extra prizes</li>
+          </ul>
         </div>
       </div>
 
