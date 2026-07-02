@@ -653,16 +653,18 @@ img{max-width:100%;}
 .how-grid{position:relative;}
 .how-grid::before{
   content:'';position:absolute;
-  top:3.5rem;left:calc(16.67% + 1.5rem);right:calc(16.67% + 1.5rem);
-  height:2px;
+  top:2.4rem;
+  left:calc(33.33% - .5rem);
+  right:calc(33.33% - .5rem);
+  height:1px;
   background:linear-gradient(90deg,
-    var(--gold) 0%,
-    rgba(252,194,0,0.4) 45%,
-    rgba(252,194,0,0.4) 55%,
-    var(--gold) 100%);
-  opacity:.25;
+    transparent,
+    rgba(252,194,0,0.5) 20%,
+    rgba(252,194,0,0.5) 80%,
+    transparent);
+  opacity:.45;
   pointer-events:none;
-  z-index:0;
+  z-index:2;
 }
 @media(max-width:700px){.how-grid::before{display:none;}}
 
