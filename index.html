@@ -147,6 +147,13 @@
       <div class="stat-divider"></div>
       <div class="stat"><span class="stat-num" data-target="10" data-prefix="$">$10</span><span class="stat-label">Signup Bonus</span></div>
     </div>
+    <!-- Live player count bar -->
+    <div class="hero-live-bar" id="hero-live-bar" style="display:none;">
+      <span class="hlb-dot"></span>
+      <span class="hlb-text"><span id="hlb-count">250+</span> players competing this month</span>
+      <span class="hlb-sep">·</span>
+      <span class="hlb-sub">updated daily</span>
+    </div>
     <div class="hero-code-card" style="position:relative;overflow:hidden;margin-top:.5rem;">
       <div style="position:absolute;top:0;left:-100%;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(230,180,50,0.8),transparent);animation:shimmerLine 2.5s linear infinite;z-index:10;"></div>
       <div class="code-card-label">Your Affiliate Code</div>
@@ -220,7 +227,7 @@
     <div class="section-tag">Get Started</div>
     <h2>HOW IT WORKS</h2>
   </div>
-  <div class="how-grid">
+  <div class="how-grid" id="how-grid">
     <div class="how-step">
       <span class="how-num">01</span>
       <div class="how-icon-wrap"><span class="how-icon">📝</span></div>
@@ -380,10 +387,10 @@
       </div>
       <p class="footer-tagline">Best Rewarding Affiliate Program on Stake.</p>
       <div class="footer-socials">
-        <a href="https://discord.com/invite/jakethedegen" target="_blank">💬</a>
-        <a href="https://kick.com/itsjakeuwu" target="_blank">▶</a>
-        <a href="https://www.youtube.com/@itsjakex" target="_blank">📺</a>
-        <a href="https://www.youtube.com/@jakeplaysbj" target="_blank">🃏</a>
+        <a href="https://discord.com/invite/jakethedegen" target="_blank" class="fs-discord" title="Discord"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.6 12.6 0 0 0-.617-1.249.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.369a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+        <a href="https://kick.com/itsjakeuwu" target="_blank" class="fs-kick" title="Kick"><svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="256" height="256" rx="40" fill="currentColor" style="color:#53FC18"/><path transform="translate(61,28) scale(0.82)" fill="#0a0d0e" d="M0 0h54v54h27v-27h27v-27h54v81h-27v27h-27v27h27v27h27v81h-54v-27h-27v-27h-27v54h-54Z"/></svg></a>
+        <a href="https://www.youtube.com/@itsjakex" target="_blank" class="fs-youtube" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color:#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://www.youtube.com/@jakeplaysbj" target="_blank" class="fs-youtube" title="YouTube (BJ)"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color:#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
       </div>
     </div>
     <div class="footer-col">
@@ -685,6 +692,23 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
 },{threshold:0.1});
 document.querySelectorAll('.reward-card,.social-card,.podium-card,.how-step,.faq-item').forEach(el=>observer.observe(el));
+// Sequential how-step reveal — each step lights up in order with a 200ms gap
+var howSteps = document.querySelectorAll('.how-step');
+var howObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      howSteps.forEach(function(step,i){
+        setTimeout(function(){
+          step.classList.add('visible');
+          step.classList.add('how-step-lit');
+          setTimeout(function(){ step.classList.remove('how-step-lit'); }, 1200);
+        }, i * 220);
+      });
+      howObs.disconnect();
+    }
+  });
+},{threshold:0.2});
+if(document.getElementById('how-grid')) howObs.observe(document.getElementById('how-grid'));
 
 // Staggered entrance animations
 document.querySelectorAll('.reward-card').forEach((card,i)=>{
@@ -793,6 +817,31 @@ document.querySelectorAll('.card-rain').forEach(initCardRain);
 <script>
 (function(){
 
+  /* ─── 0. LIVE PLAYER COUNT ─── */
+  (function(){
+    var bar=document.getElementById('hero-live-bar');
+    var countEl=document.getElementById('hlb-count');
+    if(!bar||!countEl) return;
+    // Fetch the leaderboard CSV and count rows to get live player count
+    fetch('https://docs.google.com/spreadsheets/d/14Sr_hmd2CnwPJDrzndiXP1kP9VDF6gArjZQbRxFlBuQ/export?format=csv&gid=235680015')
+      .then(function(r){return r.text();})
+      .then(function(csv){
+        var rows=csv.trim().split('\n').length-1; // subtract header
+        if(rows>0){
+          countEl.textContent=rows;
+          bar.style.display='inline-flex';
+          // Animate the count in
+          bar.style.opacity='0';
+          bar.style.transform='translateY(8px)';
+          bar.style.transition='opacity .5s ease,transform .5s ease';
+          setTimeout(function(){bar.style.opacity='1';bar.style.transform='translateY(0)';},100);
+        }
+      }).catch(function(){
+        // On error just show 250+
+        countEl.textContent='250+';
+        bar.style.display='inline-flex';
+      });
+  })();
   /* ─── 1. SCROLL PROGRESS BAR ─── */
   var bar = document.getElementById('scroll-bar');
   function updateBar(){
@@ -815,14 +864,29 @@ document.querySelectorAll('.card-rain').forEach(initCardRain);
       if(!start) start = ts;
       var progress = Math.min((ts - start) / duration, 1);
       var current  = Math.round(easeOut(progress) * target / divide * 10) / 10;
-      // Format: show integer if whole, one decimal if not
       var display  = Number.isInteger(current) ? current : current.toFixed(1);
       el.textContent = prefix + display + (divide > 1 ? '' : '') + suffix;
       if(progress < 1) requestAnimationFrame(step);
-      else el.textContent = prefix + (target/divide) + suffix; // ensure exact final value
+      else {
+        el.textContent = prefix + (target/divide) + suffix;
+        // Slot-machine re-pulse: briefly flash a golden glow on the number
+        el.classList.add('stat-num-flash');
+        setTimeout(function(){ el.classList.remove('stat-num-flash'); }, 600);
+      }
     }
     requestAnimationFrame(step);
   }
+  // Periodic re-tick every 8s to keep the stats feeling alive
+  function reTickCounters(){
+    var counterDone2 = false;
+    setInterval(function(){
+      document.querySelectorAll('.stat-num[data-target]').forEach(function(el){
+        el.classList.add('stat-num-flash');
+        setTimeout(function(){ el.classList.remove('stat-num-flash'); }, 400);
+      });
+    }, 8000);
+  }
+  reTickCounters();
 
   // Trigger counters when hero-stats scrolls into view
   var counterDone = false;
