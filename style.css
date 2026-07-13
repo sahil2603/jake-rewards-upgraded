@@ -97,7 +97,8 @@ img{max-width:100%;}
 .rewards-section{padding:6rem 2.5rem;}
 .rewards-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(auto-fit,minmax(280px,380px));
+  justify-content:center;
   gap:1.3rem;max-width:1280px;margin:0 auto;
 }
 
@@ -202,7 +203,6 @@ img{max-width:100%;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
-  .rewards-grid{grid-template-columns:repeat(2,1fr);}
   .reward-amount{font-size:2.2rem;}
 }
 @media(max-width:560px){
