@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:1400px;margin:0 auto;padding:2rem 2.5rem 6rem;}
+    .bonus-grid{display:grid;grid-template-columns:repeat(3,minmax(0,380px));justify-content:center;gap:1.5rem;max-width:1400px;margin:0 auto;padding:2rem 2.5rem 6rem;}
     .bonus-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;box-shadow:0 1px 0 rgba(255,255,255,0.03) inset,0 10px 30px -18px rgba(0,0,0,0.7);}
     .bonus-card.visible{opacity:1;transform:translateY(0);}
     .bonus-card:hover{transform:translateY(-6px);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 24px 50px -22px rgba(0,0,0,0.85);}
