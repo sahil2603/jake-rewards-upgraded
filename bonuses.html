@@ -12,9 +12,9 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bonuses — JakeRewards</title>
-  <meta name="description" content="Claim your $10 free signup bonus, enter the daily $500 giveaway and get help accessing Stake. Use code JAKE."/>
+  <meta name="description" content="Enter the daily $500 giveaway, claim your 200% deposit match and get help accessing Stake. Use code JAKE."/>
   <meta property="og:title" content="Bonuses — JakeRewards"/>
-  <meta property="og:description" content="Claim your $10 free signup bonus and enter the daily $500 giveaway. Use code JAKE."/>
+  <meta property="og:description" content="Enter the daily $500 giveaway and claim your 200% deposit match. Use code JAKE."/>
   <meta property="og:image" content="https://jakerewards.com/og-image.png?v=10"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -22,7 +22,7 @@
   <meta property="og:url" content="https://jakerewards.com/"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Bonuses — JakeRewards"/>
-  <meta name="twitter:description" content="Claim your $10 free signup bonus and enter the daily $500 giveaway. Use code JAKE."/>
+  <meta name="twitter:description" content="Enter the daily $500 giveaway and claim your 200% deposit match. Use code JAKE."/>
   <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=10"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -33,7 +33,6 @@
     .bonus-card.visible{opacity:1;transform:translateY(0);}
     .bonus-card:hover{transform:translateY(-6px);box-shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 24px 50px -22px rgba(0,0,0,0.85);}
     .bonus-card.deposit-match:hover{border-color:rgba(0,255,120,0.5);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 36px -10px rgba(0,255,120,0.35);}
-    .bonus-card.signup:hover{border-color:rgba(230,180,50,0.55);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 36px -10px rgba(230,180,50,0.35);}
     .bonus-card.giveaway:hover{border-color:rgba(0,212,255,0.5);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 36px -10px rgba(0,212,255,0.3);}
     .bonus-card.multiplier:hover{border-color:rgba(255,140,0,0.55);box-shadow:0 24px 50px -22px rgba(0,0,0,0.85),0 0 40px -10px rgba(255,140,0,0.4);}
     /* refined badge + title polish */
@@ -47,7 +46,6 @@
     /* soft top sheen line that picks up each card's accent on hover */
     .bonus-card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(255,255,255,0.10),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.6;pointer-events:none;transition:opacity .35s ease;}
     .bonus-card:hover::after{opacity:1;}
-    .bonus-card.signup{border-color:rgba(230,180,50,0.3);background:linear-gradient(135deg,var(--card),rgba(230,180,50,0.04));}
     .bonus-card.giveaway{border-color:rgba(0,212,255,0.2);background:linear-gradient(135deg,var(--card),rgba(0,212,255,0.03));}
     .bonus-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem;gap:1rem;}
     .bonus-icon{font-size:2.5rem;}
@@ -223,29 +221,6 @@
       <li><div class="step-num">4</div>Receive a 200% match on your deposit</li>
     </ul>
     <a href="https://stake.com/?c=JAKE" target="_blank" class="btn-primary" style="background:#00cc70;color:#000;">Claim via Stake Live Chat</a>
-    </div>
-  </div>
-
-  <div class="bonus-card signup" style="position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(200,150,0,0.14) 0%,rgba(13,17,24,0.98) 60%);">
-    <div style="position:absolute;top:0;left:15%;right:15%;height:2px;background:linear-gradient(90deg,transparent,rgba(252,194,0,0.7),transparent);border-radius:0 0 4px 4px;pointer-events:none;z-index:2;"></div>
-    <canvas id="signup-coins" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
-    <div style="position:relative;z-index:1;">
-      <div class="bonus-header">
-        <div class="bonus-icon" style="animation:iconBounce 2s ease-in-out infinite;">💸</div>
-        <div class="bonus-amount-badge" style="animation:goldPulse 2s ease-in-out infinite;">$10 FREE</div>
-      </div>
-      <div class="bonus-title">FREE SIGNUP BONUS</div>
-      <div class="bonus-desc">Sign up with code <strong style="color:var(--gold)">JAKE</strong> on Stake and receive a free $10 — no deposit required, no strings attached.</div>
-      <div style="display:flex;align-items:center;gap:.5rem;margin:.4rem 0 .9rem;padding:.55rem .8rem;background:rgba(230,180,50,0.08);border:1px solid rgba(230,180,50,0.28);border-radius:10px;font-size:.86rem;font-weight:600;color:var(--gold);">
-        <span style="font-size:1rem;">⚠️</span> Must be a first-time Stake user!
-      </div>
-      <ul class="bonus-steps">
-        <li><div class="step-num">1</div>Sign up on Stake using code <strong>JAKE</strong></li>
-        <li><div class="step-num">2</div>Join the Discord server</li>
-        <li><div class="step-num">3</div>Create a support ticket and provide your ETH address + QR screenshot</li>
-        <li><div class="step-num">4</div>Receive your $10 — that's it!</li>
-      </ul>
-      <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="animation:btnShine 3s ease-in-out infinite;">Claim on Discord</a>
     </div>
   </div>
 
@@ -444,10 +419,9 @@ function watchCard(selector, canvasId, palette){
 }
 // Green for deposit-match, gold for signup, cyan for giveaway, purple for help
 watchCard('.bonus-card.deposit-match','deposit-coins',['rgba(0,220,100,','rgba(0,255,120,','rgba(100,255,160,','rgba(255,255,255,']);
-watchCard('.bonus-card.signup','signup-coins',['rgba(230,180,50,','rgba(255,210,80,','rgba(255,200,0,','rgba(255,255,255,']);
 watchCard('.bonus-card.giveaway','giveaway-coins',['rgba(0,212,255,','rgba(0,180,220,','rgba(80,230,255,','rgba(255,255,255,']);
 watchCard('.bonus-card.multiplier','multiplier-coins',['rgba(255,140,0,','rgba(255,180,60,','rgba(255,200,100,','rgba(255,255,255,']);
-watchCard('.bonus-card:not(.signup):not(.giveaway):not(.deposit-match):not(.multiplier)','help-coins',['rgba(180,100,255,','rgba(200,120,255,','rgba(140,80,220,','rgba(255,255,255,']);
+watchCard('.bonus-card:not(.giveaway):not(.deposit-match):not(.multiplier)','help-coins',['rgba(180,100,255,','rgba(200,120,255,','rgba(140,80,220,','rgba(255,255,255,']);
 </script>
 <!-- GA4 conversion event tracking -->
 <script>
