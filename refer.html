@@ -12,7 +12,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Refer a Friend — JakeRewards</title>
-  <meta name="description" content="Refer friends to Jake's community and earn cash rewards. Bronze $25, Silver $175, Platinum 4 $800, Platinum 6 $1,500 per referral."/>
+  <meta name="description" content="Refer friends to Jake's community and earn cash rewards. Bronze $15, Silver $50, Gold $75, up to Diamond 1 $3,360 per referral."/>
   <meta property="og:title" content="Refer a Friend — JakeRewards"/>
   <meta property="og:description" content="Refer friends to Jake's community and earn cash rewards. Use code JAKE."/>
   <meta property="og:image" content="https://jakerewards.com/og-image.png?v=10"/>
@@ -197,7 +197,15 @@
     .tier-card.t-silver::after{background:linear-gradient(90deg,transparent,rgba(160,190,210,0.7),transparent);}
     .tier-card.t-silver:hover{border-color:rgba(160,190,210,0.35);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(160,190,210,0.12);}
 
-    /* PLATINUM (Plat 4) */
+    /* GOLD */
+    .tier-card.t-gold{background:linear-gradient(160deg,rgba(252,194,0,0.18) 0%,rgba(180,120,0,0.08) 40%,rgba(13,17,24,0.98) 65%);}
+    .tier-card.t-gold .tc-rank{color:var(--gold);}
+    .tier-card.t-gold .tc-reward{color:var(--gold);text-shadow:0 0 24px rgba(252,194,0,0.4);}
+    .tier-card.t-gold .tc-glow{background:#c09000;}
+    .tier-card.t-gold::after{background:linear-gradient(90deg,transparent,rgba(252,194,0,0.75),transparent);}
+    .tier-card.t-gold:hover{border-color:rgba(252,194,0,0.4);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 35px rgba(252,194,0,0.18);}
+
+    /* PLATINUM (1–4) */
     .tier-card.t-plat{background:linear-gradient(160deg,rgba(100,60,240,0.2) 0%,rgba(13,17,24,0.98) 55%);}
     .tier-card.t-plat .tc-rank{color:#b090ff;}
     .tier-card.t-plat .tc-reward{color:#c8adff;}
@@ -205,18 +213,18 @@
     .tier-card.t-plat::after{background:linear-gradient(90deg,transparent,rgba(140,90,255,0.7),transparent);}
     .tier-card.t-plat:hover{border-color:rgba(140,90,255,0.4);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 35px rgba(140,90,255,0.18);}
 
-    /* PLATINUM 6 — special gold treatment (highest tier) */
-    .tier-card.t-plat6{background:linear-gradient(160deg,rgba(252,194,0,0.18) 0%,rgba(180,120,0,0.08) 40%,rgba(13,17,24,0.98) 65%);}
-    .tier-card.t-plat6 .tc-rank{color:var(--gold);}
-    .tier-card.t-plat6 .tc-reward{
-      color:var(--gold);
-      text-shadow:0 0 30px rgba(252,194,0,0.5),0 0 60px rgba(252,194,0,0.2);
+    /* DIAMOND — top tier */
+    .tier-card.t-diamond{background:linear-gradient(160deg,rgba(120,210,255,0.2) 0%,rgba(60,140,220,0.08) 40%,rgba(13,17,24,0.98) 65%);}
+    .tier-card.t-diamond .tc-rank{color:#8fdfff;}
+    .tier-card.t-diamond .tc-reward{
+      color:#bdf0ff;
+      text-shadow:0 0 30px rgba(140,220,255,0.5),0 0 60px rgba(140,220,255,0.2);
     }
-    .tier-card.t-plat6 .tc-glow{background:#c09000;}
-    .tier-card.t-plat6::after{background:linear-gradient(90deg,transparent,rgba(252,194,0,0.8),transparent);}
-    .tier-card.t-plat6:hover{border-color:rgba(252,194,0,0.45);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 40px rgba(252,194,0,0.22);}
+    .tier-card.t-diamond .tc-glow{background:#4fb8e8;}
+    .tier-card.t-diamond::after{background:linear-gradient(90deg,transparent,rgba(140,220,255,0.8),transparent);}
+    .tier-card.t-diamond:hover{border-color:rgba(140,220,255,0.45);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 40px rgba(140,220,255,0.22);}
     /* Crown badge for top tier */
-    .tier-card.t-plat6 .tc-crown{
+    .tier-card .tc-crown{
       position:absolute;top:12px;right:12px;
       font-size:.6rem;font-family:var(--font-head);font-weight:700;letter-spacing:1px;
       color:#000;background:var(--gold);
@@ -365,7 +373,7 @@
       <span class="rg-icon">💵</span>
       <div class="rg-text">
         <div class="rg-label">Welcome Bonus</div>
-        <div class="rg-val">$15 Free</div>
+        <div class="rg-val">$10 Free</div>
       </div>
     </div>
   </div>
@@ -378,7 +386,7 @@
       <span class="tc-icon">🥉</span>
       <div class="tc-rank">Bronze</div>
       <div class="tc-name">Tier 1</div>
-      <div class="tc-reward">$25</div>
+      <div class="tc-reward">$15</div>
       <div class="tc-per">per referral</div>
     </div>
     <div class="tier-card t-silver">
@@ -386,24 +394,56 @@
       <span class="tc-icon">🥈</span>
       <div class="tc-rank">Silver</div>
       <div class="tc-name">Tier 2</div>
-      <div class="tc-reward">$175</div>
+      <div class="tc-reward">$50</div>
+      <div class="tc-per">per referral</div>
+    </div>
+    <div class="tier-card t-gold">
+      <div class="tc-glow"></div>
+      <span class="tc-icon">🥇</span>
+      <div class="tc-rank">Gold</div>
+      <div class="tc-name">Tier 3</div>
+      <div class="tc-reward">$75</div>
+      <div class="tc-per">per referral</div>
+    </div>
+    <div class="tier-card t-plat">
+      <div class="tc-glow"></div>
+      <span class="tc-icon">💜</span>
+      <div class="tc-rank">Platinum 1</div>
+      <div class="tc-name">Tier 4</div>
+      <div class="tc-reward">$100</div>
+      <div class="tc-per">per referral</div>
+    </div>
+    <div class="tier-card t-plat">
+      <div class="tc-glow"></div>
+      <span class="tc-icon">💜</span>
+      <div class="tc-rank">Platinum 2</div>
+      <div class="tc-name">Tier 5</div>
+      <div class="tc-reward">$200</div>
+      <div class="tc-per">per referral</div>
+    </div>
+    <div class="tier-card t-plat">
+      <div class="tc-glow"></div>
+      <span class="tc-icon">💜</span>
+      <div class="tc-rank">Platinum 3</div>
+      <div class="tc-name">Tier 6</div>
+      <div class="tc-reward">$400</div>
       <div class="tc-per">per referral</div>
     </div>
     <div class="tier-card t-plat">
       <div class="tc-glow"></div>
       <span class="tc-icon">💰</span>
       <div class="tc-rank">Platinum 4</div>
-      <div class="tc-name">Tier 3</div>
+      <div class="tc-name">Tier 7</div>
       <div class="tc-reward">$800</div>
       <div class="tc-per">per referral</div>
     </div>
-    <div class="tier-card t-plat6">
+    <div class="tier-card t-diamond">
       <div class="tc-glow"></div>
       <span class="tc-crown">👑 TOP</span>
       <span class="tc-icon">💎</span>
-      <div class="tc-rank">Platinum 6</div>
-      <div class="tc-name">Tier 4</div>
-      <div class="tc-reward">$1,500</div>
+      <div class="tc-rank">Diamond 1</div>
+      <div class="tc-name">Tier 8</div>
+      <div class="tc-reward">$3,360</div>
       <div class="tc-per">per referral</div>
     </div>
   </div>
@@ -436,7 +476,7 @@
       <div class="ref-step-num">4</div>
       <div class="ref-step-text">
         <div class="hs-title">Get paid based on your VIP tier</div>
-        <div class="hs-desc">Once verified, you receive your payout based on your current VIP tier — from $25 at Bronze up to $1,500 at Platinum 6.</div>
+        <div class="hs-desc">Once verified, you receive your payout based on your current VIP tier — from $15 at Bronze up to $3,360 at Diamond 1.</div>
       </div>
     </div>
   </div>
