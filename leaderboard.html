@@ -975,23 +975,20 @@ window.addEventListener('pageshow',function(e){
   }
 });
 
-// Leaderboard ends at 12:00 AM (midnight) AEST on the LAST DAY of each month — confirmed by Jake
-// and matches the sheet's end_date_utc (e.g. "30-Jun-26 12:00 AM"). AEST = UTC+10, no daylight
-// saving in this window (Australia's DST runs Oct–Apr). Midnight AEST = 14:00 UTC the day before,
-// computed in UTC so every visitor worldwide sees the identical countdown to the same real instant.
-function monthEndAESTMidnightUTC(yearRef, monthRef){
+// Leaderboard resets at 12:00 AM UTC on the LAST DAY of each month — matches the
+// sheet's end_date_utc exactly (e.g. "30-Jun-26 12:00 AM" = June 30, 00:00 UTC).
+// No timezone conversion needed — the sheet already stores this value in UTC.
+function monthEndUTC(yearRef, monthRef){
   // Last calendar day of the given month (day 0 of next month, in UTC terms)
   const lastDay = new Date(Date.UTC(yearRef, monthRef+1, 0)).getUTCDate();
-  // Midnight AEST on that day = 14:00 UTC the PREVIOUS day (AEST is 10h ahead of UTC)
-  const naiveAESTMidnight = new Date(Date.UTC(yearRef, monthRef, lastDay, 0, 0, 0));
-  return new Date(naiveAESTMidnight.getTime() - 10*3600*1000);
+  return new Date(Date.UTC(yearRef, monthRef, lastDay, 0, 0, 0));
 }
 function getNextReset(){
   const now=new Date();
-  let end = monthEndAESTMidnightUTC(now.getUTCFullYear(), now.getUTCMonth());
+  let end = monthEndUTC(now.getUTCFullYear(), now.getUTCMonth());
   // If this month's reset has already passed, roll forward to next month's reset
   if(now >= end){
-    end = monthEndAESTMidnightUTC(now.getUTCFullYear(), now.getUTCMonth()+1);
+    end = monthEndUTC(now.getUTCFullYear(), now.getUTCMonth()+1);
   }
   return end;
 }
