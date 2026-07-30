@@ -975,17 +975,38 @@ window.addEventListener('pageshow',function(e){
   }
 });
 
-// Leaderboard resets at 12:00 AM UTC on the LAST DAY of each month — matches the
-// sheet's end_date_utc exactly (e.g. "30-Jun-26 12:00 AM" = June 30, 00:00 UTC).
-// No timezone conversion needed — the sheet already stores this value in UTC.
-// Jake's sheet auto-resets at 05:00 UTC on the last day of each month — when it rolls,
-// the current-month tab empties and its data moves to the past-month tab, which the
-// site's "Previous Month" view already reads. Countdown targets that same instant.
-const RESET_HOUR_UTC = 5;
+// Leaderboard resets at 12:00 NOON EASTERN on the LAST DAY of each month. When it rolls,
+// Jake's sheet empties the current-month tab and moves its data to the past-month tab,
+// which the site's "Previous Month" view already reads.
+//
+// Eastern Time shifts with daylight saving (EDT = UTC-4 in summer, EST = UTC-5 in winter),
+// so we resolve the real UTC instant via the IANA zone rather than hardcoding an offset —
+// that keeps it at noon Eastern year-round instead of drifting an hour each November.
+const RESET_HOUR_ET = 12; // noon
+const RESET_ZONE = 'America/New_York';
+
+// Given a wall-clock time in a named zone, return the matching UTC instant.
+function zonedWallTimeToUTC(year, month, day, hour, minute, timeZone){
+  const guess = Date.UTC(year, month, day, hour, minute, 0);
+  const dtf = new Intl.DateTimeFormat('en-US', {
+    timeZone, hour12:false,
+    year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', second:'2-digit'
+  });
+  const parts = dtf.formatToParts(new Date(guess));
+  const get = t => parseInt(parts.find(p => p.type === t).value, 10);
+  // hour12:false can yield "24" for midnight in some engines — normalise it
+  const asZone = Date.UTC(get('year'), get('month')-1, get('day'), get('hour') % 24, get('minute'), get('second'));
+  return new Date(guess - (asZone - guess)); // subtract the zone's offset at that instant
+}
+
 function monthEndUTC(yearRef, monthRef){
-  // Last calendar day of the given month (day 0 of next month, in UTC terms)
-  const lastDay = new Date(Date.UTC(yearRef, monthRef+1, 0)).getUTCDate();
-  return new Date(Date.UTC(yearRef, monthRef, lastDay, RESET_HOUR_UTC, 0, 0));
+  // Normalise so month 12 rolls into January of the next year
+  const y = yearRef + Math.floor(monthRef / 12);
+  const m = ((monthRef % 12) + 12) % 12;
+  // Last calendar day of that month (day 0 of the next month)
+  const lastDay = new Date(Date.UTC(y, m+1, 0)).getUTCDate();
+  return zonedWallTimeToUTC(y, m, lastDay, RESET_HOUR_ET, 0, RESET_ZONE);
 }
 function getNextReset(){
   const now=new Date();
