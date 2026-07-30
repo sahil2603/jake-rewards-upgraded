@@ -975,14 +975,14 @@ window.addEventListener('pageshow',function(e){
   }
 });
 
-// Leaderboard resets at 12:00 NOON EASTERN on the LAST DAY of each month. When it rolls,
+// Leaderboard resets at 10:00 AM EASTERN on the LAST DAY of each month. When it rolls,
 // Jake's sheet empties the current-month tab and moves its data to the past-month tab,
 // which the site's "Previous Month" view already reads.
 //
 // Eastern Time shifts with daylight saving (EDT = UTC-4 in summer, EST = UTC-5 in winter),
 // so we resolve the real UTC instant via the IANA zone rather than hardcoding an offset —
 // that keeps it at noon Eastern year-round instead of drifting an hour each November.
-const RESET_HOUR_ET = 12; // noon
+const RESET_HOUR_ET = 10; // 10:00 AM
 const RESET_ZONE = 'America/New_York';
 
 // Given a wall-clock time in a named zone, return the matching UTC instant.
