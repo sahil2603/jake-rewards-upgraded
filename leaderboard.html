@@ -901,6 +901,13 @@ async function loadLiveSheet(){
     const rows=parseCSV(text);
     if(!rows.length)throw new Error('empty');
     // Sheet columns: affiliate_name, campaign_code, user_name, wagered, rank, start_date_utc, end_date_utc
+    // The sheet's own end_date_utc is the authoritative reset time — read it directly
+    // instead of computing it, since it doesn't always land on the true calendar
+    // month-end (e.g. July showed "30-Jul-26" rather than the 31st).
+    if(rows[0] && rows[0]['end_date_utc']){
+      const parsed = parseSheetDateUTC(rows[0]['end_date_utc']);
+      if(parsed) _liveResetUTC = parsed;
+    }
     _liveData=rows.slice(0,DISPLAY_ROWS).map((r,i)=>({
       user: r['user_name']||r['username']||r['user']||('Player '+(i+1)),
       wagered: parseFloat((r['wagered']||r['wager']||'0').replace(/[$,]/g,''))||0,
@@ -975,15 +982,30 @@ window.addEventListener('pageshow',function(e){
   }
 });
 
-// Leaderboard resets at 12:00 AM UTC on the LAST DAY of each month — matches the
-// sheet's end_date_utc exactly (e.g. "30-Jun-26 12:00 AM" = June 30, 00:00 UTC).
-// No timezone conversion needed — the sheet already stores this value in UTC.
+// Leaderboard resets exactly when the sheet's own end_date_utc says it does — that's the
+// authoritative source (set by Jake's automation), so we read it directly off the sheet
+// once loaded instead of guessing calendar rules in JS. The calculated fallback below only
+// covers the brief window before the first fetch completes, or if the sheet is unreachable.
+let _liveResetUTC = null;
+function parseSheetDateUTC(str){
+  if(!str) return null;
+  const m = str.trim().match(/^(\d{1,2})-([A-Za-z]{3})-(\d{2,4})\s+(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if(!m) return null;
+  const months={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+  const monthIdx=months[m[2].toLowerCase()];
+  if(monthIdx===undefined) return null;
+  let year=parseInt(m[3],10); if(year<100) year+=2000;
+  let hour=parseInt(m[4],10)%12;
+  if(/pm/i.test(m[6])) hour+=12;
+  return new Date(Date.UTC(year, monthIdx, parseInt(m[1],10), hour, parseInt(m[5],10), 0));
+}
 function monthEndUTC(yearRef, monthRef){
   // Last calendar day of the given month (day 0 of next month, in UTC terms)
   const lastDay = new Date(Date.UTC(yearRef, monthRef+1, 0)).getUTCDate();
   return new Date(Date.UTC(yearRef, monthRef, lastDay, 0, 0, 0));
 }
 function getNextReset(){
+  if(_liveResetUTC) return _liveResetUTC;
   const now=new Date();
   let end = monthEndUTC(now.getUTCFullYear(), now.getUTCMonth());
   // If this month's reset has already passed, roll forward to next month's reset
