@@ -978,10 +978,14 @@ window.addEventListener('pageshow',function(e){
 // Leaderboard resets at 12:00 AM UTC on the LAST DAY of each month — matches the
 // sheet's end_date_utc exactly (e.g. "30-Jun-26 12:00 AM" = June 30, 00:00 UTC).
 // No timezone conversion needed — the sheet already stores this value in UTC.
+// Jake's sheet auto-resets at 05:00 UTC on the last day of each month — when it rolls,
+// the current-month tab empties and its data moves to the past-month tab, which the
+// site's "Previous Month" view already reads. Countdown targets that same instant.
+const RESET_HOUR_UTC = 5;
 function monthEndUTC(yearRef, monthRef){
   // Last calendar day of the given month (day 0 of next month, in UTC terms)
   const lastDay = new Date(Date.UTC(yearRef, monthRef+1, 0)).getUTCDate();
-  return new Date(Date.UTC(yearRef, monthRef, lastDay, 0, 0, 0));
+  return new Date(Date.UTC(yearRef, monthRef, lastDay, RESET_HOUR_UTC, 0, 0));
 }
 function getNextReset(){
   const now=new Date();
