@@ -490,7 +490,7 @@ function initHomePodium(){
   });
 }
 // Fetch live sheet data for homepage podium
-const HOME_SHEET_CSV='https://docs.google.com/spreadsheets/d/14Sr_hmd2CnwPJDrzndiXP1kP9VDF6gArjZQbRxFlBuQ/export?format=csv&gid=235680015';
+const HOME_SHEET_CSV='https://docs.google.com/spreadsheets/d/1sLYyMTfF0z-GATYGQxc3bzsDLWB-vHDpJ2omgCUxJAQ/export?format=csv&gid=1705855106';
 async function loadHomeLiveSheet(){
   try{
     const res=await fetch(HOME_SHEET_CSV);
@@ -811,7 +811,7 @@ document.querySelectorAll('.card-rain').forEach(initCardRain);
     var countEl=document.getElementById('hlb-count');
     if(!bar||!countEl) return;
     // Fetch the leaderboard CSV and count rows to get live player count
-    fetch('https://docs.google.com/spreadsheets/d/14Sr_hmd2CnwPJDrzndiXP1kP9VDF6gArjZQbRxFlBuQ/export?format=csv&gid=235680015')
+    fetch('https://docs.google.com/spreadsheets/d/1sLYyMTfF0z-GATYGQxc3bzsDLWB-vHDpJ2omgCUxJAQ/export?format=csv&gid=1705855106')
       .then(function(r){return r.text();})
       .then(function(csv){
         var rows=csv.trim().split('\n').length-1; // subtract header
