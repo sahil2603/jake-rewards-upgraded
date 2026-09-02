@@ -414,24 +414,182 @@
     </div>
   </div>
 
-  <!-- High Roller Bounty -->Bounty -->
+  <!-- High Roller Bounty -->
   <div class="refer-section-label">High Roller Bounty</div>
-  <div style="background:linear-gradient(135deg,rgba(252,194,0,0.12),rgba(160,80,0,0.08),rgba(13,17,24,0.97));border:1px solid rgba(252,194,0,0.3);border-radius:18px;padding:2rem 2rem;margin-bottom:2.5rem;position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(252,194,0,0.8),transparent);"></div>
-    <div style="display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;">
-      <div style="font-size:3rem;filter:drop-shadow(0 4px 12px rgba(252,194,0,0.4));">🎯</div>
-      <div style="flex:1;min-width:220px;">
-        <div style="font-family:var(--font-head);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);margin-bottom:.5rem;">Special Bonus</div>
-        <div style="font-family:var(--font-display);font-size:1.5rem;color:#fff;margin-bottom:.8rem;letter-spacing:.5px;">HIGHROLLER BOUNTY</div>
-        <p style="font-size:.88rem;color:var(--text2);line-height:1.7;margin-bottom:1rem;">Refer a friend that <strong style="color:#fff;">wagers $500,000+</strong> and <strong style="color:#fff;">deposits $10,000+</strong> in any given 30-day window and receive an additional <strong style="color:var(--gold);">$1,000</strong> on top of the standard rank-up bonuses.</p>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-          <div style="background:rgba(252,194,0,0.1);border:1px solid rgba(252,194,0,0.25);border-radius:10px;padding:.6rem 1.2rem;font-family:var(--font-head);font-size:.78rem;color:var(--gold);">💰 +$1,000 Extra</div>
-          <div style="background:rgba(252,194,0,0.06);border:1px solid rgba(252,194,0,0.15);border-radius:10px;padding:.6rem 1.2rem;font-family:var(--font-head);font-size:.78rem;color:var(--text2);">$500K wagered in 30 days</div>
-          <div style="background:rgba(252,194,0,0.06);border:1px solid rgba(252,194,0,0.15);border-radius:10px;padding:.6rem 1.2rem;font-family:var(--font-head);font-size:.78rem;color:var(--text2);">$10K deposited in 30 days</div>
+  <div class="hrb-card" id="hrbCard">
+    <!-- Animated top border beam -->
+    <div class="hrb-beam"></div>
+    <!-- Corner radial glow orb -->
+    <div class="hrb-orb hrb-orb-tl"></div>
+    <div class="hrb-orb hrb-orb-br"></div>
+    <!-- Shimmer sweep on hover -->
+    <div class="hrb-shimmer"></div>
+    <!-- Floating gold particles (JS-driven) -->
+    <canvas class="hrb-canvas" id="hrbCanvas"></canvas>
+
+    <div class="hrb-inner">
+      <div class="hrb-icon" id="hrbIcon">🎯</div>
+      <div class="hrb-content">
+        <div class="hrb-tag">⚡ Special Bonus</div>
+        <div class="hrb-title">HIGHROLLER BOUNTY</div>
+        <p class="hrb-desc">Refer a friend that <strong>wagers $500,000+</strong> and <strong>deposits $10,000+</strong> in any given 30-day window and receive an additional <strong class="hrb-amount">$1,000</strong> on top of the standard rank-up bonuses.</p>
+        <div class="hrb-badges">
+          <div class="hrb-badge hrb-badge-gold">💰 +$1,000 Extra</div>
+          <div class="hrb-badge hrb-badge-dim">📈 $500K wagered in 30 days</div>
+          <div class="hrb-badge hrb-badge-dim">💳 $10K deposited in 30 days</div>
         </div>
       </div>
     </div>
   </div>
+  <style>
+  .hrb-card{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,rgba(252,194,0,0.1) 0%,rgba(160,80,0,0.07) 40%,rgba(13,17,24,0.98) 70%);
+    border:1px solid rgba(252,194,0,0.28);
+    border-radius:20px;padding:2.2rem 2rem;margin-bottom:2.5rem;
+    cursor:default;
+    transition:transform .35s cubic-bezier(.22,1,.36,1),
+               box-shadow .35s cubic-bezier(.22,1,.36,1),
+               border-color .35s;
+    will-change:transform;
+  }
+  .hrb-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(252,194,0,0.6);
+    box-shadow:0 30px 70px -20px rgba(252,194,0,0.35),
+               0 0 0 1px rgba(252,194,0,0.15),
+               inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  /* Animated gold beam across the top */
+  .hrb-beam{
+    position:absolute;top:0;left:-100%;right:auto;
+    width:60%;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(252,194,0,0.9),transparent);
+    animation:hrbBeam 3s ease-in-out infinite;
+  }
+  @keyframes hrbBeam{
+    0%{left:-60%;opacity:0}
+    20%{opacity:1}
+    80%{opacity:1}
+    100%{left:160%;opacity:0}
+  }
+  /* Corner glow orbs */
+  .hrb-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(40px);}
+  .hrb-orb-tl{
+    top:-60px;left:-60px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(252,194,0,0.18),transparent 70%);
+    animation:hrbOrb 4s ease-in-out infinite;
+  }
+  .hrb-orb-br{
+    bottom:-60px;right:-40px;width:160px;height:160px;
+    background:radial-gradient(circle,rgba(252,140,0,0.12),transparent 70%);
+    animation:hrbOrb 4s ease-in-out infinite reverse;
+  }
+  @keyframes hrbOrb{
+    0%,100%{opacity:.6;transform:scale(1);}
+    50%{opacity:1;transform:scale(1.15);}
+  }
+  /* Shimmer sweep */
+  .hrb-shimmer{
+    position:absolute;top:0;left:-100%;width:50%;height:100%;
+    background:linear-gradient(105deg,transparent,rgba(255,255,255,0.04),transparent);
+    transition:left .6s ease;pointer-events:none;
+  }
+  .hrb-card:hover .hrb-shimmer{left:160%;}
+  /* Floating particles canvas */
+  .hrb-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.6;}
+  /* Inner layout */
+  .hrb-inner{position:relative;z-index:1;display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;}
+  .hrb-icon{
+    font-size:3.2rem;flex-shrink:0;
+    filter:drop-shadow(0 4px 16px rgba(252,194,0,0.5));
+    animation:hrbIconPulse 2.5s ease-in-out infinite;
+    transition:transform .3s cubic-bezier(.22,1,.36,1);
+  }
+  .hrb-card:hover .hrb-icon{transform:scale(1.15) rotate(-8deg);}
+  @keyframes hrbIconPulse{
+    0%,100%{filter:drop-shadow(0 4px 16px rgba(252,194,0,0.4));}
+    50%{filter:drop-shadow(0 4px 28px rgba(252,194,0,0.75)) drop-shadow(0 0 40px rgba(252,194,0,0.3));}
+  }
+  .hrb-content{flex:1;min-width:220px;}
+  .hrb-tag{
+    font-family:var(--font-head);font-size:.62rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);
+    margin-bottom:.5rem;opacity:.9;
+  }
+  .hrb-title{
+    font-family:var(--font-display);font-size:1.6rem;color:#fff;
+    margin-bottom:.8rem;letter-spacing:.5px;
+    text-shadow:0 0 30px rgba(252,194,0,0.2);
+  }
+  .hrb-desc{font-size:.88rem;color:var(--text2);line-height:1.75;margin-bottom:1.1rem;}
+  .hrb-desc strong{color:#fff;}
+  .hrb-amount{
+    color:var(--gold)!important;
+    text-shadow:0 0 14px rgba(252,194,0,0.5);
+    animation:hrbAmountPulse 2s ease-in-out infinite;
+  }
+  @keyframes hrbAmountPulse{
+    0%,100%{text-shadow:0 0 10px rgba(252,194,0,0.4);}
+    50%{text-shadow:0 0 22px rgba(252,194,0,0.8),0 0 40px rgba(252,194,0,0.3);}
+  }
+  .hrb-badges{display:flex;gap:.8rem;flex-wrap:wrap;}
+  .hrb-badge{
+    border-radius:10px;padding:.6rem 1.2rem;
+    font-family:var(--font-head);font-size:.78rem;font-weight:700;
+    transition:transform .25s,box-shadow .25s,border-color .25s,background .25s;
+    will-change:transform;
+  }
+  .hrb-badge:hover{transform:translateY(-3px);}
+  .hrb-badge-gold{
+    background:rgba(252,194,0,0.12);border:1px solid rgba(252,194,0,0.35);color:var(--gold);
+    animation:hrbBadgePulse 2.5s ease-in-out infinite;
+  }
+  .hrb-badge-gold:hover{background:rgba(252,194,0,0.2);box-shadow:0 8px 20px rgba(252,194,0,0.25);}
+  @keyframes hrbBadgePulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(252,194,0,0.3);}
+    50%{box-shadow:0 0 0 5px rgba(252,194,0,0);}
+  }
+  .hrb-badge-dim{
+    background:rgba(252,194,0,0.05);border:1px solid rgba(252,194,0,0.15);color:var(--text2);
+  }
+  .hrb-badge-dim:hover{background:rgba(252,194,0,0.1);border-color:rgba(252,194,0,0.3);color:#fff;}
+  </style>
+  <script>
+  (function(){
+    var card = document.getElementById('hrbCard');
+    var cv   = document.getElementById('hrbCanvas');
+    if(!card||!cv) return;
+    var ctx = cv.getContext('2d'), W, H, pts = [];
+    function resize(){
+      var r = card.getBoundingClientRect();
+      W = cv.width  = r.width;
+      H = cv.height = r.height;
+    }
+    resize();
+    new ResizeObserver(resize).observe(card);
+    function mkPt(){
+      return {x:Math.random()*W,y:Math.random()*H,
+              vx:(Math.random()-.5)*.4,vy:-.15-Math.random()*.35,
+              r:.8+Math.random()*1.4,a:.4+Math.random()*.5,life:0,
+              col:Math.random()>.4?'rgba(252,194,0,':'rgba(255,220,80,'};
+    }
+    for(var i=0;i<18;i++) pts.push(mkPt());
+    var t=0;
+    (function draw(){
+      ctx.clearRect(0,0,W,H); t++;
+      pts.forEach(function(p){
+        p.x+=p.vx; p.y+=p.vy; p.life+=.008;
+        if(p.life>=1) Object.assign(p,mkPt());
+        var a = p.a*Math.sin(p.life*Math.PI);
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);
+        ctx.fillStyle=p.col+a.toFixed(2)+')';ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    })();
+  })();
+  </script>
+
 
   <!-- How It Works -->
   <div class="refer-section-label">How it works</div>
