@@ -114,9 +114,10 @@ html.jm-leaving #jm-veil{animation:jmVeilIn .3s ease forwards}
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
   opacity:0;transition:opacity .5s}
 @media (hover:hover){ *:hover>.jm-beam{opacity:1;animation:jmBeam 2.4s linear infinite} }
-.jm-beam.jm-once{animation:jmBeamOnce 1.8s var(--jm-ease) .2s both}
+/* one steady lap on reveal (phones): linear so it doesn't whip round fast then crawl */
+.jm-beam.jm-once{animation:jmBeamOnce 2.6s linear .45s both}
 @keyframes jmBeam{to{--jm-a:360deg}}
-@keyframes jmBeamOnce{0%{opacity:0;--jm-a:0deg}15%{opacity:1}80%{opacity:1}100%{opacity:0;--jm-a:360deg}}
+@keyframes jmBeamOnce{0%{opacity:0;--jm-a:0deg}12%{opacity:1}85%{opacity:1}100%{opacity:0;--jm-a:360deg}}
 .rc-cyan,.bonus-card.giveaway,.tier-card.diamond,.tier-card.t-plat{--jm-bc:0,212,255}
 .rc-purple,.tier-card.obsidian,.refer-hero-card.purple{--jm-bc:176,107,255}
 .bonus-card.deposit-match{--jm-bc:0,220,110}
