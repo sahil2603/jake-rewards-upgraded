@@ -15,7 +15,7 @@
   <meta name="description" content="Choose your JakeRewards experience — $75,000 leaderboard, rank-up VIP rewards, or deposit bonuses and giveaways."/>
   <meta property="og:title" content="Rewards Hub — JakeRewards"/>
   <meta property="og:description" content="$75,000 leaderboard, rank-up VIP rewards, and bonuses. Use code JAKE on Stake."/>
-  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:type" content="website"/>
@@ -23,10 +23,11 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Rewards Hub — JakeRewards"/>
   <meta name="twitter:description" content="$75,000 leaderboard, rank-up VIP rewards, and bonuses. Use code JAKE on Stake."/>
-  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="motion.css?v=9"/>
   <style>
     .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.6rem;max-width:1040px;margin:0 auto;padding:2rem 2.5rem 6rem;}
     .hub-card{position:relative;overflow:hidden;background:linear-gradient(165deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012) 60%);border:1px solid var(--border);border-radius:20px;padding:2.6rem 2rem 2.2rem;display:flex;flex-direction:column;gap:.9rem;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;opacity:0;transform:translateY(22px);}
@@ -43,8 +44,111 @@
     .hub-card-desc{position:relative;z-index:1;font-size:.86rem;color:var(--text2);line-height:1.65;flex:1;}
     .hub-card .reward-link{position:relative;z-index:1;}
   </style>
+<style>
+/* ===== Rewards Hub v2 ===== */
+.rh-strip{position:relative;z-index:1;display:inline-flex;align-items:center;gap:1.6rem;margin:2rem auto 0;padding:1rem 1.8rem;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid rgba(252,194,0,.18);box-shadow:0 20px 50px -30px rgba(252,194,0,.35)}
+.rh-strip i{width:1px;height:38px;background:linear-gradient(transparent,rgba(252,194,0,.35),transparent)}
+.rh-stat{display:flex;flex-direction:column;align-items:center}
+.rh-stat b{font-family:var(--font-display);font-size:2rem;letter-spacing:1.5px;line-height:1;color:var(--gold);text-shadow:0 0 22px rgba(252,194,0,.4)}
+.rh-stat span{margin-top:5px;font-family:var(--font-head);font-size:.6rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.rh-code{position:relative;z-index:1;display:flex;align-items:center;gap:.9rem;margin:1.2rem auto 0;padding:.55rem .6rem .55rem 1.1rem;border-radius:12px;background:rgba(10,12,18,.7);border:1px dashed rgba(252,194,0,.45);color:#fff;cursor:pointer;font-family:var(--font-head);transition:border-color .3s,box-shadow .3s}
+.rh-code:hover{border-style:solid;box-shadow:0 12px 30px -14px rgba(252,194,0,.6)}
+.rh-code-k{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.rh-code b{font-family:var(--font-display);font-size:1.5rem;letter-spacing:5px;color:var(--gold);line-height:1}
+.rh-code-c{font-size:.72rem;font-weight:700;background:var(--gold);color:#000;padding:.4rem .8rem;border-radius:8px;transition:background .25s}
+.rh-code.done .rh-code-c{background:#1ed98a}
+
+.rh-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;max-width:1180px;margin:0 auto;padding:1.5rem 2.5rem 3rem}
+.rh-card{--c:252,194,0;position:relative;display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:linear-gradient(170deg,rgba(var(--c),.10),rgba(13,17,24,.98) 46%);border:1px solid rgba(var(--c),.22);box-shadow:0 30px 60px -40px rgba(0,0,0,.9);transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .35s,box-shadow .45s;text-decoration:none}
+.rh-card:hover{transform:translateY(-10px);border-color:rgba(var(--c),.55);box-shadow:0 40px 80px -40px rgba(var(--c),.55),0 0 0 1px rgba(var(--c),.15)}
+.rh-purple{--c:176,107,255}.rh-cyan{--c:0,212,255}
+.rh-num{position:absolute;top:14px;right:18px;z-index:3;font-family:var(--font-display);font-size:2.6rem;line-height:1;letter-spacing:2px;color:transparent;-webkit-text-stroke:1px rgba(var(--c),.45);transition:color .4s}
+.rh-card:hover .rh-num{color:rgba(var(--c),.18)}
+
+/* art panels */
+.rh-art{position:relative;height:200px;overflow:hidden;border-bottom:1px solid rgba(var(--c),.15);background:radial-gradient(ellipse 70% 90% at 50% 110%,rgba(var(--c),.28),transparent 70%),radial-gradient(circle at 50% 40%,rgba(var(--c),.06),transparent 60%)}
+.rh-art::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(var(--c),.07) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--c),.07) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse at 50% 60%,#000,transparent 72%);mask-image:radial-gradient(ellipse at 50% 60%,#000,transparent 72%);pointer-events:none}
+
+/* 01 podium */
+.rh-rays{position:absolute;left:50%;top:62%;width:420px;height:420px;margin:-210px 0 0 -210px;background:repeating-conic-gradient(from 0deg,rgba(252,194,0,.16) 0 5deg,transparent 5deg 14deg);-webkit-mask:radial-gradient(circle,#000 10%,transparent 62%);mask:radial-gradient(circle,#000 10%,transparent 62%);animation:rhSpin 24s linear infinite}
+@keyframes rhSpin{to{transform:rotate(360deg)}}
+.rh-pod{position:absolute;left:50%;bottom:0;width:190px;margin-left:-95px;display:flex;align-items:flex-end;gap:8px;z-index:1}
+.rh-pod>div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.rh-pod em{font-style:normal;font:800 .72rem var(--font-head);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#111;background:#dfe5ec}
+.rh-pod .p3 em{background:#e0965c}.rh-pod .p1 em{background:none;font-size:1.3rem;animation:rhCrown 2.8s ease-in-out infinite}
+@keyframes rhCrown{50%{translate:0 -5px;rotate:-6deg}}
+.rh-pod span{display:block;width:100%;border-radius:10px 10px 0 0;transform-origin:bottom;transform:scaleY(.05);transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.rh-pod .p1 span{height:92px;background:linear-gradient(180deg,#FFD740,#b88a00 90%);box-shadow:0 0 30px rgba(252,194,0,.45)}
+.rh-pod .p2 span{height:64px;background:linear-gradient(180deg,#e7edf3,#6f7c89)}
+.rh-pod .p3 span{height:46px;background:linear-gradient(180deg,#ef9d5f,#7a4020)}
+.rh-card.rh-in .rh-pod span{transform:none}
+.rh-card.rh-in .rh-pod .p2 span{transition-delay:.15s}.rh-card.rh-in .rh-pod .p1 span{transition-delay:.3s}.rh-card.rh-in .rh-pod .p3 span{transition-delay:.45s}
+.rh-art-big{position:absolute;left:18px;top:16px;z-index:2;font-family:var(--font-display);font-size:1.5rem;letter-spacing:2px;color:var(--gold);text-shadow:0 0 18px rgba(252,194,0,.5)}
+
+/* 02 VIP ladder: tiers scroll upward */
+.rh-ladder{position:absolute;inset:14px 22% 14px 22%;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+.rh-ladder-track{display:flex;flex-direction:column;gap:8px;animation:rhClimb 14s linear infinite}
+@keyframes rhClimb{to{transform:translateY(-50%)}}
+.rh-ladder-track span{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:.45rem .8rem;border-radius:10px;font:700 .72rem var(--font-head);letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.rh-ladder-track b{font-family:var(--font-display);font-weight:400;font-size:1rem;letter-spacing:1px}
+.t-br b{color:#e8a24a}.t-si b{color:#d8e4f0}.t-go b{color:#FCC200}.t-pl b{color:#bfe3ff}.t-di b{color:#96dcff}
+.t-ob{background:linear-gradient(90deg,rgba(144,64,224,.3),rgba(144,64,224,.08))!important;border-color:rgba(176,107,255,.5)!important}.t-ob b{color:#d0a0ff}
+.rh-crown{position:absolute;right:9%;top:50%;margin-top:-22px;font-size:2rem;filter:drop-shadow(0 6px 14px rgba(176,107,255,.6));animation:rhCrown 3.2s ease-in-out infinite}
+
+/* 03 gift + coins */
+.rh-gift{position:absolute;left:50%;top:50%;font-size:4.2rem;translate:-50% -46%;filter:drop-shadow(0 14px 22px rgba(0,0,0,.5)) drop-shadow(0 0 24px rgba(0,212,255,.3));animation:rhGift 3s ease-in-out infinite}
+@keyframes rhGift{0%,100%{rotate:-5deg;scale:1}50%{rotate:5deg;scale:1.06}}
+.rh-coin{position:absolute;bottom:-20px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:800 .8rem var(--font-head);color:#6b4b00;background:radial-gradient(circle at 35% 30%,#fff3b0,#FCC200 55%,#b88400);box-shadow:0 4px 10px rgba(0,0,0,.4);animation:rhCoin 4.2s ease-in infinite}
+.rh-coin.c1{left:18%;animation-delay:-.3s}.rh-coin.c2{left:34%;animation-delay:-2.2s;scale:.8}.rh-coin.c3{left:66%;animation-delay:-1.1s}.rh-coin.c4{left:82%;animation-delay:-3.3s;scale:.7}
+@keyframes rhCoin{0%{transform:translateY(0) rotateY(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(-230px) rotateY(720deg);opacity:0}}
+.rh-chip{position:absolute;z-index:2;font-family:var(--font-display);font-size:1.05rem;letter-spacing:1.5px;padding:.3rem .7rem;border-radius:9px;animation:rhFloat 4s ease-in-out infinite}
+.rh-chip.k1{left:10%;top:18%;color:#1ed98a;background:rgba(0,220,110,.12);border:1px solid rgba(0,220,110,.35);rotate:-6deg}
+.rh-chip.k2{right:9%;bottom:18%;color:var(--accent);background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.35);rotate:5deg;animation-delay:-2s}
+@keyframes rhFloat{50%{translate:0 -8px}}
+
+/* body */
+.rh-body{position:relative;z-index:1;display:flex;flex-direction:column;flex:1;padding:1.5rem 1.7rem 1.7rem}
+.rh-tag{font:800 .62rem var(--font-head);letter-spacing:2.6px;text-transform:uppercase;color:rgb(var(--c,252,194,0))}
+.rh-title{font-family:var(--font-display);font-weight:400;font-size:2rem;letter-spacing:2px;line-height:1.05;color:#fff;margin:.45rem 0 .6rem}
+.rh-desc{font-size:.86rem;color:var(--text2);line-height:1.65;margin-bottom:1.1rem}
+.rh-facts{list-style:none;display:grid;gap:.5rem;margin:0 0 1.4rem;padding:0}
+.rh-facts li{position:relative;padding-left:1.5rem;font-size:.84rem;color:rgba(255,255,255,.78)}
+.rh-facts li::before{content:"";position:absolute;left:0;top:.28em;width:14px;height:14px;border-radius:50%;background:rgba(var(--c),.16);border:1px solid rgba(var(--c),.5);box-shadow:inset 0 0 0 3px rgba(13,17,24,1),inset 0 0 0 7px rgba(var(--c),.9)}
+.rh-facts b{color:#fff}
+.rh-cta{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1rem;border-radius:12px;font:700 .86rem var(--font-head);letter-spacing:.4px;color:#fff;background:rgba(var(--c),.1);border:1px solid rgba(var(--c),.35);transition:background .35s,color .35s,box-shadow .35s}
+.rh-cta em{font-style:normal;transition:translate .35s cubic-bezier(.16,1,.3,1)}
+.rh-card:hover .rh-cta{background:rgb(var(--c));color:#0a0a0a;box-shadow:0 12px 30px -12px rgba(var(--c),.8)}
+.rh-card:hover .rh-cta em{translate:5px 0}
+
+/* entrance */
+.rh-card{opacity:0;translate:0 40px}
+.rh-card.rh-in{opacity:1;translate:0 0;transition:opacity .9s cubic-bezier(.16,1,.3,1) var(--rd,0s),translate 1s cubic-bezier(.16,1,.3,1) var(--rd,0s),transform .5s cubic-bezier(.16,1,.3,1),border-color .35s,box-shadow .45s}
+
+/* start strip */
+.rh-start{position:relative;z-index:1;max-width:1100px;margin:0 auto 6rem;padding:2rem 2.4rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;border-radius:22px;background:linear-gradient(120deg,rgba(252,194,0,.12),rgba(13,17,24,.95) 55%);border:1px solid rgba(252,194,0,.25);overflow:hidden}
+.rh-start::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,236,160,.12) 50%,transparent 65%);translate:-100% 0;animation:rhSweep 5s ease-in-out infinite;pointer-events:none}
+@keyframes rhSweep{60%,100%{translate:100% 0}}
+.rh-start h3{font-family:var(--font-display);font-weight:400;font-size:2rem;letter-spacing:2px;color:#fff;margin:.3rem 0 .4rem}
+.rh-start p{color:var(--text2);font-size:.9rem;margin:0}
+.rh-start p b{color:var(--gold)}
+.rh-start-btns{display:flex;gap:.8rem;flex-wrap:wrap}
+
+@media (max-width:980px){.rh-grid{grid-template-columns:1fr;max-width:560px}}
+@media (max-width:560px){
+  .rh-strip{gap:.8rem;padding:.8rem 1rem;width:100%;justify-content:space-around}
+  .rh-stat b{font-size:1.5rem}.rh-stat span{font-size:.5rem;letter-spacing:1px}
+  .rh-grid{padding:1rem 1rem 2rem;gap:1.1rem}
+  .rh-art{height:170px}
+  .rh-title{font-size:1.75rem}
+  .rh-start{margin:0 1rem 5rem;padding:1.5rem 1.3rem;text-align:center;justify-content:center}
+  .rh-start-btns{width:100%}.rh-start-btns a{flex:1;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){.rh-card{opacity:1;translate:none}.rh-rays,.rh-ladder-track,.rh-coin,.rh-gift,.rh-chip,.rh-crown,.rh-start::before{animation:none!important}.rh-pod span{transform:none}}
+</style>
+
 </head>
 <body>
+<div id="jm-veil" aria-hidden="true"></div>
 <div id="scroll-bar"></div>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
@@ -81,30 +185,113 @@
   <div class="section-tag">All Rewards</div>
   <h1>REWARDS HUB</h1>
   <p>Pick the reward system you want to explore. Everything is free, everything is real.</p>
+  <div class="rh-strip">
+    <div class="rh-stat"><b>$75K</b><span>Monthly leaderboard</span></div>
+    <i></i>
+    <div class="rh-stat"><b>$1,000</b><span>Daily giveaway</span></div>
+    <i></i>
+    <div class="rh-stat"><b>$500K</b><span>Top rank-up reward</span></div>
+  </div>
+  <button type="button" class="rh-code" onclick="rhCopy(this)" aria-label="Copy code JAKE"><span class="rh-code-k">Code</span><b>JAKE</b><span class="rh-code-c">Copy Code</span></button>
 </div>
 
-<div class="hub-grid">
-  <a href="leaderboard.html" class="hub-card">
-    <div class="hub-icon-wrap"><span class="hub-icon">🏆</span></div>
-    <div class="hub-card-tag">Monthly Grind</div>
-    <div class="hub-card-title">$75,000 LEADERBOARD</div>
-    <div class="hub-card-desc">See the full hybrid leaderboard, podium, prizes and rules for Jake's $75,000 monthly race. Top grinders compete for a massive prize pool.</div>
-    <div class="reward-link">Open Leaderboard →</div>
+<div class="rh-grid">
+  <!-- 01 · LEADERBOARD -->
+  <a href="leaderboard.html" class="rh-card rh-gold">
+    <span class="rh-num">01</span>
+    <div class="rh-art rh-art-lb" aria-hidden="true">
+      <div class="rh-rays"></div>
+      <div class="rh-pod">
+        <div class="p2"><em>2</em><span></span></div>
+        <div class="p1"><em>👑</em><span></span></div>
+        <div class="p3"><em>3</em><span></span></div>
+      </div>
+      <div class="rh-art-big">$75,000</div>
+    </div>
+    <div class="rh-body">
+      <div class="rh-tag">Monthly Grind</div>
+      <h3 class="rh-title">$75,000 Leaderboard</h3>
+      <p class="rh-desc">See the full hybrid leaderboard, podium, prizes and rules for Jake's $75,000 monthly race. Top grinders compete for a massive prize pool.</p>
+      <ul class="rh-facts">
+        <li><b>$20,000</b> for 1st place</li>
+        <li><b>100</b> paid places</li>
+        <li>Resets every month</li>
+      </ul>
+      <span class="rh-cta">Open Leaderboard <em>→</em></span>
+    </div>
   </a>
-  <a href="rankrewards.html" class="hub-card">
-    <div class="hub-icon-wrap"><span class="hub-icon">👑</span></div>
-    <div class="hub-card-tag">VIP Ladder</div>
-    <div class="hub-card-title">RANK-UP REWARDS</div>
-    <div class="hub-card-desc">View one-time cash bonuses for every Stake VIP rank from Bronze ($25) all the way up to Obsidian ($650,000). Hit a rank, claim your cash.</div>
-    <div class="reward-link">View VIP Payouts →</div>
+
+  <!-- 02 · RANK-UP -->
+  <a href="rankrewards.html" class="rh-card rh-purple">
+    <span class="rh-num">02</span>
+    <div class="rh-art rh-art-vip" aria-hidden="true">
+      <div class="rh-ladder">
+        <div class="rh-ladder-track">
+          <span class="t-br">Bronze <b>$30</b></span><span class="t-si">Silver <b>$60</b></span><span class="t-go">Gold <b>$110</b></span><span class="t-pl">Platinum I <b>$225</b></span><span class="t-pl">Platinum VI <b>$6,400</b></span><span class="t-di">Diamond I <b>$12,800</b></span><span class="t-di">Diamond V <b>$204,800</b></span><span class="t-ob">Obsidian <b>$500,000</b></span>
+          <span class="t-br">Bronze <b>$30</b></span><span class="t-si">Silver <b>$60</b></span><span class="t-go">Gold <b>$110</b></span><span class="t-pl">Platinum I <b>$225</b></span>
+        </div>
+      </div>
+      <div class="rh-crown">👑</div>
+    </div>
+    <div class="rh-body">
+      <div class="rh-tag">VIP Ladder</div>
+      <h3 class="rh-title">Rank-Up Rewards</h3>
+      <p class="rh-desc">View one-time cash bonuses for every Stake VIP rank from Bronze ($30) all the way up to Obsidian ($500,000). Hit a rank, claim your cash.</p>
+      <ul class="rh-facts">
+        <li><b>15</b> VIP ranks paid</li>
+        <li>Paid <b>on top</b> of Stake's reward</li>
+        <li>Claim with a Discord ticket</li>
+      </ul>
+      <span class="rh-cta">View VIP Payouts <em>→</em></span>
+    </div>
   </a>
-  <a href="bonuses.html" class="hub-card">
-    <div class="hub-icon-wrap"><span class="hub-icon">🎁</span></div>
-    <div class="hub-card-tag">Boosts</div>
-    <div class="hub-card-title">BONUSES & GIVEAWAYS</div>
-    <div class="hub-card-desc">Daily $500 giveaway for active players, a 200% deposit match, and help accessing Stake. All delivered through Discord.</div>
-    <div class="reward-link">View Bonuses →</div>
+
+  <!-- 03 · BONUSES -->
+  <a href="bonuses.html" class="rh-card rh-cyan">
+    <span class="rh-num">03</span>
+    <div class="rh-art rh-art-gift" aria-hidden="true">
+      <div class="rh-gift">🎁</div>
+      <span class="rh-coin c1">$</span><span class="rh-coin c2">$</span><span class="rh-coin c3">$</span><span class="rh-coin c4">$</span>
+      <div class="rh-chip k1">200% MATCH</div>
+      <div class="rh-chip k2">$1,000 / DAY</div>
+    </div>
+    <div class="rh-body">
+      <div class="rh-tag">Boosts</div>
+      <h3 class="rh-title">Bonuses &amp; Giveaways</h3>
+      <p class="rh-desc">Daily $1,000 giveaway for active players, a 200% deposit match, and help accessing Stake. All delivered through Discord.</p>
+      <ul class="rh-facts">
+        <li><b>5 winners</b> of $200, paid daily</li>
+        <li><b>200%</b> deposit match</li>
+        <li>Help accessing Stake</li>
+      </ul>
+      <span class="rh-cta">View Bonuses <em>→</em></span>
+    </div>
   </a>
+</div>
+
+<div class="vt-wrap">
+<div class="vt-soon">
+  <span class="vt-sweep" aria-hidden="true"></span>
+  <span class="vt-ico" aria-hidden="true"><em>⇄</em><i>🔒</i></span>
+  <div class="vt-copy">
+    <span class="vt-tag"><i></i>Coming soon</span>
+    <b>VIP TRANSFER PROGRAM</b>
+    <p>Jake's VIP Transfer Program is on the way. Keep an eye on the Discord for the launch.</p>
+  </div>
+  <a class="vt-cta" href="https://discord.com/invite/jakethedegen" target="_blank" rel="noopener">Watch Discord <span>→</span></a>
+</div>
+</div>
+
+<div class="rh-start">
+  <div class="rh-start-txt">
+    <div class="rh-tag">New here?</div>
+    <h3>Start in two steps</h3>
+    <p>Sign up on Stake with code <b>JAKE</b>, then join the Discord to claim everything above.</p>
+  </div>
+  <div class="rh-start-btns">
+    <a href="https://stake.com/?c=JAKE" target="_blank" rel="noopener" class="btn-primary">Join with code JAKE</a>
+    <a href="https://discord.com/invite/jakethedegen" target="_blank" rel="noopener" class="btn-ghost">Join the Discord</a>
+  </div>
 </div>
 
 <footer class="footer">
@@ -242,5 +429,21 @@ document.querySelectorAll('.hub-card').forEach(el=>obs.observe(el));
   }
 })();
 </script>
+<script>
+/* Rewards Hub v2: staggered card entrance, podium rise, code copy */
+function rhCopy(btn){
+  try{ navigator.clipboard && navigator.clipboard.writeText('JAKE'); }catch(e){}
+  var c = btn.querySelector('.rh-code-c'); btn.classList.add('done'); c.textContent = 'Copied ✓';
+  setTimeout(function(){ btn.classList.remove('done'); c.textContent = 'Copy Code'; }, 1600);
+}
+(function(){
+  var cards = [].slice.call(document.querySelectorAll('.rh-card'));
+  cards.forEach(function(c, i){ c.style.setProperty('--rd', (i * 0.14) + 's'); });
+  if(!('IntersectionObserver' in window)){ cards.forEach(function(c){ c.classList.add('rh-in'); }); return; }
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('rh-in'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+  cards.forEach(function(c){ io.observe(c); });
+})();
+</script>
+<script src="motion.js?v=9"></script>
 </body>
 </html>

@@ -12,10 +12,10 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rank-Up Rewards — JakeRewards</title>
-  <meta name="description" content="Hit every Stake VIP rank under code JAKE and claim a one-time cash bonus. Bronze $50 all the way to Obsidian $650,000."/>
+  <meta name="description" content="Hit every Stake VIP rank under code JAKE and claim a one-time cash bonus. Bronze $30 all the way to Obsidian $500,000."/>
   <meta property="og:title" content="Rank-Up Rewards — JakeRewards"/>
   <meta property="og:description" content="Hit every Stake VIP rank under code JAKE and claim a one-time cash bonus."/>
-  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:type" content="website"/>
@@ -23,10 +23,11 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Rank-Up Rewards — JakeRewards"/>
   <meta name="twitter:description" content="Hit every Stake VIP rank under code JAKE and claim a one-time cash bonus."/>
-  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="motion.css?v=9"/>
   <style>
     .tiers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:1100px;margin:0 auto;}
     .tier-card{position:relative;overflow:hidden;background:linear-gradient(165deg,rgba(255,255,255,0.045),rgba(255,255,255,0.01) 60%);border:1px solid var(--border);border-radius:18px;padding:1.8rem 1.2rem 1.5rem;text-align:center;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s;opacity:0;transform:translateY(16px);}
@@ -94,8 +95,85 @@
     .rr-table td,.rr-table th{padding:.6rem .4rem;font-size:.75rem;}
   }
   </style>
+<style>
+/* ===== Rank-Up v2: climb rail + tier polish ===== */
+.jm-rail{position:relative;max-width:1100px;margin:0 auto 2.4rem;padding:1.6rem 2rem 1.5rem;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.07)}
+.jm-rail-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.3rem;font:800 .62rem var(--font-head);letter-spacing:2.4px;text-transform:uppercase;color:var(--gold)}
+.jm-rail-head span{color:var(--muted);letter-spacing:1.2px}
+.jm-rail-track{position:relative;height:4px;margin:0 9px;border-radius:4px;background:rgba(255,255,255,.08)}
+.jm-rail-fill{position:absolute;inset:0;border-radius:inherit;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#e8a24a,#d8e4f0 14%,#FCC200 20%,#20c0d8 45%,#96dcff 80%,#9040e0);box-shadow:0 0 14px rgba(252,194,0,.5);transition:transform 2.6s cubic-bezier(.45,0,.2,1)}
+.jm-rail.jm-go .jm-rail-fill{transform:scaleX(1)}
+.jm-rail-nodes{position:absolute;left:0;right:0;top:50%;height:0}
+.jm-node{position:absolute;top:0;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:2px solid #0d1117;background:var(--nc);box-shadow:0 0 0 2px rgba(255,255,255,.08);cursor:pointer;scale:.4;opacity:.3;transition:scale .5s cubic-bezier(.2,1.6,.4,1),opacity .4s,box-shadow .3s;transition-delay:var(--nd)}
+.jm-rail.jm-go .jm-node{scale:1;opacity:1}
+.jm-node:hover,.jm-node:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.2),0 0 18px var(--nc);scale:1.3;transition-delay:0s;outline:none}
+.jm-node.top{width:26px;height:26px;margin:-13px 0 0 -13px;box-shadow:0 0 0 3px rgba(144,64,224,.35),0 0 24px rgba(144,64,224,.8);animation:jmTopPulse 2.2s ease-in-out infinite}
+@keyframes jmTopPulse{50%{box-shadow:0 0 0 7px rgba(144,64,224,0),0 0 30px rgba(176,107,255,.9)}}
+.jm-node-tip{position:absolute;bottom:calc(100% + 12px);left:50%;translate:-50% 6px;white-space:nowrap;padding:.35rem .6rem;border-radius:8px;background:#0d1117;border:1px solid rgba(255,255,255,.14);font:700 .7rem var(--font-head);color:#fff;opacity:0;pointer-events:none;transition:opacity .2s,translate .25s}
+.jm-node-tip b{font-family:var(--font-display);font-weight:400;font-size:.95rem;letter-spacing:1px;color:var(--gold);margin-left:.35rem}
+.jm-node:hover .jm-node-tip,.jm-node:focus-visible .jm-node-tip{opacity:1;translate:-50% 0}
+.jm-node-tip.r{left:auto;right:-6px;translate:0 6px}.jm-node-tip.l{left:-6px;translate:0 6px}
+.jm-node:hover .jm-node-tip.r,.jm-node:hover .jm-node-tip.l,.jm-node:focus-visible .jm-node-tip.r,.jm-node:focus-visible .jm-node-tip.l{translate:0 0}
+
+.jm-rail-labels{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem 1rem;margin-top:1.5rem;padding:0 2px}
+.jm-rail-labels span{display:inline-flex;align-items:center;gap:.45rem;font:800 .6rem var(--font-head);letter-spacing:1.4px;text-transform:uppercase;color:var(--lc)}
+.jm-rail-labels span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lc);box-shadow:0 0 8px var(--lc)}
+.tier-card.jm-flash{animation:jmFlash 1.4s ease}
+@keyframes jmFlash{25%{box-shadow:0 0 0 2px rgba(252,194,0,.9),0 0 40px rgba(252,194,0,.5)}}
+/* icons turn in 3D on hover; the top tier gets a permanent light ring + ribbon */
+.tier-icon svg{transition:rotate .9s cubic-bezier(.16,1,.3,1)}
+.tier-card:hover .tier-icon svg{rotate:y 360deg}
+.tier-card.obsidian>.jm-beam{opacity:1!important;animation:jmBeam 3s linear infinite!important}
+.tier-card.obsidian{box-shadow:0 0 40px -12px rgba(144,64,224,.6)}
+.jm-ribbon{position:absolute;top:10px;left:50%;translate:-50% 0;border-radius:999px;padding:.22rem .7rem;font:800 .5rem var(--font-head);letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#6b21d8,#b06bff);box-shadow:0 4px 12px rgba(144,64,224,.6);z-index:3}
+@media (max-width:560px){
+  .jm-rail{margin:0 0 1.6rem;padding:1.2rem .9rem 2.3rem}
+  .jm-rail-track{margin:0 7px}
+  .jm-node{width:12px;height:12px;margin:-6px 0 0 -6px;border-width:1.5px}
+  .jm-node.top{width:18px;height:18px;margin:-9px 0 0 -9px}
+  .jm-rail-labels{justify-content:center;gap:.5rem .9rem;margin-top:1.2rem}.jm-rail-labels span{font-size:.5rem;letter-spacing:.8px}
+  .jm-rail-head{font-size:.55rem;letter-spacing:1.6px}
+  .jm-rail-head span{display:none}
+}
+@media (prefers-reduced-motion:reduce){.jm-rail-fill{transform:none}.jm-node{scale:1;opacity:1}.jm-node.top{animation:none}}
+</style>
+<script>
+/* Climb rail: built from the tier cards themselves, so amounts always match the page */
+(function(){
+  function build(){
+    var grid=document.querySelector('.tiers-grid'); if(!grid) return;
+    var cards=[].slice.call(grid.querySelectorAll('.tier-card')); if(!cards.length) return;
+    var COL={bronze:'#e8a24a',silver:'#d8e4f0',gold:'#FCC200',plat:'#20c0d8',diamond:'#96dcff',obsidian:'#b06bff'};
+    var rail=document.createElement('div'); rail.className='jm-rail';
+    rail.innerHTML='<div class="jm-rail-head">Your climb<span>Tap a step to jump to it</span></div><div class="jm-rail-track"><div class="jm-rail-fill"></div><div class="jm-rail-nodes"></div></div><div class="jm-rail-labels"></div>';
+    var nodes=rail.querySelector('.jm-rail-nodes'), labels=rail.querySelector('.jm-rail-labels'), seen={};
+    cards.forEach(function(c,i){
+      var kind=['bronze','silver','gold','plat','diamond','obsidian'].filter(function(k){return c.classList.contains(k);})[0]||'gold';
+      var name=(c.querySelector('.tier-name')||{}).textContent||'', amt=(c.querySelector('.tier-reward')||{}).textContent||'';
+      var pct=cards.length>1?i/(cards.length-1)*100:0;
+      var n=document.createElement('button'); n.type='button'; n.className='jm-node'+(i===cards.length-1?' top':'');
+      n.style.left=pct+'%'; n.style.setProperty('--nc',COL[kind]); n.style.setProperty('--nd',(0.25+i*0.15)+'s');
+      n.setAttribute('aria-label',name+' '+amt);
+      n.innerHTML='<span class="jm-node-tip'+(pct>80?' r':pct<20?' l':'')+'">'+name.replace(/ VIP$/,'')+'<b>'+amt+'</b></span>';
+      n.addEventListener('click',function(){
+        if(window.jmLenis) jmLenis.scrollTo(c,{offset:-160,duration:1.2}); else c.scrollIntoView({behavior:'smooth',block:'center'});
+        c.classList.remove('jm-flash'); void c.offsetWidth; c.classList.add('jm-flash');
+      });
+      nodes.appendChild(n);
+      if(!seen[kind]){ seen[kind]=1; var l=document.createElement('span'); l.className='k-'+kind; l.style.setProperty('--lc',COL[kind]); l.textContent={bronze:'Bronze',silver:'Silver',gold:'Gold',plat:'Platinum',diamond:'Diamond',obsidian:'Obsidian'}[kind]; labels.appendChild(l); }
+    });
+    grid.parentNode.insertBefore(rail,grid);
+    var ob=grid.querySelector('.tier-card.obsidian'); if(ob){ var r=document.createElement('span'); r.className='jm-ribbon'; r.textContent='Top tier'; ob.appendChild(r); }
+    if(!('IntersectionObserver' in window)){rail.classList.add('jm-go');return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){rail.classList.add('jm-go');io.disconnect();}});},{threshold:.5});
+    io.observe(rail);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build); else build();
+})();
+</script>
 </head>
 <body>
+<div id="jm-veil" aria-hidden="true"></div>
 <div id="scroll-bar"></div>
 <nav class="nav">
   <a href="index.html" class="nav-logo">
@@ -133,14 +211,20 @@
   <canvas id="rr-particles" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.35;"></canvas>
 <h1>RANK-UP REWARDS</h1>
   <p>Hit each Stake VIP rank while playing under code <strong style="color:var(--gold)">JAKE</strong> and claim a one-time cash bonus for every step you climb.</p>
+  <div class="pg-strip">
+    <div class="pg-stat"><b>15</b><span>VIP ranks paid</span></div><i></i>
+    <div class="pg-stat"><b>$30</b><span>Your first rank-up</span></div><i></i>
+    <div class="pg-stat"><b>$500K</b><span>Obsidian reward</span></div>
+  </div>
+  <button type="button" class="pg-code" onclick="pgCopy(this)" aria-label="Copy code JAKE"><span class="pg-code-k">Code</span><b>JAKE</b><span class="pg-code-c">Copy Code</span></button>
 </div>
 
 <section style="padding:2rem 2.5rem 6rem;">
               <div class="tiers-grid">
-    <div class="tier-card bronze"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="brig" cx="38%" cy="30%"><stop offset="0%" stop-color="#f0b060"/><stop offset="55%" stop-color="#c07828"/><stop offset="100%" stop-color="#7a4010"/></radialGradient><filter id="brif"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(200,120,30,0.55)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#brig)" stroke="#d4903a" stroke-width=".8" filter="url(#brif)"/></svg></div><div class="tier-name">Bronze VIP</div><div class="tier-reward">$50</div></div>
-    <div class="tier-card silver"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="srig" cx="38%" cy="30%"><stop offset="0%" stop-color="#eef4fa"/><stop offset="55%" stop-color="#9ab0c4"/><stop offset="100%" stop-color="#506070"/></radialGradient><filter id="srif"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(140,170,200,0.45)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#srig)" stroke="rgba(200,220,240,0.8)" stroke-width="1.2" filter="url(#srif)"/></svg></div><div class="tier-name">Silver VIP</div><div class="tier-reward">$75</div></div>
-    <div class="tier-card gold"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="grig" cx="38%" cy="30%"><stop offset="0%" stop-color="#fff080"/><stop offset="45%" stop-color="#fcc200"/><stop offset="100%" stop-color="#a06800"/></radialGradient><filter id="grif"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(252,194,0,0.55)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#grig)" stroke="#e8b000" stroke-width=".8" filter="url(#grif)"/></svg></div><div class="tier-name">Gold VIP</div><div class="tier-reward">$125</div></div>
-    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp1" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp1"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp1)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp1)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">I</text></svg></div><div class="tier-name">Platinum I</div><div class="tier-reward">$250</div></div>
+    <div class="tier-card bronze"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="brig" cx="38%" cy="30%"><stop offset="0%" stop-color="#f0b060"/><stop offset="55%" stop-color="#c07828"/><stop offset="100%" stop-color="#7a4010"/></radialGradient><filter id="brif"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(200,120,30,0.55)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#brig)" stroke="#d4903a" stroke-width=".8" filter="url(#brif)"/></svg></div><div class="tier-name">Bronze VIP</div><div class="tier-reward">$30</div></div>
+    <div class="tier-card silver"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="srig" cx="38%" cy="30%"><stop offset="0%" stop-color="#eef4fa"/><stop offset="55%" stop-color="#9ab0c4"/><stop offset="100%" stop-color="#506070"/></radialGradient><filter id="srif"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(140,170,200,0.45)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#srig)" stroke="rgba(200,220,240,0.8)" stroke-width="1.2" filter="url(#srif)"/></svg></div><div class="tier-name">Silver VIP</div><div class="tier-reward">$60</div></div>
+    <div class="tier-card gold"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="grig" cx="38%" cy="30%"><stop offset="0%" stop-color="#fff080"/><stop offset="45%" stop-color="#fcc200"/><stop offset="100%" stop-color="#a06800"/></radialGradient><filter id="grif"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(252,194,0,0.55)"/></filter></defs><path d="M22.00,3.00 L27.88,13.91 L40.07,16.13 L31.51,25.09 L33.17,37.37 L22.00,32.00 L10.83,37.37 L12.49,25.09 L3.93,16.13 L16.12,13.91Z" fill="url(#grig)" stroke="#e8b000" stroke-width=".8" filter="url(#grif)"/></svg></div><div class="tier-name">Gold VIP</div><div class="tier-reward">$110</div></div>
+    <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp1" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp1"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp1)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp1)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">I</text></svg></div><div class="tier-name">Platinum I</div><div class="tier-reward">$225</div></div>
     <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp2" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp2"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp2)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp2)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">II</text></svg></div><div class="tier-name">Platinum II</div><div class="tier-reward">$400</div></div>
     <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp3" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp3"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp3)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp3)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">III</text></svg></div><div class="tier-name">Platinum III</div><div class="tier-reward">$800</div></div>
     <div class="tier-card plat"><div class="tier-icon"><svg viewBox="0 0 44 44" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pgp4" cx="38%" cy="30%"><stop offset="0%" stop-color="#c0f4ff"/><stop offset="45%" stop-color="#20c0d8"/><stop offset="100%" stop-color="#0870a0"/></radialGradient><filter id="pfp4"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(32,192,216,0.65)"/></filter></defs><path d="M22.00,2.00 L28.47,13.10 L41.02,15.82 L32.46,25.40 L33.76,38.18 L22.00,33.00 L10.24,38.18 L11.54,25.40 L2.98,15.82 L15.53,13.10Z" fill="url(#pgp4)" stroke="rgba(180,245,255,0.8)" stroke-width="1" filter="url(#pfp4)"/><text x="22" y="26" text-anchor="middle" font-size="10" font-weight="900" fill="rgba(0,55,75,0.92)" font-family="Georgia,serif">IV</text></svg></div><div class="tier-name">Platinum IV</div><div class="tier-reward">$1,600</div></div>
@@ -163,7 +247,7 @@
   <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">I</text>
-</svg></div><div class="tier-name">Diamond I</div><div class="tier-reward">$15,625</div></div>
+</svg></div><div class="tier-name">Diamond I</div><div class="tier-reward">$12,800</div></div>
     <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="dfd2"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
@@ -181,7 +265,7 @@
   <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">II</text>
-</svg></div><div class="tier-name">Diamond II</div><div class="tier-reward">$26,750</div></div>
+</svg></div><div class="tier-name">Diamond II</div><div class="tier-reward">$25,600</div></div>
     <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="dfd3"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
@@ -199,7 +283,7 @@
   <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">III</text>
-</svg></div><div class="tier-name">Diamond III</div><div class="tier-reward">$56,500</div></div>
+</svg></div><div class="tier-name">Diamond III</div><div class="tier-reward">$51,200</div></div>
     <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="dfd4"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
@@ -217,7 +301,7 @@
   <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">IV</text>
-</svg></div><div class="tier-name">Diamond IV</div><div class="tier-reward">$164,250</div></div>
+</svg></div><div class="tier-name">Diamond IV</div><div class="tier-reward">$102,400</div></div>
     <div class="tier-card diamond"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="dfd5"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(40,192,224,0.65)"/></filter>
@@ -235,7 +319,7 @@
   <line x1="20" y1="22" x2="14" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <line x1="44" y1="22" x2="50" y2="44" stroke="rgba(255,255,255,0.2)" stroke-width="0.6"/>
   <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(0,50,80,0.85)" font-family="Georgia,serif">V</text>
-</svg></div><div class="tier-name">Diamond V</div><div class="tier-reward">$250,000</div></div>
+</svg></div><div class="tier-name">Diamond V</div><div class="tier-reward">$204,800</div></div>
     <div class="tier-card obsidian"><div class="tier-icon"><svg viewBox="0 0 64 66" width="44" height="46" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="ofo1"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="rgba(160,60,255,0.65)"/></filter>
@@ -251,9 +335,20 @@
   <line x1="44" y1="22" x2="54" y2="4" stroke="rgba(220,160,255,0.4)" stroke-width="0.8"/>
   <line x1="20" y1="22" x2="44" y2="22" stroke="rgba(220,160,255,0.35)" stroke-width="0.7"/>
   <text x="32" y="38" text-anchor="middle" font-size="13" font-weight="900" fill="rgba(230,190,255,0.92)" font-family="Georgia,serif">I</text>
-</svg></div><div class="tier-name">Obsidian I</div><div class="tier-reward">$650,000</div></div>
+</svg></div><div class="tier-name">Obsidian I</div><div class="tier-reward">$500,000</div></div>
   </div>
-
+<div class="vt-wrap vt-in-section">
+<div class="vt-soon">
+  <span class="vt-sweep" aria-hidden="true"></span>
+  <span class="vt-ico" aria-hidden="true"><em>⇄</em><i>🔒</i></span>
+  <div class="vt-copy">
+    <span class="vt-tag"><i></i>Coming soon</span>
+    <b>VIP TRANSFER PROGRAM</b>
+    <p>Jake's VIP Transfer Program is on the way. Keep an eye on the Discord for the launch.</p>
+  </div>
+  <a class="vt-cta" href="https://discord.com/invite/jakethedegen" target="_blank" rel="noopener">Watch Discord <span>→</span></a>
+</div>
+</div>
 
 </section>
 
@@ -274,6 +369,18 @@
   </div>
 </section>
 
+
+<div class="pg-start">
+  <div>
+    <div class="pg-tag">Hit a new rank?</div>
+    <h3>Claim it in Discord</h3>
+    <p>Play under code <b>JAKE</b>, reach the rank on Stake, then open a ticket in the Discord to get paid.</p>
+  </div>
+  <div class="pg-start-btns">
+    <a href="https://discord.com/invite/jakethedegen" target="_blank" rel="noopener" class="btn-primary">Open a ticket</a>
+    <a href="https://stake.com/?c=JAKE" target="_blank" rel="noopener" class="btn-ghost">Join with code JAKE</a>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="footer-inner">
@@ -433,5 +540,6 @@ document.querySelectorAll('.tier-card').forEach(el=>clearDelay.observe(el,{attri
   }
 })();
 </script>
+<script src="motion.js?v=9"></script>
 </body>
 </html>

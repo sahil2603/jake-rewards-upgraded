@@ -14,24 +14,25 @@
   <link rel="apple-touch-icon" href="logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JakeRewards — Most Rewarding Stake Affiliate 2026</title>
-  <meta name="description" content="Jake's affiliate program on Stake. $75,000 monthly leaderboard, daily $500 giveaway, rank-up rewards from Bronze to Obsidian. Use code JAKE."/>
+  <meta name="description" content="Jake's affiliate program on Stake. $75,000 monthly leaderboard, daily $1,000 giveaway, rank-up rewards from Bronze to Obsidian. Use code JAKE."/>
   <meta name="keywords" content="jake rewards, stake affiliate code jake, stake leaderboard, stake rank up rewards, stake giveaway, jakerewards"/>
   <meta property="og:title" content="JakeRewards — Most Rewarding Stake Affiliate 2026"/>
-  <meta property="og:description" content="$75,000 monthly leaderboard, daily $500 giveaway, rank-up rewards. Use code JAKE on Stake."/>
-  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta property="og:description" content="$75,000 monthly leaderboard, daily $1,000 giveaway, rank-up rewards. Use code JAKE on Stake."/>
+  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://jakerewards.com/"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="JakeRewards — Most Rewarding Stake Affiliate 2026"/>
-  <meta name="twitter:description" content="$75,000 monthly leaderboard, daily $500 giveaway, rank-up rewards. Use code JAKE on Stake."/>
-  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta name="twitter:description" content="$75,000 monthly leaderboard, daily $1,000 giveaway, rank-up rewards. Use code JAKE on Stake."/>
+  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/></noscript>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="motion.css?v=9"/>
 <style>
 @keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @keyframes shimmerLine{0%{left:-100%}100%{left:100%}}
@@ -61,8 +62,153 @@
   .hero-givenaway{font-size:.82rem;letter-spacing:1px;padding:.45rem .9rem;}
 }
 </style>
+<style>
+/* ===== Home v3 polish (content unchanged) ===== */
+/* code card: a light runs around its edge */
+.hero-code-card{isolation:isolate}
+.hero-code-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--jm-a),transparent 0 60%,rgba(252,194,0,.9) 75%,#fff4c4 78%,rgba(252,194,0,.9) 81%,transparent 95%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:jmBeam 4s linear infinite;pointer-events:none;z-index:2}
+.code-card-value{display:inline-flex}
+.code-card-value .ck{display:inline-block;animation:hmLetter 3.6s ease-in-out infinite;animation-delay:calc(var(--k) * .12s)}
+@keyframes hmLetter{0%,70%,100%{translate:0 0;text-shadow:0 0 20px rgba(252,194,0,.4)}78%{translate:0 -4px;text-shadow:0 0 26px rgba(255,230,120,.95)}86%{translate:0 0}}
+/* stats: glowing top edge + hover */
+.hero-stats{position:relative}
+.stat{transition:translate .4s cubic-bezier(.16,1,.3,1)}
+.stat:hover{translate:0 -3px}
+/* hero depth + scroll cue */
+.hero-content{perspective:1000px}
+.hero-title{transition:rotate .8s cubic-bezier(.16,1,.3,1)}
+.hero-orb{transition:translate 1.2s cubic-bezier(.16,1,.3,1)}
+.hm-cue{position:absolute;left:50%;bottom:22px;z-index:3;width:26px;height:42px;margin-left:-13px;border-radius:14px;border:1.5px solid rgba(252,194,0,.45);background:none;cursor:pointer;padding:0}
+.hm-cue::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:3px;background:#FCC200;animation:hmWheel 2s cubic-bezier(.16,1,.3,1) infinite}
+@keyframes hmWheel{0%{opacity:0;translate:0 -3px}30%{opacity:1}100%{opacity:0;translate:0 14px}}
+/* live race: glass chips */
+a.wins-ticker-tag,a.win-pill{text-decoration:none}
+.win-pill{transition:border-color .3s,background .3s}
+a.win-pill:hover{border-color:rgba(252,194,0,.35);background:rgba(252,194,0,.06)}
+.win-pill.race-hl{border-color:rgba(252,194,0,.28);background:linear-gradient(110deg,rgba(252,194,0,.1),rgba(255,255,255,.02))}
+.race-rank{font-family:var(--font-display);font-size:1.15rem;letter-spacing:1px;color:#FCC200;line-height:1}
+.race-ico{font-size:.9rem;line-height:1}
+/* live race v2: brighter, richer */
+.wins-ticker{position:relative;background:linear-gradient(180deg,rgba(252,194,0,.07),rgba(252,194,0,.015) 60%,rgba(0,0,0,0)),var(--bg2)!important;border-top:1px solid rgba(252,194,0,.22)!important;border-bottom:1px solid rgba(252,194,0,.12)!important}
+.wins-ticker::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:linear-gradient(90deg,transparent,#FCC200 30%,#fff3c2 50%,#FCC200 70%,transparent);opacity:.7;pointer-events:none}
+a.wins-ticker-tag{padding:.45rem .85rem;border-radius:999px;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.35);color:#eafff4;font-size:.7rem;letter-spacing:2px;box-shadow:0 0 18px rgba(0,255,136,.12)}
+.win-pill{color:rgba(255,255,255,.88)!important;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025))!important;border-color:rgba(255,255,255,.13)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.win-pill .win-user{color:#fff}
+.win-pill .win-game{color:rgba(255,255,255,.62)}
+.win-pill .win-amt{color:#FFD23F!important;text-shadow:0 0 14px rgba(252,194,0,.55)}
+.win-pill.race-hl{border-color:rgba(252,194,0,.45)!important;background:linear-gradient(110deg,rgba(252,194,0,.2),rgba(252,194,0,.05))!important}
+.win-pill.r1{border-color:rgba(252,194,0,.5)!important;background:linear-gradient(110deg,rgba(252,194,0,.18),rgba(255,255,255,.03))!important}
+.win-pill.r2{border-color:rgba(214,222,235,.4)!important}
+.win-pill.r3{border-color:rgba(205,127,50,.45)!important}
+.win-pill.r2 .race-rank{color:#dfe6f2}.win-pill.r3 .race-rank{color:#e0954f}
+.wins-track-wrap{-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)!important;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)!important}
+@media (max-width:768px){
+  .wins-ticker{padding:.9rem 0 1rem!important;gap:.65rem!important;align-items:center!important}
+  a.wins-ticker-tag{font-size:.66rem;margin:0 auto}
+  .wins-track-wrap{width:100%}
+  .wins-track{gap:.7rem!important}
+  .win-pill{font-size:.9rem!important;padding:.55rem .95rem!important;gap:7px!important}
+  .win-pill .win-game{font-size:.82rem!important}
+  .race-rank{font-size:1.2rem}
+}
+.win-pill{padding:.42rem .95rem;border-radius:999px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+.win-amt{text-shadow:0 0 12px rgba(252,194,0,.45)}
+.wins-ticker-tag .live-dot{box-shadow:0 0 0 0 rgba(0,255,136,.6);animation:hmPing 1.6s infinite}
+@keyframes hmPing{70%{box-shadow:0 0 0 8px rgba(0,255,136,0)}100%{box-shadow:0 0 0 0 rgba(0,255,136,0)}}
+/* reward cards: outline number */
+.hm-num{position:absolute;top:14px;right:18px;z-index:1;font-family:var(--font-display);font-size:2.6rem;line-height:1;letter-spacing:2px;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.14);transition:color .4s,-webkit-text-stroke-color .4s;pointer-events:none}
+.reward-card:hover .hm-num{color:rgba(252,194,0,.12);-webkit-text-stroke-color:rgba(252,194,0,.5)}
+/* how it works: arrows travel between the steps */
+.hm-arrow{position:absolute;z-index:2;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;display:grid;place-items:center;background:#0d1117;border:1px solid rgba(252,194,0,.4);box-shadow:0 0 16px rgba(252,194,0,.25);color:#FCC200;font-size:.9rem;pointer-events:none}
+.hm-arrow span{display:block;animation:hmNudge 1.6s ease-in-out infinite}
+@keyframes hmNudge{50%{translate:3px 0}}
+/* stream: rotating light ring */
+.hm-ring{position:absolute;inset:-2px;z-index:1;border-radius:16px;padding:2px;background:conic-gradient(from var(--jm-a),#FCC200,#b06bff,#53FC18,#FCC200);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:jmBeam 6s linear infinite;pointer-events:none;opacity:.85}
+.stream-frame{position:relative;z-index:2}
+/* total paid: pulse rings, sweep, rising coins */
+.paid-inner{isolation:isolate}
+.hm-rings{position:absolute;left:50%;top:50%;width:0;height:0;z-index:-1;pointer-events:none}
+.hm-rings i{position:absolute;left:-150px;top:-150px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(252,194,0,.35);animation:hmRing 4.5s ease-out infinite;opacity:0}
+.hm-rings i:nth-child(2){animation-delay:-1.5s}.hm-rings i:nth-child(3){animation-delay:-3s}
+@keyframes hmRing{0%{scale:.35;opacity:.8}100%{scale:1.9;opacity:0}}
+.paid-counter{background:linear-gradient(100deg,#FCC200 0 40%,#fff3c2 50%,#FCC200 60% 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:rfShine 5s ease-in-out 2s infinite}
+@keyframes rfShine{0%{background-position:100% 0}35%,100%{background-position:0 0}}
+.hm-coin{position:absolute;z-index:0;bottom:-26px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#FCC200 55%,#b88400);box-shadow:0 4px 10px rgba(0,0,0,.4);animation:hmCoin 7s ease-in infinite;pointer-events:none}
+@keyframes hmCoin{0%{transform:translateY(0) rotateY(0);opacity:0}12%{opacity:.85}85%{opacity:.85}100%{transform:translateY(-340px) rotateY(540deg);opacity:0}}
+/* faq answers glide in */
+.faq-item.open .faq-a p{animation:hmFaq .5s cubic-bezier(.16,1,.3,1) both}
+@keyframes hmFaq{from{opacity:0;translate:0 -6px}}
+@media (max-width:900px){.hm-arrow{display:none}}
+@media (max-width:560px){.hm-cue{display:none}.hm-num{font-size:2rem}}
+@media (prefers-reduced-motion:reduce){.hero-code-card::before,.code-card-value .ck,.hero-stats::before,.hm-cue::after,.hm-arrow span,.hm-ring,.hm-rings i,.paid-counter,.hm-coin,.wins-ticker-tag .live-dot{animation:none!important}.hm-rings,.hm-coin{display:none}}
+</style>
+<style>
+/* ===== Home v5: clean hero (same content) ===== */
+.hero-bg::after{content:"";position:absolute;left:50%;top:44%;width:1100px;height:620px;margin:-310px 0 0 -550px;border-radius:50%;background:radial-gradient(closest-side,rgba(252,194,0,.13),rgba(252,194,0,.04) 55%,transparent);pointer-events:none;z-index:0}
+.hero-content{max-width:1100px}
+.hm-badges{display:flex;gap:.7rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem}
+.hm-badges .hero-badge,.hm-badges .hero-givenaway{margin:0!important}
+.hero-title{font-size:clamp(2.7rem,min(5.6vw,9.6vh),5.4rem);line-height:.98;margin-bottom:1.3rem}
+@media (min-width:900px) and (max-height:840px){.hero{padding-top:104px;padding-bottom:56px}.hm-badges{margin-bottom:1rem}.hero-title{margin-bottom:1rem}.hero-sub{margin-bottom:1.3rem;font-size:1.05rem}.hero-btns{margin-bottom:1.3rem}.hero-live-bar{margin-bottom:.7rem!important}.hm-bar .stat-num{font-size:1.75rem}.hm-cue{display:none}}
+.hero-sub{margin-bottom:1.8rem}
+.hero-btns{margin-bottom:2.2rem}
+.hero-btns .btn-primary,.hero-btns .btn-ghost{padding:.9rem 2.1rem;font-size:.92rem}
+.hero-btns .btn-primary{box-shadow:0 14px 34px -14px rgba(252,194,0,.75)}
+/* one clean info bar: stats + code */
+.hm-bar{position:relative;display:flex;align-items:stretch;gap:0;padding:.35rem;border-radius:20px;background:rgba(13,17,24,.72);border:1px solid rgba(252,194,0,.2);box-shadow:0 30px 70px -40px rgba(0,0,0,.9),0 0 50px -28px rgba(252,194,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hm-bar .hero-stats{margin:0;padding:.7rem 1.4rem;background:none;border:0;backdrop-filter:none;gap:1.4rem}
+.hm-bar .hero-stats::before{display:none}
+.hm-bar .stat-num{font-size:2rem}
+.hm-bar .stat-label{font-size:.6rem;letter-spacing:1.6px}
+.hm-bar .hero-code-card{margin:0!important;padding:.7rem 1.1rem .7rem 1.4rem;border-radius:15px;background:linear-gradient(135deg,rgba(252,194,0,.14),rgba(252,194,0,.04));border:1px solid rgba(252,194,0,.3);box-shadow:none;gap:1rem}
+.hm-bar .hero-code-card::before{animation-duration:5s}
+.hm-bar .code-card-value{font-size:1.9rem}
+.code-card-value .ck{animation:none}
+.hm-live{margin:0 0 1rem}
+.hero-live-bar{margin:0 auto 1rem!important}
+@media (max-width:900px){
+  .hm-bar{flex-direction:column;width:100%;max-width:520px;padding:.35rem}
+  .hm-bar .hero-stats{justify-content:space-around;padding:.8rem .6rem;gap:.5rem}
+  .hm-bar .hero-code-card{width:100%;justify-content:space-between}
+}
+@media (max-width:560px){
+  .hm-badges{gap:.5rem;margin-bottom:1.2rem}
+  .hm-badges .hero-badge{font-size:.6rem;letter-spacing:1.2px;padding:.4rem .8rem}
+  .hm-bar .stat-num{font-size:1.55rem}
+  .hm-bar .code-card-value{font-size:1.5rem}
+}
+/* reward cards: bigger icon tiles, bigger amounts, pill buttons */
+.reward-icon{width:66px;height:66px;display:grid;place-items:center;border-radius:20px;font-size:2rem;background:radial-gradient(circle at 30% 25%,rgba(252,194,0,.28),rgba(255,255,255,.03) 70%);border:1px solid rgba(252,194,0,.3);box-shadow:0 10px 26px -10px rgba(252,194,0,.55);margin-bottom:1.2rem}
+.rc-cyan .reward-icon{background:radial-gradient(circle at 30% 25%,rgba(0,212,255,.28),rgba(255,255,255,.03) 70%);border-color:rgba(0,212,255,.35);box-shadow:0 10px 26px -10px rgba(0,212,255,.55)}
+.rc-purple .reward-icon{background:radial-gradient(circle at 30% 25%,rgba(176,107,255,.3),rgba(255,255,255,.03) 70%);border-color:rgba(176,107,255,.4);box-shadow:0 10px 26px -10px rgba(176,107,255,.6)}
+.reward-amount{font-size:3.1rem!important}
+.reward-card .reward-link{align-self:flex-start;padding:.6rem 1.1rem;border-radius:11px;background:rgba(252,194,0,.08);border:1px solid rgba(252,194,0,.3)}
+.rc-cyan .reward-link{background:rgba(0,212,255,.08);border-color:rgba(0,212,255,.3)}
+.rc-purple .reward-link{background:rgba(176,107,255,.1);border-color:rgba(176,107,255,.35)}
+/* socials: one row of four on desktop (no orphan card) */
+.socials-grid{grid-template-columns:repeat(4,1fr)!important;max-width:1100px!important}
+@media (max-width:900px){.socials-grid{grid-template-columns:1fr 1fr!important}}
+</style>
+<style>
+/* ===== Storm v2 (storm.js) ===== */
+.hero.jm-storm #particles,.hero.jm-storm .hero-cards{display:none}
+.jm-storm-cv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.jm-cards{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;perspective:900px}
+.jm-card,.jm-chip{position:absolute;left:0;top:0;transform-style:preserve-3d;will-change:transform}
+.jm-card{width:52px;height:73px;margin:-36px 0 0 -26px}
+.jm-card .hc-face{box-shadow:0 6px 14px rgba(0,0,0,.5),0 0 14px rgba(255,140,40,.22)}
+.jm-chip{width:38px;height:38px;margin:-19px 0 0 -19px}
+.jm-chip i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#2a1a48 0 40%,#FCC200 41% 44%,transparent 45%),repeating-conic-gradient(#FCC200 0 18deg,#1b1430 18deg 45deg);box-shadow:0 0 0 2px #FCC200 inset,0 6px 12px rgba(0,0,0,.5),0 0 14px rgba(252,194,0,.35)}
+.jm-chip.purple i{background:radial-gradient(circle,#1b1430 0 40%,#b06bff 41% 44%,transparent 45%),repeating-conic-gradient(#b06bff 0 18deg,#140c26 18deg 45deg);box-shadow:0 0 0 2px #b06bff inset,0 6px 12px rgba(0,0,0,.5),0 0 14px rgba(176,107,255,.4)}
+.hero-accent.jm-zap{animation:jmZap .7s ease-out,jmGoldSweep 5s ease-in-out 1.6s infinite}
+@keyframes jmZap{0%{filter:brightness(2.6) drop-shadow(0 0 22px #fff6c8)}30%{filter:brightness(1.4) drop-shadow(0 0 14px rgba(252,194,0,.9))}55%{filter:brightness(2) drop-shadow(0 0 18px #fff6c8)}100%{filter:none}}
+@keyframes jmShake{20%{translate:3px -2px}40%{translate:-3px 2px}60%{translate:2px 1px}80%{translate:-1px -1px}}
+@media (max-width:700px){.jm-card{width:36px;height:50px;margin:-25px 0 0 -18px}.jm-card .hc-pip{font-size:1.1rem}.jm-card .hc-corner{font-size:.48rem}.jm-card .hc-back{font-size:1.1rem}.jm-chip{width:28px;height:28px;margin:-14px 0 0 -14px}}
+@media (prefers-reduced-motion:reduce){.jm-cards{display:none}}
+</style>
 </head>
 <body>
+<div id="jm-veil" aria-hidden="true"></div>
 <!-- Scroll progress bar -->
 <div id="scroll-bar" style="position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--gold),#ff9d2f,var(--accent));z-index:9999;transition:width .1s linear;box-shadow:0 0 10px rgba(252,194,0,0.6);pointer-events:none;"></div>
 
@@ -143,9 +289,9 @@
     <div class="hero-stats">
       <div class="stat"><span class="stat-num" data-target="75000" data-prefix="$" data-suffix="K" data-divide="1000">$75K</span><span class="stat-label">Monthly Leaderboard</span></div>
       <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num" data-target="500" data-prefix="$">$500</span><span class="stat-label">Daily Giveaway</span></div>
+      <div class="stat"><span class="stat-num" data-target="1000" data-prefix="$" data-suffix="K" data-divide="1000">$1K</span><span class="stat-label">Daily Giveaway</span></div>
       <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num" data-target="1" data-prefix="$" data-suffix="M+">$1M+</span><span class="stat-label">Rank Up Rewards</span></div>
+      <div class="stat"><span class="stat-num" data-target="900000" data-prefix="$" data-suffix="K+" data-divide="1000">$900K+</span><span class="stat-label">Rank Up Rewards</span></div>
     </div>
     <!-- Live player count bar -->
     <div class="hero-live-bar" id="hero-live-bar" style="display:none;">
@@ -164,9 +310,9 @@
 </div>
 </section>
 
-<!-- LIVE WINS TICKER -->
-<div class="wins-ticker" aria-label="Recent community wins">
-  <div class="wins-ticker-tag"><span class="live-dot"></span> LIVE WINS</div>
+<!-- LIVE RACE TICKER (real leaderboard data) -->
+<div class="wins-ticker" aria-label="Live leaderboard race">
+  <a class="wins-ticker-tag" href="leaderboard.html"><span class="live-dot"></span> LIVE RACE</a>
   <div class="wins-track-wrap"><div class="wins-track" id="wins-track"></div></div>
 </div>
 
@@ -191,9 +337,9 @@
       <canvas class="card-rain" data-colors="#00d4ff,#fff,#e6b432" data-syms="🎁,$,💎,◎,Ξ"></canvas>
       <div style="position:relative;z-index:1;">
         <div class="reward-icon">🎁</div>
-        <div class="reward-amount">$500</div>
+        <div class="reward-amount">$1,000</div>
         <div class="reward-name">Daily Giveaway</div>
-        <p class="reward-desc">5 winners of $100 chosen every single day from active players under code JAKE. Join Discord to enter.</p>
+        <p class="reward-desc">5 winners of $200 chosen and paid out every single day from active players under code JAKE. Join Discord to enter.</p>
         <a href="bonuses.html" class="reward-link">Learn More</a>
       </div>
     </div>
@@ -201,7 +347,7 @@
       <canvas class="card-rain" data-colors="#b464ff,#e6b432,#00d4ff" data-syms="🚀,◆,💎,$,Ξ"></canvas>
       <div style="position:relative;z-index:1;">
         <div class="reward-icon">🚀</div>
-        <div class="reward-amount">$25–$650K</div>
+        <div class="reward-amount">$30–$500K</div>
         <div class="reward-name">Rank-Up Rewards</div>
         <p class="reward-desc">Every time you hit a new Stake VIP rank, Jake pays you out — from Bronze all the way to Obsidian.</p>
         <a href="rankrewards.html" class="reward-link">See All Tiers</a>
@@ -358,7 +504,7 @@
     </div>
     <div class="faq-item">
       <button class="faq-q">What are rank-up rewards?<span class="faq-chev">+</span></button>
-      <div class="faq-a"><p>Each time you hit a new Stake VIP rank (Bronze through Obsidian), Jake pays you a bonus on top of Stake's own reward — from $25 at the lower tiers up to massive payouts at the top. Check the Rank-Up Rewards page for the full list.</p></div>
+      <div class="faq-a"><p>Each time you hit a new Stake VIP rank (Bronze through Obsidian), Jake pays you a bonus on top of Stake's own reward — from $30 at the lower tiers up to massive payouts at the top. Check the Rank-Up Rewards page for the full list.</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">How do I actually get paid?<span class="faq-chev">+</span></button>
@@ -430,8 +576,8 @@ function _fmtShort(n){
 }
 // Podium (top 3) — wait for deferred data like ticker + counter
 // Real prize labels for home podium top 3
-const _HOME_PRIZES=[{cash:20000,lb:true},{cash:10000,lb:true},{cash:5000,lb:true}];
-function _homePrizeLabel(idx){const p=_HOME_PRIZES[idx];if(!p)return '';if(p.lb)return '$'+p.cash.toLocaleString()+' + 5% lossback';return '$'+p.cash.toLocaleString();}
+const _HOME_PRIZES=[{cash:20000,lb:'10%'},{cash:10000,lb:'7.5%'},{cash:5000,lb:'5%'}];
+function _homePrizeLabel(idx){const p=_HOME_PRIZES[idx];if(!p)return '';if(p.lb)return '$'+p.cash.toLocaleString()+' + '+p.lb+' lossback';return '$'+p.cash.toLocaleString();}
 function _maskUser(n){if(!n)return '—';if(n.length<=5)return '*'.repeat(n.length);return '*'.repeat(5)+n.slice(5);}
 
 function initHomePodium(){
@@ -528,6 +674,7 @@ async function loadHomeLiveSheet(){
     })).filter(r=>r.wagered>0).sort((a,b)=>a.rank-b.rank);
     if(live.length>0){
       window._homeLiveData=live;
+      if(window.jmRace) window.jmRace(live);
       document.getElementById('home-podium').innerHTML='';
       initHomePodium();
     }
@@ -538,25 +685,46 @@ async function loadHomeLiveSheet(){
 // Load live sheet on page load
 if(document.readyState==='complete'){loadHomeLiveSheet();}
 else{window.addEventListener('load',loadHomeLiveSheet,{once:true});}
-// Wins ticker — hardcoded community wins
+// Live race ticker — built from Jake's real leaderboard sheet (no made-up wins)
 (function(){
   const track=document.getElementById('wins-track');
   if(!track) return;
-  const wins=[
-    {user:'CryptoKing',amount:22000,game:'Stake Originals'},{user:'WagerWolf',amount:12000,game:'Slots'},
-    {user:'MoonGrinder',amount:8000,game:'Live Casino'},{user:'SlotSensei',amount:6000,game:'Pragmatic Play'},
-    {user:'DiamondHands',amount:5000,game:'Stake Originals'},{user:'NightRider',amount:4000,game:'Blackjack'},
-    {user:'LuckyCrypto',amount:3500,game:'Roulette'},{user:'HighRoller99',amount:3000,game:'Slots'},
-    {user:'BetKing',amount:2500,game:'Baccarat'},{user:'GoldRush',amount:2000,game:'Stake Dice'},
-    {user:'SpinMaster',amount:1700,game:'Book of Dead'},{user:'CasinoAce',amount:1500,game:'Blackjack'},
-    {user:'RollTheDice',amount:1400,game:'Plinko'},{user:'JackpotJoe',amount:1200,game:'Slots'},
-    {user:'BetBlitz',amount:1200,game:'Live Dealer'},{user:'WinStreak',amount:900,game:'Roulette'},
-    {user:'StackStar',amount:750,game:'Stake Originals'},{user:'FullSend',amount:600,game:'Slots'},
-    {user:'NovaBet',amount:500,game:'Crash'},{user:'PurpleAce',amount:450,game:'Baccarat'}
-  ];
-  const make=w=>'<div class="win-pill"><span class="win-dot"></span><span class="win-user">'+w.user+'</span> won <span class="win-amt">$'+w.amount.toLocaleString()+'</span> on <span class="win-game">'+w.game+'</span></div>';
-  const html=wins.map(make).join('');
-  track.innerHTML=html+html;
+  const PRIZE=[20000,10000,5000,4000,3500,3000,2500,2250,2000,1650,1400,1300,1250,1125,1000];
+  function nextReset(){ // 10:00 AM New York time, last day of the month (same rule as leaderboard page)
+    function at(y,m){const last=new Date(Date.UTC(y,m+1,0)).getUTCDate();const g=Date.UTC(y,m,last,10,0,0);
+      const f=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(g));
+      const v=t=>parseInt(f.find(x=>x.type===t).value,10);const z=Date.UTC(v('year'),v('month')-1,v('day'),v('hour')%24,v('minute'),v('second'));return g-(z-g);}
+    const n=new Date();let e=at(n.getUTCFullYear(),n.getUTCMonth());if(Date.now()>=e)e=at(n.getUTCFullYear(),n.getUTCMonth()+1);return e;}
+  function left(){const d=Math.max(0,nextReset()-Date.now());return Math.floor(d/864e5)+'d '+Math.floor(d%864e5/36e5)+'h '+Math.floor(d%36e5/6e4)+'m';}
+  const money=n=>'$'+Math.round(n).toLocaleString();
+  const pill=(inner,cls)=>'<a class="win-pill '+(cls||'')+'" href="leaderboard.html">'+inner+'</a>';
+  function build(data){
+    const out=[];
+    out.push(pill('<span class="race-ico">⏱</span>Race ends in <span class="win-amt jm-race-left">'+left()+'</span>','race-hl'));
+    if(data&&data.length){
+      const total=data.reduce((a,r)=>a+r.wagered,0);
+      out.push(pill('<span class="race-ico">🔥</span><span class="win-amt">'+money(total)+'</span> wagered this month'));
+      out.push(pill('<span class="race-ico">👥</span><span class="win-user">'+data.length+'</span> players racing for <span class="win-amt">$75,000</span>'));
+      data.slice(0,15).forEach((r,i)=>{
+        let x='<span class="race-rank">#'+(i+1)+'</span><span class="win-user">'+_maskUser(r.user)+'</span><span class="win-game">'+money(r.wagered)+' wagered</span>';
+        if(PRIZE[i]) x+='<span class="win-game">→</span><span class="win-amt">'+money(PRIZE[i])+'</span>';
+        out.push(pill(x,i<3?'r'+(i+1):''));
+        if(i===0&&data[1]) out.push(pill('<span class="race-ico">⚔️</span>#2 is <span class="win-amt">'+money(data[0].wagered-data[1].wagered)+'</span> behind first place'));
+        if(i===9&&data[10]) out.push(pill('<span class="race-ico">🎯</span><span class="win-amt">'+money(data[9].wagered-data[10].wagered)+'</span> separates #10 and #11'));
+      });
+    }else{
+      out.push(pill('<span class="race-ico">🏆</span><span class="win-amt">$75,000</span> monthly leaderboard'));
+      out.push(pill('<span class="race-ico">🎁</span><span class="win-amt">$1,000</span> daily giveaway'));
+      out.push(pill('<span class="race-ico">⚡</span>Use code <span class="win-amt">JAKE</span> to join the race'));
+    }
+    out.push(pill('<span class="race-ico">⚡</span>Wager under code <span class="win-amt">JAKE</span> to climb the board','race-hl'));
+    const html=out.join('');
+    track.innerHTML=html+html;
+    requestAnimationFrame(()=>{track.style.animationDuration=Math.max(40,track.scrollWidth/2/55)+'s';});
+  }
+  window.jmRace=build;
+  build(window._homeLiveData||null);
+  setInterval(()=>{if(document.hidden)return;const t=left();track.querySelectorAll('.jm-race-left').forEach(e=>e.textContent=t);},30000);
 })();
 // Total paid counter — wait for deferred data, then set up observer
 function initPaidCounter(){
@@ -672,7 +840,7 @@ function bgLoop(now){
   requestAnimationFrame(bgLoop);
   if(now-_bgLast<25) return; // cap ~40fps to leave headroom for UI
   _bgLast=now;
-  if(_heroVisible){ (BG_MODE==='storm') ? drawStormFrame(now||performance.now()) : drawParticlesFrame(); }
+  if(_heroVisible && !window.JM_STORM){ (BG_MODE==='storm') ? drawStormFrame(now||performance.now()) : drawParticlesFrame(); } /* storm.js takes over when loaded */
 }
 // start bg loop after first paint
 requestAnimationFrame(bgLoop);
@@ -973,5 +1141,76 @@ document.querySelectorAll('.card-rain').forEach(initCardRain);
   }
 })();
 </script>
+<script>
+/* Home v5: group the two badges on one line and put stats + code in one clean bar (moves existing elements; no text changes) */
+(function(){
+  function go(){
+    var hc=document.querySelector('.hero-content'); if(!hc || hc.querySelector('.hm-bar')) return;
+    var badge=hc.querySelector('.hero-badge'), ga=hc.querySelector('.hero-givenaway');
+    if(badge && ga){ var row=document.createElement('div'); row.className='hm-badges'; hc.insertBefore(row,badge); row.appendChild(badge); row.appendChild(ga); }
+    var stats=hc.querySelector('.hero-stats'), code=hc.querySelector('.hero-code-card'), live=document.getElementById('hero-live-bar');
+    if(stats && code){ var bar=document.createElement('div'); bar.className='hm-bar'; stats.parentNode.insertBefore(bar,stats); bar.appendChild(stats); bar.appendChild(code); if(live) hc.insertBefore(live,bar); }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
+})();
+</script>
+<script>
+/* Home v3: depth on mouse, letters, arrows, rings, coins (visual only; no content changes) */
+(function(){
+  var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FINE=window.matchMedia&&matchMedia('(pointer: fine)').matches;
+  function go(){
+    var hero=document.querySelector('.hero');
+    /* JAKE letters on the code card take turns lifting */
+    var cv=document.querySelector('.code-card-value');
+    if(cv && !cv.querySelector('.ck')){ var t=cv.textContent.trim(); cv.setAttribute('aria-label',t); cv.innerHTML=t.split('').map(function(ch,k){return '<span class="ck" style="--k:'+k+'" aria-hidden="true">'+ch+'</span>';}).join(''); }
+    /* scroll cue */
+    if(hero && !hero.querySelector('.hm-cue')){
+      var cue=document.createElement('button'); cue.type='button'; cue.className='hm-cue'; cue.setAttribute('aria-label','Scroll down');
+      cue.onclick=function(){ var t=document.querySelector('.rewards-section'); if(!t) return; if(window.jmLenis) jmLenis.scrollTo(t,{offset:-70,duration:1.4}); else t.scrollIntoView({behavior:'smooth'}); };
+      hero.appendChild(cue);
+    }
+    /* reward cards: 01 02 03 */
+    document.querySelectorAll('.reward-card').forEach(function(c,i){ if(c.querySelector('.hm-num')) return; var n=document.createElement('span'); n.className='hm-num'; n.setAttribute('aria-hidden','true'); n.textContent=('0'+(i+1)); c.appendChild(n); });
+    /* stream ring */
+    var fw=document.querySelector('.stream-frame-wrap'); if(fw && !fw.querySelector('.hm-ring')){ var r=document.createElement('span'); r.className='hm-ring'; r.setAttribute('aria-hidden','true'); fw.appendChild(r); }
+    /* paid band: pulse rings + coins */
+    var pi=document.querySelector('.paid-inner');
+    if(pi && !RM && !pi.querySelector('.hm-rings')){
+      var rg=document.createElement('div'); rg.className='hm-rings'; rg.setAttribute('aria-hidden','true'); rg.innerHTML='<i></i><i></i><i></i>'; pi.insertBefore(rg,pi.firstChild);
+      var band=document.querySelector('.paid-band');
+      [8,22,38,62,78,92].forEach(function(x,k){ var c=document.createElement('span'); c.className='hm-coin'; c.style.left=x+'%'; c.style.animationDelay=(-k*1.15)+'s'; c.style.scale=(0.55+(k%3)*0.2).toFixed(2); band.appendChild(c); });
+    }
+    /* how it works: arrows sit in the gaps between steps (desktop, only when they're on one row) */
+    var hg=document.getElementById('how-grid');
+    function placeArrows(){
+      if(!hg) return;
+      hg.querySelectorAll('.hm-arrow').forEach(function(a){a.remove();});
+      var steps=[].slice.call(hg.querySelectorAll('.how-step')); if(steps.length<2) return;
+      var g=hg.getBoundingClientRect();
+      for(var k=0;k<steps.length-1;k++){
+        var a=steps[k].getBoundingClientRect(), b=steps[k+1].getBoundingClientRect();
+        if(Math.abs(a.top-b.top)>4) continue;
+        var el=document.createElement('span'); el.className='hm-arrow'; el.setAttribute('aria-hidden','true'); el.innerHTML='<span>→</span>';
+        el.style.left=((a.right+b.left)/2-g.left)+'px'; el.style.top=(a.top-g.top+76)+'px'; hg.appendChild(el);
+      }
+    }
+    placeArrows(); window.addEventListener('resize',function(){clearTimeout(placeArrows.t);placeArrows.t=setTimeout(placeArrows,200);});
+    if(document.fonts&&document.fonts.ready) document.fonts.ready.then(placeArrows);
+    /* depth: orbs drift and the headline leans slightly toward the mouse */
+    if(hero && FINE && !RM){
+      var orbs=[].slice.call(hero.querySelectorAll('.hero-orb')), title=hero.querySelector('.hero-title'), q=false, ev=null;
+      hero.addEventListener('pointermove',function(e){ ev=e; if(q) return; q=true; requestAnimationFrame(function(){ q=false; var r=hero.getBoundingClientRect(), nx=(ev.clientX-r.left)/r.width-.5, ny=(ev.clientY-r.top)/r.height-.5;
+        orbs.forEach(function(o,k){ var f=(k+1)*18; o.style.translate=(nx*f).toFixed(1)+'px '+(ny*f).toFixed(1)+'px'; });
+        if(title) title.style.rotate=(-ny).toFixed(3)+' '+nx.toFixed(3)+' 0 '+(Math.hypot(nx,ny)*6).toFixed(2)+'deg';
+      }); });
+      hero.addEventListener('pointerleave',function(){ orbs.forEach(function(o){o.style.translate='';}); if(title) title.style.rotate=''; });
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
+})();
+</script>
+<script src="storm.js?v=9"></script>
+<script src="motion.js?v=9"></script>
 </body>
 </html>

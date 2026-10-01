@@ -15,7 +15,7 @@
   <meta name="description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Track top grinders, prizes and your position. Use code JAKE to enter."/>
   <meta property="og:title" content="$75,000 Leaderboard — JakeRewards"/>
   <meta property="og:description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Use code JAKE."/>
-  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta property="og:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:type" content="website"/>
@@ -23,10 +23,11 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="$75,000 Leaderboard — JakeRewards"/>
   <meta name="twitter:description" content="Compete in Jake's $75,000 monthly leaderboard on Stake. Use code JAKE."/>
-  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=10"/>
+  <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="motion.css?v=9"/>
   <style>
     .lb-wrap{max-width:900px;margin:0 auto;padding:2rem 2.5rem 6rem;}
     .lb-tabs{display:flex;gap:.5rem;margin-bottom:2rem;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.4rem;width:fit-content;}
@@ -51,6 +52,28 @@
     .wager-rules ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
     .wager-rules li{font-size:.8rem;color:var(--text2);padding-left:1.2rem;position:relative;}
     .wager-rules li::before{content:'•';position:absolute;left:0;color:var(--accent);}
+    /* How payouts work (October 2026) */
+    .lb-pay{margin-top:1.4rem;padding:1.5rem;border-radius:var(--radius);background:linear-gradient(160deg,rgba(252,194,0,.07),var(--card) 55%);border:1px solid rgba(252,194,0,.2)}
+    .lb-pay h4{font-family:var(--font-head);font-size:.85rem;font-weight:700;color:var(--gold);margin-bottom:1rem}
+    .lb-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+    .lb-pay-card{display:flex;gap:.9rem;align-items:flex-start;padding:1rem 1.1rem;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .3s}
+    .lb-pay-card:hover{transform:translateY(-3px)}
+    .lb-pay-card.top:hover{border-color:rgba(252,194,0,.4);box-shadow:0 14px 30px -14px rgba(252,194,0,.4)}
+    .lb-pay-card.auto:hover{border-color:rgba(0,212,255,.4);box-shadow:0 14px 30px -14px rgba(0,212,255,.35)}
+    .lb-pay-ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;background:rgba(252,194,0,.12)}
+    .lb-pay-card.auto .lb-pay-ico{position:relative;background:rgba(0,212,255,.12)}
+    .lb-pay-card.auto .lb-pay-ico::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid rgba(0,212,255,.45);animation:v3RingSq 2.6s ease-out infinite}
+    @keyframes v3RingSq{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35);opacity:0}}
+    @keyframes lbZap{0%,100%{box-shadow:0 0 0 0 rgba(0,212,255,.35)}50%{box-shadow:0 0 0 7px rgba(0,212,255,0)}}
+    .lb-pay-card b{display:block;font-family:var(--font-head);font-size:.95rem;color:#fff;margin-bottom:.25rem}
+    .lb-pay-card p{font-size:.82rem;color:var(--text2);line-height:1.55;margin:0}
+    .lb-pay-card p strong{color:#fff}
+    .lb-pay-floor{display:flex;gap:.7rem;align-items:center;margin-top:.9rem;padding:.75rem 1rem;border-radius:12px;font-size:.82rem;color:var(--text2);background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.22)}
+    .lb-pay-floor strong{color:#fff}
+    .lb-pay-up{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.7rem;color:#052e16;background:linear-gradient(135deg,#86efac,#22c55e);animation:lbUp 1.8s ease-in-out infinite}
+    @keyframes lbUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    @media(max-width:700px){.lb-pay-grid{grid-template-columns:1fr}.lb-pay{padding:1.2rem}}
+    @media(prefers-reduced-motion:reduce){.lb-pay-card.auto .lb-pay-ico,.lb-pay-up{animation:none}}
 
     .lb-table td{vertical-align:middle;}
     .lb-userwrap{display:flex;align-items:center;gap:10px;}
@@ -277,8 +300,10 @@
       border-radius:12px;padding:1rem 1.3rem;
       margin-top:1.6rem;text-align:center;flex-wrap:wrap;
       box-shadow:0 0 0 0 rgba(255,140,0,0.25);
-      animation:claimNoticeGlow 2.4s ease-in-out infinite;
+      position:relative;
     }
+    .claim-notice::after{content:"";position:absolute;inset:-1px;border-radius:inherit;border:1px solid rgba(255,140,0,.55);box-shadow:0 0 24px 2px rgba(255,140,0,.18);opacity:0;animation:claimNoticeFade 2.4s ease-in-out infinite;pointer-events:none}
+    @keyframes claimNoticeFade{50%{opacity:1}}
     .claim-notice-icon{font-size:1.2rem;flex-shrink:0;}
     .claim-notice-text{font-size:.86rem;color:var(--text2);line-height:1.5;}
     .claim-notice-text strong{color:#ff9d2f;font-weight:700;}
@@ -524,8 +549,66 @@
       .bill{animation:none!important;display:none;}
     }
   </style>
+<style>
+/* ===== Leaderboard v2 ===== */
+.pg-live+.pg-code{margin-top:.9rem}
+/* segmented countdown */
+.jm-cd{display:flex;align-items:flex-end;gap:.45rem;margin-top:.45rem}
+.jm-cd-seg{display:flex;flex-direction:column;align-items:center;min-width:62px;padding:.45rem .5rem .35rem;border-radius:10px;background:rgba(252,194,0,.06);border:1px solid rgba(252,194,0,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.jm-cd-seg b{font-family:var(--font-display);font-weight:400;font-size:1.9rem;letter-spacing:2px;line-height:1;color:var(--gold);text-shadow:0 0 16px rgba(252,194,0,.45)}
+.jm-cd-seg small{margin-top:3px;font:700 .5rem var(--font-head);letter-spacing:1.6px;text-transform:uppercase;color:var(--muted)}
+.jm-cd-seg b.tick{animation:jmTick .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes jmTick{from{translate:0 -35%;opacity:.2}}
+.jm-cd i{font-style:normal;font-family:var(--font-display);font-size:1.5rem;color:rgba(252,194,0,.45);padding-bottom:1.1rem;animation:jmBlink 1s steps(2) infinite}
+@keyframes jmBlink{50%{opacity:.2}}
+.countdown-bar{position:relative;overflow:hidden;background:linear-gradient(110deg,rgba(252,194,0,.08),var(--card) 45%)!important;border-color:rgba(252,194,0,.22)!important}
+.countdown-bar::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgba(255,236,160,.08) 50%,transparent 60%);translate:-100% 0;animation:pgSweep 6s ease-in-out infinite;pointer-events:none}
+/* pool cards */
+.lb-pool-card{position:relative;overflow:hidden;transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s}
+.lb-pool-card:hover{transform:translateY(-5px);border-color:rgba(252,194,0,.35);box-shadow:0 18px 40px -22px rgba(252,194,0,.5)}
+.pc-ico{position:absolute;right:.8rem;top:.7rem;font-size:1.3rem;opacity:.9;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+/* tabs: active pill glows */
+.lb-tab.active{box-shadow:0 8px 22px -8px rgba(252,194,0,.7)}
+.lb-tab{transition:all .3s cubic-bezier(.16,1,.3,1)!important}
+.lb-tab:not(.active):hover{color:#fff;background:rgba(255,255,255,.05)}
+@media (max-width:560px){
+  .jm-cd-seg{min-width:0;flex:1;padding:.4rem .2rem .3rem}
+  .jm-cd-seg b{font-size:1.45rem}
+  .jm-cd{width:100%;gap:.3rem}.jm-cd i{display:none}
+  .countdown-bar>div:first-child{width:100%}
+  .pc-ico{font-size:1rem;right:.55rem;top:.5rem}
+}
+@media (prefers-reduced-motion:reduce){.jm-cd-seg b.tick,.jm-cd i,.countdown-bar::after{animation:none}}
+</style>
+<script>
+/* Segmented countdown: mirrors the page's own countdown text, so the timing logic is untouched */
+(function(){
+  function build(){
+    var src=document.getElementById('lb-countdown'); if(!src) return;
+    var box=document.createElement('div'); box.className='jm-cd'; box.setAttribute('aria-hidden','true');
+    var names=['Days','Hrs','Min','Sec'];
+    box.innerHTML=names.map(function(n,i){return '<div class="jm-cd-seg"><b>--</b><small>'+n+'</small></div>'+(i<3?'<i>:</i>':'');}).join('');
+    src.parentNode.insertBefore(box,src.nextSibling);
+    src.style.position='absolute'; src.style.width='1px'; src.style.height='1px'; src.style.overflow='hidden'; src.style.clip='rect(0 0 0 0)';
+    var bs=box.querySelectorAll('.jm-cd-seg b'), last=[];
+    function sync(){
+      box.style.display = src.style.display==='none' ? 'none' : '';
+      var m=(src.textContent||'').match(/(\d+)d\s+(\d+)h\s+(\d+)m\s+(\d+)s/);
+      if(!m) return;
+      for(var k=0;k<4;k++){
+        var v=k===0?m[1]:('0'+m[k+1]).slice(-2);
+        if(last[k]!==v){ bs[k].textContent=v; if(last[k]!==undefined){ bs[k].classList.remove('tick'); void bs[k].offsetWidth; bs[k].classList.add('tick'); } last[k]=v; }
+      }
+    }
+    sync();
+    new MutationObserver(sync).observe(src,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:['style']});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build); else build();
+})();
+</script>
 </head>
 <body>
+<div id="jm-veil" aria-hidden="true"></div>
 <div id="scroll-bar"></div>
 <canvas id="star-canvas" style="position:fixed;top:0;left:0;width:100%;height:55vh;pointer-events:none;z-index:0;"></canvas>
 <nav class="nav" style="position:relative;z-index:100;">
@@ -564,11 +647,14 @@
   <div class="section-tag">Monthly Race</div>
   <h1>$75,000 LEADERBOARD</h1>
   <p>Track the top grinders across Jake's community. Top players win serious prizes every month.</p>
+  <div class="pg-live"><span class="live-dot"></span>Live standings · updated daily</div>
+  <button type="button" class="pg-code" onclick="pgCopy(this)" aria-label="Copy code JAKE"><span class="pg-code-k">Code</span><b>JAKE</b><span class="pg-code-c">Copy Code</span></button>
 </div>
 
 <div class="lb-wrap">
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
     <div class="lb-tabs">
+      <span class="lb-tab-ind" aria-hidden="true"></span>
       <button class="lb-tab active" onclick="switchTab('current',this)">Current Month</button>
       <button class="lb-tab" onclick="switchTab('previous',this)">Previous Month</button>
     </div>
@@ -576,18 +662,20 @@
 
   <div class="countdown-bar" id="lb-countdown-bar">
     <div>
-      <div class="countdown-label" id="lb-countdown-label">Leaderboard Ends In</div>
+      <div class="cd-head"><span class="cd-live" id="lbCdLive"><i></i>LIVE</span><div class="countdown-label" id="lb-countdown-label">Leaderboard Ends In</div></div>
       <div class="countdown-val" id="lb-countdown">--d --h --m --s</div>
     </div>
     <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" id="lb-countdown-cta">Claim Rewards</a>
+    <span class="cd-orb o1" aria-hidden="true"></span><span class="cd-orb o2" aria-hidden="true"></span>
+    <div class="cd-prog" id="lbCdProg" aria-hidden="true"><div class="cd-prog-bar"><i id="lbCdFill"></i></div><span id="lbCdDay">Day — of —</span></div>
   </div>
 
 
   <div class="lb-pool-strip">
-    <div class="lb-pool-card"><div class="pc-label">Prize Pool</div><div class="pc-val">$75,000</div></div>
-    <div class="lb-pool-card"><div class="pc-label">Paid Places</div><div class="pc-val">100</div></div>
-    <div class="lb-pool-card"><div class="pc-label">1st Place</div><div class="pc-val">$20,000</div></div>
-    <div class="lb-pool-card"><div class="pc-label">Players Competing</div><div class="pc-val" id="lb-playercount">—</div></div>
+    <div class="lb-pool-card"><span class="pc-ico">💰</span><div class="pc-label">Prize Pool</div><div class="pc-val">$75,000</div></div>
+    <div class="lb-pool-card"><span class="pc-ico">🎯</span><div class="pc-label">Paid Places</div><div class="pc-val">100</div></div>
+    <div class="lb-pool-card pc-first"><span class="pc-ico">👑</span><div class="pc-label">1st Place</div><div class="pc-val">$20,000</div></div>
+    <div class="lb-pool-card"><span class="pc-ico">🔥</span><div class="pc-label">Players Competing</div><div class="pc-val" id="lb-playercount">—</div><span class="pc-live"><i></i>live</span></div>
   </div>
 
   <div class="rank-ticker" id="rank-ticker" style="display:none;">
@@ -621,11 +709,29 @@
 
   <div class="wager-rules">
     <h4>⚡ Weighted Wager System</h4>
-    <ul>
-      <li>Games with RTP of 98% or lower → 100% of wager is counted</li>
-      <li>Games with RTP between 98% and 99% → 50% of wager is counted</li>
-      <li>Games with RTP of 99% and over → 10% of wager is counted</li>
+    <p class="wr-sub">How much of each bet counts toward your position, based on the game's RTP.</p>
+    <ul class="wr-list">
+      <li class="wr-row r1" style="--v:100"><span class="wr-band"><b>RTP 98% or lower</b><small>Most slots</small></span><span class="wr-meter"><i></i></span><span class="wr-pct"><b data-to="100">0</b>% counted</span><span class="wr-sr">Games with RTP of 98% or lower → 100% of wager is counted</span></li>
+      <li class="wr-row r2" style="--v:50"><span class="wr-band"><b>RTP 98% – 99%</b><small>Higher-RTP games</small></span><span class="wr-meter"><i></i></span><span class="wr-pct"><b data-to="50">0</b>% counted</span><span class="wr-sr">Games with RTP between 98% and 99% → 50% of wager is counted</span></li>
+      <li class="wr-row r3" style="--v:10"><span class="wr-band"><b>RTP 99% and over</b><small>e.g. low-edge originals</small></span><span class="wr-meter"><i></i></span><span class="wr-pct"><b data-to="10">0</b>% counted</span><span class="wr-sr">Games with RTP of 99% and over → 10% of wager is counted</span></li>
     </ul>
+  </div>
+
+  <div class="lb-pay" id="lbPay">
+    <h4>💸 How payouts work</h4>
+    <div class="lb-pay-grid">
+      <div class="lb-pay-card top">
+        <span class="lb-pay-ico">🏆</span>
+        <div><b>Top 10</b><p>Open a <strong>support ticket</strong> in the Discord to claim your payout once the board resets.</p></div>
+      </div>
+      <div class="lb-pay-card auto">
+        <span class="lb-pay-ico">⚡</span>
+        <div><b>11th – 100th</b><p>Paid <strong>automatically</strong> within <strong>48–120 hours</strong> of the reset. Nothing to do.</p><div class="lb-pay-flow" aria-hidden="true"><i></i></div></div>
+      </div>
+    </div>
+    <div class="lb-pay-floor"><span class="lb-pay-up">▲</span><span class="lb-pay-floor-txt"><strong>Floor raised from October 2026:</strong> every paid place now gets at least <strong>$50</strong> (was $25), and 51st–60th now pay <strong>$100</strong>.</span>
+      <span class="lb-floor-cmp" aria-hidden="true"><span class="fc-row old"><small>Before</small><i></i><b>$25</b></span><span class="fc-row new"><small>Now</small><i></i><b>$50</b></span></span>
+    </div>
   </div>
 
   <div class="claim-notice">
@@ -660,10 +766,26 @@
 const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/1SW5j8VUSEcbj2Te9naiFB_zQzpwyjWnsjKyMxcM5l90/export?format=csv&gid=235680015';
 const SHEET_CSV_PREV = 'https://docs.google.com/spreadsheets/d/1SW5j8VUSEcbj2Te9naiFB_zQzpwyjWnsjKyMxcM5l90/export?format=csv&gid=1502602180';
 const DISPLAY_ROWS = 110;
+/* Prize table from the October 2026 board onwards (set by Jake). Top 3 also get lossback. */
 const _LB_PRIZES = [
-  {cash:20000,lb:true},{cash:10000,lb:true},{cash:5000,lb:true},
-  {cash:4000,lb:true},{cash:3500,lb:true},{cash:3000,lb:true},
-  {cash:2500,lb:true},{cash:2250,lb:true},{cash:2000,lb:true},{cash:1650,lb:true},
+  {cash:20000,lb:'10%'},{cash:10000,lb:'7.5%'},{cash:5000,lb:'5%'},
+  4000,3500,3000,2500,2250,2000,1650,
+  1400,1300,1250,1125,1000,950,875,750,700,675,
+  650,600,550,450,400,350,325,300,275,250,
+  225,200,195,190,180,175,170,165,160,155,
+  150,145,140,135,130,125,120,115,110,105,
+  100,100,100,100,100,100,100,100,100,100,
+  90,90,90,90,90,90,90,90,90,90,
+  75,75,75,75,75,75,75,75,75,75,
+  60,60,60,60,60,60,60,60,60,60,
+  50,50,50,50,50,50,50,50,50,50
+];
+/* Previous table -- still used for the "Previous Month" view of any board that ended at or before
+   the switch (the September 2026 board paid out under these). */
+const _LB_PRIZES_OLD = [
+  {cash:20000,lb:'5%'},{cash:10000,lb:'5%'},{cash:5000,lb:'5%'},
+  {cash:4000,lb:'5%'},{cash:3500,lb:'5%'},{cash:3000,lb:'5%'},
+  {cash:2500,lb:'5%'},{cash:2250,lb:'5%'},{cash:2000,lb:'5%'},{cash:1650,lb:'5%'},
   1400,1300,1250,1200,1100,1000,950,900,850,800,
   750,700,650,600,550,500,450,400,350,300,
   250,200,195,190,180,170,160,150,140,125,
@@ -675,11 +797,20 @@ const _LB_PRIZES = [
   25,25,25,25,25,25,25,25,25,25,
   25
 ];
+const _LB_NEW_PRIZES_FROM = Date.UTC(2026, 8, 30, 14, 0, 0); /* Sep 30 2026, 10:00 AM New York -- the reset that started the October board */
+function _prizeTable(){
+  if(_currentTab !== 'previous') return _LB_PRIZES;
+  try{
+    const next = getNextReset();
+    const lastReset = monthEndUTC(next.getUTCFullYear(), next.getUTCMonth() - 1); /* when the "previous" board ended */
+    return (lastReset.getTime() <= _LB_NEW_PRIZES_FROM + 6*3600*1000) ? _LB_PRIZES_OLD : _LB_PRIZES;
+  }catch(e){ return _LB_PRIZES; }
+}
 let _liveData=null, _prevData=null, _liveMode=false, _prevMode=false, _lbObs=null, _currentTab='current';
 
 function toggleMobile(){document.getElementById('mobile-nav').classList.toggle('open');}
 function fmtShort(n){if(n>=1e6)return '$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return '$'+(n/1e3).toFixed(1)+'K';return '$'+Math.round(n);}
-function _getPrizeLabel(idx){const p=_LB_PRIZES[idx];if(!p)return '—';if(typeof p==='object')return '$'+p.cash.toLocaleString()+' + 5% lossback';return '$'+p.toLocaleString();}
+function _getPrizeLabel(idx){const p=_prizeTable()[idx];if(!p)return '—';if(typeof p==='object')return '$'+p.cash.toLocaleString()+' + '+p.lb+' lossback';return '$'+p.toLocaleString();}
 function maskUser(n){if(!n)return '—';if(n.length<=5)return '*'.repeat(n.length);return '*'.repeat(5)+n.slice(5);}
 
 // Store prev ranks for change indicators
@@ -1206,6 +1337,201 @@ scheduleUTCMidnightRefresh();
     items.forEach(function(item){
       if(item.dataset.page===activePage) item.classList.add('active');
     });
+  }
+})();
+</script>
+<script src="motion.js?v=9"></script>
+<style>
+/* ═════════ Leaderboard v3 · tabs, countdown, stat cards, rules, payouts ═════════ */
+/* sliding tab pill */
+.lb-tabs{position:relative;isolation:isolate}
+.lb-tab{position:relative;z-index:1;background:transparent!important;box-shadow:none!important}
+.lb-tab.active{color:#000!important}
+.lb-tab-ind{position:absolute;z-index:0;top:.4rem;bottom:.4rem;left:.4rem;width:0;border-radius:7px;background:linear-gradient(135deg,#FFE066,#FCC200 55%,#e0a800);box-shadow:0 8px 24px -8px rgba(252,194,0,.75),inset 0 1px 0 rgba(255,255,255,.5);overflow:hidden;transition:left .5s cubic-bezier(.65,0,.25,1.2),width .5s cubic-bezier(.65,0,.25,1.2)}
+.lb-tab-ind::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.6) 50%,transparent 65%);translate:-120% 0;animation:v3Shine 4s ease-in-out 1s infinite}
+@keyframes v3Shine{0%{translate:-120% 0}45%,100%{translate:120% 0}}
+
+/* countdown */
+.countdown-bar{padding-bottom:2.6rem!important}
+.cd-head{display:flex;align-items:center;gap:.6rem}
+.cd-live{display:inline-flex;align-items:center;gap:.35rem;font:800 .55rem var(--font-head);letter-spacing:1.8px;color:#22c55e;padding:.22rem .5rem;border-radius:99px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3)}
+.cd-live i{position:relative;width:6px;height:6px;border-radius:50%;background:#22c55e}
+.cd-live i::after,.pc-live i::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:v3Ring 1.5s ease-out infinite}
+@keyframes v3Ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
+.cd-live.off{display:none}
+@keyframes v3Ping{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}100%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
+.jm-cd{perspective:400px}
+.jm-cd-seg{position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.jm-cd-seg::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.35);z-index:1}
+.jm-cd-seg b{position:relative;display:block;transform-origin:50% 100%}
+.jm-cd-seg b.tick{animation:v3Flip .55s cubic-bezier(.2,1.2,.4,1)!important}
+@keyframes v3Flip{0%{transform:rotateX(-90deg);opacity:.2}60%{transform:rotateX(12deg);opacity:1}100%{transform:rotateX(0)}}
+.jm-cd-seg.sec{border-color:rgba(252,194,0,.4)}
+.jm-cd-seg.sec::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:calc(var(--sp,0) * 1%);background:linear-gradient(90deg,#FCC200,#fff3b0);box-shadow:0 0 8px #FCC200;transition:width .95s linear}
+.countdown-bar:hover .jm-cd-seg{border-color:rgba(252,194,0,.45);box-shadow:0 0 18px -6px rgba(252,194,0,.6)}
+.cd-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(30px);opacity:.5;z-index:0}
+.cd-orb.o1{width:180px;height:120px;left:12%;top:-50px;background:rgba(252,194,0,.22);animation:v3Drift 9s ease-in-out infinite}
+.cd-orb.o2{width:150px;height:110px;right:22%;bottom:-60px;background:rgba(255,160,40,.16);animation:v3Drift 11s ease-in-out -4s infinite reverse}
+@keyframes v3Drift{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,14px)}}
+.countdown-bar>div:not(.cd-prog),.countdown-bar>a{position:relative;z-index:1}
+.lb-pool-card .pc-label{padding-right:1.7rem}
+#lb-countdown-cta{position:relative;overflow:hidden;box-shadow:0 10px 28px -10px rgba(252,194,0,.8);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+#lb-countdown-cta::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);translate:-120% 0;animation:v3Shine 3.6s ease-in-out .6s infinite}
+#lb-countdown-cta:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 16px 34px -10px rgba(252,194,0,.95)}
+.cd-prog{position:absolute;left:1.5rem;right:1.5rem;bottom:.85rem;display:flex;align-items:center;gap:.8rem;z-index:1}
+.cd-prog-bar{position:relative;flex:1;height:5px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden}
+.cd-prog-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:99px;background:linear-gradient(90deg,rgba(252,194,0,.35),#FCC200);transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+.cd-prog-bar i::after{content:"";position:absolute;right:-1px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:#fff6c8;box-shadow:0 0 10px 2px #FCC200}
+.cd-prog-bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);width:30%;translate:-100% 0;animation:v3Run 2.8s linear infinite}
+@keyframes v3Run{to{translate:430% 0}}
+.cd-prog span{font:700 .6rem var(--font-head);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.cd-prog.off{display:none}
+
+/* stat cards */
+.lb-pool-card{isolation:isolate;opacity:0;transform:translateY(18px)}
+.lb-pool-card.v3-in{opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;transition-delay:calc(var(--i,0) * 90ms),calc(var(--i,0) * 90ms),0s,0s}
+.lb-pool-card.v3-in:hover{transform:translateY(-6px);transition-delay:0s}
+.lb-pool-card::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:radial-gradient(220px circle at var(--mx,50%) var(--my,0%),rgba(252,194,0,.14),transparent 60%);opacity:0;transition:opacity .3s}
+.lb-pool-card:hover::before{opacity:1}
+.lb-pool-card::after{content:"";position:absolute;left:1.2rem;bottom:0;height:2px;width:0;border-radius:2px;background:linear-gradient(90deg,#FCC200,transparent);transition:width 1s cubic-bezier(.22,1,.36,1) .3s}
+.lb-pool-card.v3-in::after{width:46%}
+.pc-ico{animation:v3Bob 3.2s ease-in-out infinite;transition:transform .4s cubic-bezier(.2,1.6,.4,1)}
+.lb-pool-card:nth-child(2) .pc-ico{animation-delay:-.8s}.lb-pool-card:nth-child(3) .pc-ico{animation-delay:-1.6s}.lb-pool-card:nth-child(4) .pc-ico{animation-delay:-2.4s}
+@keyframes v3Bob{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.lb-pool-card:hover .pc-ico{transform:scale(1.25) rotate(-10deg)}
+.pc-first{border-color:rgba(252,194,0,.4)!important;background:linear-gradient(160deg,rgba(252,194,0,.12),var(--card) 60%)!important}
+.pc-first .pc-val{background:linear-gradient(100deg,#FCC200 0 40%,#fff6c8 50%,#FCC200 60% 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:v3Text 4.5s ease-in-out infinite}
+@keyframes v3Text{0%{background-position:100% 0}50%,100%{background-position:0 0}}
+.pc-live{position:absolute;right:.9rem;bottom:.75rem;display:inline-flex;align-items:center;gap:.3rem;font:800 .5rem var(--font-head);letter-spacing:1.4px;text-transform:uppercase;color:#f97316}
+.pc-live i{position:relative;width:5px;height:5px;border-radius:50%;background:#f97316}
+@keyframes v3PingO{0%{box-shadow:0 0 0 0 rgba(249,115,22,.7)}100%{box-shadow:0 0 0 6px rgba(249,115,22,0)}}
+
+/* wager rules → meters */
+.wager-rules{position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(0,212,255,.06),var(--card) 55%)!important}
+.wager-rules h4{display:flex;align-items:center;gap:.4rem}
+.wr-sub{margin:-.3rem 0 1rem;font-size:.8rem;color:var(--muted)}
+.wager-rules ul.wr-list{gap:.7rem}
+.wager-rules li.wr-row{display:grid;grid-template-columns:minmax(150px,1.1fr) 2fr minmax(110px,auto);align-items:center;gap:1rem;padding:.75rem .9rem!important;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);transition:border-color .3s,transform .3s cubic-bezier(.22,1,.36,1)}
+.wager-rules li.wr-row::before{display:none}
+.wager-rules li.wr-row:hover{transform:translateX(4px);border-color:rgba(0,212,255,.3)}
+.wr-band b{display:block;font-family:var(--font-head);font-size:.85rem;color:#fff}
+.wr-band small{font-size:.7rem;color:var(--muted)}
+.wr-meter{position:relative;height:10px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.wr-meter i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:99px;overflow:hidden;transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+.wr-row.r1 .wr-meter i{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.wr-row.r2 .wr-meter i{background:linear-gradient(90deg,#d97706,#fbbf24);transition-delay:.15s}
+.wr-row.r3 .wr-meter i{background:linear-gradient(90deg,#be123c,#fb7185);transition-delay:.3s}
+.wr-meter i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);width:40%;translate:-100% 0;animation:v3Run 2.4s linear infinite}
+.wager-rules.v3-in .wr-meter i{width:calc(var(--v) * 1%)}
+.wr-pct{font-size:.78rem;color:var(--muted);text-align:right;white-space:nowrap}
+.wr-pct b{font:400 1.35rem var(--font-display);letter-spacing:1px;color:#fff;font-variant-numeric:tabular-nums}
+.wr-row.r1 .wr-pct b{color:#4ade80}.wr-row.r2 .wr-pct b{color:#fbbf24}.wr-row.r3 .wr-pct b{color:#fb7185}
+.wr-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* payouts box */
+.lb-pay{position:relative;overflow:hidden}
+.lb-pay::before{content:"";position:absolute;top:0;left:0;width:40%;height:1px;background:linear-gradient(90deg,transparent,#FCC200,transparent);animation:v3Beam 4s ease-in-out infinite;will-change:transform}
+@keyframes v3Beam{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+.lb-pay-card{opacity:0;transform:translateY(14px)}
+.lb-pay.v3-in .lb-pay-card{opacity:1;transform:none;transition:opacity .6s ease,transform .7s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s}
+.lb-pay.v3-in .lb-pay-card.auto{transition-delay:.12s,.12s,0s,0s}
+.lb-pay.v3-in .lb-pay-card:hover{transform:translateY(-3px)}
+.lb-pay-card.top .lb-pay-ico{position:relative;overflow:hidden}
+.lb-pay-card.top .lb-pay-ico::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);translate:-120% 0;animation:v3Shine 3.2s ease-in-out infinite}
+.lb-pay-flow{position:relative;height:4px;margin-top:.7rem;border-radius:99px;background:rgba(0,212,255,.1);overflow:hidden}
+.lb-pay-flow i{position:absolute;top:0;bottom:0;left:0;width:35%;border-radius:99px;background:linear-gradient(90deg,transparent,#00d4ff,#a5f3fc,transparent);animation:v3Flow 1.8s ease-in-out infinite;will-change:transform}
+@keyframes v3Flow{0%{transform:translateX(-100%)}100%{transform:translateX(290%)}}
+.lb-pay-floor{flex-wrap:wrap}
+.lb-pay-floor-txt{flex:1;min-width:220px}
+.lb-floor-cmp{display:grid;gap:.3rem;min-width:170px}
+.fc-row{display:grid;grid-template-columns:40px 1fr 34px;align-items:center;gap:.5rem;font-size:.68rem;color:var(--muted)}
+.fc-row i{height:7px;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.fc-row.old i{background:rgba(255,255,255,.22)}
+.fc-row.new i{background:linear-gradient(90deg,#22c55e,#86efac);box-shadow:0 0 10px rgba(74,222,128,.5);transition-delay:.35s}
+.lb-pay.v3-in .fc-row.old i{width:50%}.lb-pay.v3-in .fc-row.new i{width:100%}
+.fc-row b{color:#fff;font-family:var(--font-head);text-align:right}
+.fc-row.new b{color:#4ade80}
+
+/* ── performance ──
+   Phones: the 1st-place border's rotating gradient is repainted every frame, so it becomes a still
+   gold gradient there; the spinning ray layer is made smaller; half the falling bills are dropped.
+   Everywhere: podium effects pause when the podium is off-screen. */
+@media (max-width:700px),(hover:none){
+  .podium-card.gold::before{animation:none!important;background:conic-gradient(from 210deg,#ffd700,#ff8c00,#ffd700,#fff176,#ffd700)!important}
+  .podium-card.gold .podium-aura{width:160%!important;height:160%!important}
+  .bill-container .bill:nth-child(2n){display:none}
+}
+/* pause looping effects when their section is off-screen (keeps scrolling smooth) */
+.v3-off,.v3-off *,.v3-off *::before,.v3-off *::after,.v3-off::before,.v3-off::after{animation-play-state:paused!important}
+
+@media (min-width:701px){.lb-pool-card .pc-label{white-space:nowrap;letter-spacing:1.5px}}
+@media (min-width:701px){.lb-pool-card:last-of-type .pc-label{letter-spacing:1px}}
+@media (max-width:700px){
+  #lb-countdown-cta{width:100%;text-align:center;justify-content:center}
+  .countdown-bar{padding-bottom:2.8rem!important}
+  .cd-prog{left:1rem;right:1rem}
+  .wager-rules li.wr-row{grid-template-columns:1fr auto;gap:.5rem .8rem}
+  .wr-meter{grid-column:1 / -1;grid-row:2}
+  .lb-floor-cmp{width:100%}
+  .cd-orb{display:none}
+}
+@media (hover:none){.lb-pool-card::before{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .cd-live i::after,.pc-live i::after,.lb-pay-card.auto .lb-pay-ico::after,.claim-notice::after,.lb-tab-ind,.lb-tab-ind::after,.cd-live i,.cd-orb,#lb-countdown-cta::after,.cd-prog-bar::after,.pc-ico,.pc-first .pc-val,.pc-live i,.wr-meter i::after,.lb-pay::before,.lb-pay-card.top .lb-pay-ico::after,.lb-pay-flow i{animation:none!important}
+  .lb-tab-ind,.cd-prog-bar i,.wr-meter i,.fc-row i{transition:none!important}
+  .lb-pool-card,.lb-pay-card{opacity:1!important;transform:none!important}
+}
+</style>
+<script>
+/* Leaderboard v3: sliding tabs, flip countdown + month progress, stat-card reveal/spotlight, animated rules & payouts */
+(function(){
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sliding tab pill */
+  var tabs = document.querySelector('.lb-tabs'), ind = tabs && tabs.querySelector('.lb-tab-ind');
+  function moveInd(){ var a = tabs && tabs.querySelector('.lb-tab.active'); if(!a || !ind) return; ind.style.left = a.offsetLeft + 'px'; ind.style.width = a.offsetWidth + 'px'; }
+  if(tabs){ new MutationObserver(moveInd).observe(tabs, { subtree:true, attributes:true, attributeFilter:['class'] }); addEventListener('resize', moveInd); moveInd(); if(document.fonts) document.fonts.ready.then(moveInd); }
+
+  /* countdown extras: seconds bar, LIVE badge, month progress */
+  var bar = document.getElementById('lb-countdown-bar'), src = document.getElementById('lb-countdown'),
+      live = document.getElementById('lbCdLive'), prog = document.getElementById('lbCdProg'), fill = document.getElementById('lbCdFill'), day = document.getElementById('lbCdDay');
+  function extras(){
+    var segs = bar ? bar.querySelectorAll('.jm-cd-seg') : [];
+    if(segs[3] && !segs[3].classList.contains('sec')) segs[3].classList.add('sec');
+    var hidden = src && src.style.display === 'none';
+    if(live) live.classList.toggle('off', !!hidden);
+    if(prog) prog.classList.toggle('off', !!hidden);
+    var m = src && (src.textContent||'').match(/(\d+)s/);
+    if(segs[3] && m) segs[3].style.setProperty('--sp', ((60 - +m[1]) / 60 * 100).toFixed(1));
+  }
+  function month(){
+    try{
+      var end = getNextReset(), start = monthEndUTC(end.getUTCFullYear(), end.getUTCMonth() - 1), now = Date.now();
+      var pct = Math.max(0, Math.min(1, (now - start) / (end - start)));
+      var days = Math.round((end - start) / 864e5), d = Math.min(days, Math.floor((now - start) / 864e5) + 1);
+      if(fill) fill.style.width = (pct * 100).toFixed(2) + '%';
+      if(day) day.textContent = 'Day ' + d + ' of ' + days;
+    }catch(e){ if(prog) prog.style.display = 'none'; }
+  }
+  if(src){ new MutationObserver(extras).observe(src, { childList:true, characterData:true, subtree:true, attributes:true, attributeFilter:['style'] }); }
+  setTimeout(function(){ extras(); month(); }, 300); setInterval(month, 60000);
+
+  /* reveal on scroll + pause looping effects off-screen */
+  function io(els, onIn, opts){ if(!('IntersectionObserver' in window)){ els.forEach(function(e){ onIn(e, true); }); return; }
+    var o = new IntersectionObserver(function(es){ es.forEach(function(e){ onIn(e.target, e.isIntersecting); }); }, opts || { threshold:.15 }); els.forEach(function(e){ o.observe(e); }); }
+  var cards = [].slice.call(document.querySelectorAll('.lb-pool-card'));
+  cards.forEach(function(c, i){ c.style.setProperty('--i', i); });
+  io(cards, function(el, vis){ if(vis) el.classList.add('v3-in'); });
+  var rules = document.querySelector('.wager-rules'), pay = document.getElementById('lbPay');
+  function countUp(b){ var to = +b.dataset.to; if(RM){ b.textContent = to; return; } var t0 = performance.now();
+    (function f(n){ var p = Math.min(1, (n - t0) / 1200), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(to * e); if(p < 1) requestAnimationFrame(f); })(t0); }
+  if(rules) io([rules], function(el, vis){ if(vis && !el.classList.contains('v3-in')){ el.classList.add('v3-in'); el.querySelectorAll('.wr-pct b').forEach(countUp); } });
+  if(pay) io([pay], function(el, vis){ if(vis) el.classList.add('v3-in'); });
+  io([bar, rules, pay, document.querySelector('.lb-pool-strip'), tabs, document.querySelector('.lb-podium-wrap'), document.querySelector('.claim-notice')].filter(Boolean), function(el, vis){ el.classList.toggle('v3-off', !vis); }, { rootMargin:'80px 0px' });
+
+  /* spotlight that follows the cursor on stat cards (mouse only) */
+  if(!RM && matchMedia('(hover:hover) and (pointer:fine)').matches){
+    cards.forEach(function(c){ c.addEventListener('pointermove', function(e){ var r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); }); });
   }
 })();
 </script>
