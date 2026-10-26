@@ -766,10 +766,11 @@
 const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/1SW5j8VUSEcbj2Te9naiFB_zQzpwyjWnsjKyMxcM5l90/export?format=csv&gid=235680015';
 const SHEET_CSV_PREV = 'https://docs.google.com/spreadsheets/d/1SW5j8VUSEcbj2Te9naiFB_zQzpwyjWnsjKyMxcM5l90/export?format=csv&gid=1502602180';
 const DISPLAY_ROWS = 110;
-/* Prize table from the October 2026 board onwards (set by Jake). Top 3 also get lossback. */
+/* Prize table from the October 2026 board onwards (set by Jake). Top 3 get 10% / 7.5% / 5% lossback,
+   4th-10th get 5% lossback (added 26 Oct 2026). */
 const _LB_PRIZES = [
   {cash:20000,lb:'10%'},{cash:10000,lb:'7.5%'},{cash:5000,lb:'5%'},
-  4000,3500,3000,2500,2250,2000,1650,
+  {cash:4000,lb:'5%'},{cash:3500,lb:'5%'},{cash:3000,lb:'5%'},{cash:2500,lb:'5%'},{cash:2250,lb:'5%'},{cash:2000,lb:'5%'},{cash:1650,lb:'5%'},
   1400,1300,1250,1125,1000,950,875,750,700,675,
   650,600,550,450,400,350,325,300,275,250,
   225,200,195,190,180,175,170,165,160,155,
