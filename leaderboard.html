@@ -798,12 +798,12 @@ const _LB_PRIZES_OLD = [
   25,25,25,25,25,25,25,25,25,25,
   25
 ];
-const _LB_NEW_PRIZES_FROM = Date.UTC(2026, 8, 30, 14, 0, 0); /* Sep 30 2026, 10:00 AM New York -- the reset that started the October board */
+const _LB_NEW_PRIZES_FROM = Date.UTC(2026, 9, 1, 0, 0, 0); /* Oct 1 2026 -- the October board was the first with the new prizes */
 function _prizeTable(){
   if(_currentTab !== 'previous') return _LB_PRIZES;
   try{
-    const next = getNextReset();
-    const lastReset = monthEndUTC(next.getUTCFullYear(), next.getUTCMonth() - 1); /* when the "previous" board ended */
+    const w = _raceWindow(); /* the Previous Month tab is the board before the sheet's current one */
+    const lastReset = new Date(w.start); /* the previous board ended when the sheet's current board started */
     return (lastReset.getTime() <= _LB_NEW_PRIZES_FROM + 6*3600*1000) ? _LB_PRIZES_OLD : _LB_PRIZES;
   }catch(e){ return _LB_PRIZES; }
 }
@@ -1033,6 +1033,7 @@ async function loadLiveSheet(){
     const rows=parseCSV(text);
     if(!rows.length)throw new Error('empty');
     // Sheet columns: affiliate_name, campaign_code, user_name, wagered, rank, start_date_utc, end_date_utc
+    _sheetStart=_sheetDate(rows[0]['start_date_utc']); updateCountdown();
     _liveData=rows.slice(0,DISPLAY_ROWS).map((r,i)=>({
       user: r['user_name']||r['username']||r['user']||('Player '+(i+1)),
       wagered: parseFloat((r['wagered']||r['wager']||'0').replace(/[$,]/g,''))||0,
@@ -1107,7 +1108,7 @@ window.addEventListener('pageshow',function(e){
   }
 });
 
-// Leaderboard resets at 10:00 AM EASTERN on the LAST DAY of each month. When it rolls,
+// (old note) Leaderboard used to reset at 10:00 AM EASTERN on the LAST DAY of each month; now see monthEndUTC. When it rolls,
 // Jake's sheet empties the current-month tab and moves its data to the past-month tab,
 // which the site's "Previous Month" view already reads.
 //
@@ -1132,25 +1133,46 @@ function zonedWallTimeToUTC(year, month, day, hour, minute, timeZone){
   return new Date(guess - (asZone - guess)); // subtract the zone's offset at that instant
 }
 
-function monthEndUTC(yearRef, monthRef){
-  // Normalise so month 12 rolls into January of the next year
-  const y = yearRef + Math.floor(monthRef / 12);
-  const m = ((monthRef % 12) + 12) % 12;
-  // Last calendar day of that month (day 0 of the next month)
-  const lastDay = new Date(Date.UTC(y, m+1, 0)).getUTCDate();
-  return zonedWallTimeToUTC(y, m, lastDay, RESET_HOUR_ET, 0, RESET_ZONE);
+/* ── When does the race end? Read it from Jake's sheet, no fixed dates in the code. ──
+   Every row of the live tab has start_date_utc (e.g. "01-Oct-26 12:00 am"). A race runs for that
+   calendar month in UTC, so it ends at 00:00 UTC on the 1st of the following month. 30/31-day
+   months, February and leap years all work out by themselves.
+   - Sheet still on the month that just ended -> "Race finished · final results coming soon",
+     however long Jake's team takes to roll the sheet over.
+   - Sheet moved on to the new month -> counts down to the end of that month straight away.
+   If the sheet can't be read, the current UTC calendar month is used. */
+let _sheetStart=null; /* start of the board in Jake's live sheet (ms, UTC) */
+function _sheetDate(v){ const m=String(v||'').match(/(\d{1,2})[-\/ ]([A-Za-z]{3})[A-Za-z]*[-\/ ](\d{2,4})/); if(!m) return null;
+  const mon=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'].indexOf(m[2].toLowerCase()); if(mon<0) return null;
+  const y=+m[3]<100?2000+(+m[3]):+m[3]; return Date.UTC(y,mon,1); }
+/* the reset that happens in calendar month m: 00:00 UTC on the 1st */
+function monthEndUTC(yearRef, monthRef){ return new Date(Date.UTC(yearRef, monthRef, 1)); }
+function _raceWindow(){
+  const now=Date.now();
+  if(_sheetStart!==null){
+    const st=new Date(_sheetStart), end=Date.UTC(st.getUTCFullYear(), st.getUTCMonth()+1, 1);
+    /* sheet is for a month that's already over: race finished, waiting for the rollover
+       (after 5 days with no rollover, stop waiting and follow the calendar) */
+    if(now>=end && now<end+5*864e5) return { start:_sheetStart, end:end, finished:true };
+    if(now<end) return { start:_sheetStart, end:end, finished:false };
+  }
+  const n=new Date(now), start=Date.UTC(n.getUTCFullYear(), n.getUTCMonth(), 1);
+  return { start:start, end:Date.UTC(n.getUTCFullYear(), n.getUTCMonth()+1, 1), finished:false };
 }
 function getNextReset(){
-  const now=new Date();
-  let end = monthEndUTC(now.getUTCFullYear(), now.getUTCMonth());
-  // If this month's reset has already passed, roll forward to next month's reset
-  if(now >= end){
-    end = monthEndUTC(now.getUTCFullYear(), now.getUTCMonth()+1);
-  }
-  return end;
+  const w=_raceWindow();
+  /* once finished, "next" is the end of the new month (keeps Previous-Month prizes logic right) */
+  if(w.finished){ const e=new Date(w.end); return new Date(Date.UTC(e.getUTCFullYear(), e.getUTCMonth()+1, 1)); }
+  return new Date(w.end);
 }
 function updateCountdown(){
-  const now=new Date(), end=getNextReset();
+  const now=new Date(), w=_raceWindow(), end=new Date(w.end);
+  const el=document.getElementById('lb-countdown'), lab=document.getElementById('lb-countdown-label');
+  if(w.finished){
+    if(_currentTab!=='previous'){ if(lab) lab.textContent='Race finished · final results coming soon'; if(el) el.textContent='0d 0h 0m 0s'; }
+    return;
+  }
+  if(lab && _currentTab!=='previous') lab.textContent='Leaderboard Ends In';
   const d=end-now;
   const days=Math.floor(d/864e5), hrs=Math.floor((d%864e5)/36e5), mins=Math.floor((d%36e5)/6e4), secs=Math.floor((d%6e4)/1e3);
   document.getElementById('lb-countdown').textContent=`${days}d ${hrs}h ${mins}m ${secs}s`;
@@ -1507,7 +1529,7 @@ scheduleUTCMidnightRefresh();
   }
   function month(){
     try{
-      var end = getNextReset(), start = monthEndUTC(end.getUTCFullYear(), end.getUTCMonth() - 1), now = Date.now();
+      var w = _raceWindow(), end = w.end, start = w.start, now = Math.min(Date.now(), w.end);
       var pct = Math.max(0, Math.min(1, (now - start) / (end - start)));
       var days = Math.round((end - start) / 864e5), d = Math.min(days, Math.floor((now - start) / 864e5) + 1);
       if(fill) fill.style.width = (pct * 100).toFixed(2) + '%';

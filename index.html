@@ -667,6 +667,9 @@ async function loadHomeLiveSheet(){
       rows.push(row);
     }
     // Exact sheet columns: affiliate_name | campaign_code | user_name | wagered | rank | start_date_utc | end_date_utc
+    { const m=String((rows[0]||{})['start_date_utc']||'').match(/(\d{1,2})[-\/ ]([A-Za-z]{3})[A-Za-z]*[-\/ ](\d{2,4})/);
+      const mon=m?['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'].indexOf(m[2].toLowerCase()):-1;
+      if(mon>-1){ const y=+m[3]<100?2000+(+m[3]):+m[3]; window._homeSheetStart=Date.UTC(y,mon,1); } }
     const live=rows.map((r,i)=>({
       user: r['user_name']||r['username']||r['user']||('Player '+(i+1)),
       wagered: parseFloat((r['wagered']||r['wager']||'0').replace(/[$,]/g,''))||0,
@@ -690,17 +693,18 @@ else{window.addEventListener('load',loadHomeLiveSheet,{once:true});}
   const track=document.getElementById('wins-track');
   if(!track) return;
   const PRIZE=[20000,10000,5000,4000,3500,3000,2500,2250,2000,1650,1400,1300,1250,1125,1000];
-  function nextReset(){ // 10:00 AM New York time, last day of the month (same rule as leaderboard page)
-    function at(y,m){const last=new Date(Date.UTC(y,m+1,0)).getUTCDate();const g=Date.UTC(y,m,last,10,0,0);
-      const f=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(g));
-      const v=t=>parseInt(f.find(x=>x.type===t).value,10);const z=Date.UTC(v('year'),v('month')-1,v('day'),v('hour')%24,v('minute'),v('second'));return g-(z-g);}
-    const n=new Date();let e=at(n.getUTCFullYear(),n.getUTCMonth());if(Date.now()>=e)e=at(n.getUTCFullYear(),n.getUTCMonth()+1);return e;}
-  function left(){const d=Math.max(0,nextReset()-Date.now());return Math.floor(d/864e5)+'d '+Math.floor(d%864e5/36e5)+'h '+Math.floor(d%36e5/6e4)+'m';}
+  /* same rule as the leaderboard page: the race is the calendar month (UTC) the sheet's start_date_utc is in */
+  function raceEnd(){
+    const n=Date.now(), st=window._homeSheetStart;
+    if(st!=null){ const d=new Date(st), e=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1); if(n<e+5*864e5) return e; }
+    const t=new Date(n); return Date.UTC(t.getUTCFullYear(),t.getUTCMonth()+1,1);
+  }
+  function raceTxt(){const d=raceEnd()-Date.now();if(d<=0)return 'Race finished · results coming soon';return 'Race ends in <span class="win-amt">'+Math.floor(d/864e5)+'d '+Math.floor(d%864e5/36e5)+'h '+Math.floor(d%36e5/6e4)+'m</span>';}
   const money=n=>'$'+Math.round(n).toLocaleString();
   const pill=(inner,cls)=>'<a class="win-pill '+(cls||'')+'" href="leaderboard.html">'+inner+'</a>';
   function build(data){
     const out=[];
-    out.push(pill('<span class="race-ico">⏱</span>Race ends in <span class="win-amt jm-race-left">'+left()+'</span>','race-hl'));
+    out.push(pill('<span class="race-ico">⏱</span><span class="jm-race-left">'+raceTxt()+'</span>','race-hl'));
     if(data&&data.length){
       const total=data.reduce((a,r)=>a+r.wagered,0);
       out.push(pill('<span class="race-ico">🔥</span><span class="win-amt">'+money(total)+'</span> wagered this month'));
@@ -724,7 +728,7 @@ else{window.addEventListener('load',loadHomeLiveSheet,{once:true});}
   }
   window.jmRace=build;
   build(window._homeLiveData||null);
-  setInterval(()=>{if(document.hidden)return;const t=left();track.querySelectorAll('.jm-race-left').forEach(e=>e.textContent=t);},30000);
+  setInterval(()=>{if(document.hidden)return;const t=raceTxt();track.querySelectorAll('.jm-race-left').forEach(e=>e.innerHTML=t);},30000);
 })();
 // Total paid counter — wait for deferred data, then set up observer
 function initPaidCounter(){
