@@ -12,9 +12,9 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bonuses — JakeRewards</title>
-  <meta name="description" content="Enter the daily $1,000 giveaway, claim your 200% deposit match and get help accessing Stake. Use code JAKE."/>
+  <meta name="description" content="Enter the daily $350 giveaway, claim your 200% deposit match and get help accessing Stake. Use code JAKE."/>
   <meta property="og:title" content="Bonuses — JakeRewards"/>
-  <meta property="og:description" content="Enter the daily $1,000 giveaway and claim your 200% deposit match. Use code JAKE."/>
+  <meta property="og:description" content="Enter the daily $350 giveaway and claim your 200% deposit match. Use code JAKE."/>
   <meta property="og:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
@@ -22,7 +22,7 @@
   <meta property="og:url" content="https://jakerewards.com/"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Bonuses — JakeRewards"/>
-  <meta name="twitter:description" content="Enter the daily $1,000 giveaway and claim your 200% deposit match. Use code JAKE."/>
+  <meta name="twitter:description" content="Enter the daily $350 giveaway and claim your 200% deposit match. Use code JAKE."/>
   <meta name="twitter:image" content="https://jakerewards.com/og-image.png?v=15"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -79,16 +79,16 @@
 .bn-win .bn-total b{color:var(--accent);text-shadow:0 0 20px rgba(0,212,255,.45)}
 .bn-win .bn-total small{margin:0 0 0 .1rem}
 .bn-win .bn-total{justify-content:center}
-.bn-slots{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:.8rem}
+.bn-slots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.4rem;margin-bottom:.8rem}
 .bn-slot{display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.6rem 0 .5rem;border-radius:12px;background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.15);animation:bnSlot 5s ease-in-out infinite;animation-delay:calc(var(--k) * .45s)}
 .bn-slot em{font-style:normal;font-size:1.15rem;filter:grayscale(.7);transition:filter .3s}
-.bn-slot b{font-family:var(--font-display);font-size:1rem;letter-spacing:1px;color:rgba(255,255,255,.55)}
+.bn-slot b{font-family:var(--font-display);font-size:.9rem;letter-spacing:1px;color:rgba(255,255,255,.55)}
 @keyframes bnSlot{0%,8%{background:rgba(0,212,255,.05);border-color:rgba(0,212,255,.15);box-shadow:none;scale:1}14%{background:rgba(0,212,255,.2);border-color:rgba(0,212,255,.8);box-shadow:0 0 22px -4px rgba(0,212,255,.8);scale:1.08}24%,70%{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.5);box-shadow:0 0 14px -6px rgba(0,212,255,.8);scale:1}85%,100%{background:rgba(0,212,255,.05);border-color:rgba(0,212,255,.15);box-shadow:none}}
 .bn-slot{--lit:0}
 .asb-icon{display:inline-block;transform-origin:50% 80%;animation:bnLock 4s ease-in-out infinite}
 @keyframes bnLock{0%,70%,100%{rotate:0deg}75%{rotate:-14deg}80%{rotate:12deg}85%{rotate:-8deg}90%{rotate:4deg}}
 .bonus-card .btn-primary{width:100%;justify-content:center}
-@media (max-width:560px){.bn-row{grid-template-columns:74px 1fr 50px}.bn-slot em{font-size:.95rem}.bn-slot b{font-size:.8rem}.bn-slots{gap:.3rem}}
+@media (max-width:560px){.bn-row{grid-template-columns:74px 1fr 50px}.bn-slot em{font-size:.85rem}.bn-slot b{font-size:.7rem}.bn-slots{gap:.25rem}}
 @media (prefers-reduced-motion:reduce){.bn-art::after,.bn-slot,.asb-icon{animation:none}.bn-bar i{width:var(--w)!important}}
 </style>
 <script>
@@ -103,7 +103,7 @@
 })();
 </script>
 <style>
-/* October: "2x DOUBLED" ribbon on the daily giveaway card */
+/* "2x DOUBLED" ribbon (October promo, no longer shown) */
 .bn-badges{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:flex-end}
 .bn-2x{display:inline-flex;align-items:baseline;gap:.35rem;padding:.32rem .7rem;border-radius:999px;font:400 1.05rem/1 var(--font-display);letter-spacing:1px;color:#001a22;background:linear-gradient(135deg,#7cf3ff,#00d4ff 55%,#00a6d6);box-shadow:0 0 0 0 rgba(0,212,255,.55);animation:bn2xPulse 2.4s ease-in-out infinite;position:relative;overflow:hidden}
 .bn-2x small{font:800 .58rem var(--font-head);letter-spacing:1.6px}
@@ -153,7 +153,7 @@
   <p>Everything Jake gives you on top of Stake's own offers. All free, all real.</p>
   <div class="pg-strip">
     <div class="pg-stat"><b>200%</b><span>Deposit match</span></div><i></i>
-    <div class="pg-stat"><b>$1,000</b><span>Given away daily</span></div><i></i>
+    <div class="pg-stat"><b>$350</b><span>Given away daily</span></div><i></i>
     <div class="pg-stat"><b>5</b><span>Winners every day</span></div>
   </div>
   <button type="button" class="pg-code" onclick="pgCopy(this)" aria-label="Copy code JAKE"><span class="pg-code-k">Code</span><b>JAKE</b><span class="pg-code-c">Copy Code</span></button>
@@ -212,20 +212,20 @@
     <div style="position:relative;z-index:1;">
     <div class="bonus-header">
       <div class="bonus-icon">🎁</div>
-      <div class="bn-badges"><div class="bn-2x" title="Up from $500/day">2× <small>DOUBLED</small></div><div class="bonus-amount-badge">$1,000/DAY</div></div>
+      <div class="bn-badges"><div class="bonus-amount-badge">$350/DAY</div></div>
     </div>
     <div class="bn-art bn-win" aria-hidden="true">
       <div class="bn-slots">
-        <div class="bn-slot" style="--k:0"><em>🏆</em><b>$200</b></div><div class="bn-slot" style="--k:1"><em>🏆</em><b>$200</b></div><div class="bn-slot" style="--k:2"><em>🏆</em><b>$200</b></div><div class="bn-slot" style="--k:3"><em>🏆</em><b>$200</b></div><div class="bn-slot" style="--k:4"><em>🏆</em><b>$200</b></div>
+        <div class="bn-slot" style="--k:0"><em>🏆</em><b>$50</b></div><div class="bn-slot" style="--k:1"><em>🏆</em><b>$50</b></div><div class="bn-slot" style="--k:2"><em>🏆</em><b>$50</b></div><div class="bn-slot" style="--k:3"><em>🏆</em><b>$50</b></div><div class="bn-slot" style="--k:4"><em>🏆</em><b>$50</b></div><div class="bn-slot" style="--k:5"><em>🏆</em><b>$50</b></div><div class="bn-slot" style="--k:6"><em>🏆</em><b>$50</b></div>
       </div>
-      <div class="bn-total"><span>5 winners × $200 =</span><b>$1,000</b><small>paid out daily</small></div>
+      <div class="bn-total"><span>7 winners × $50 =</span><b>$350</b><small>paid out daily</small></div>
     </div>
     <div class="bonus-title">DAILY GIVEAWAY</div>
-    <div class="bonus-desc">Every day, <strong style="color:#fff">5 winners of $200</strong> are chosen from active players under code JAKE, and winners are <strong style="color:#fff">paid out daily</strong>. To keep it rewarding for the most active players, the giveaway roles have higher requirements. See <strong style="color:#fff">#1000-daily-gw</strong> in the Discord for the details.</div>
+    <div class="bonus-desc">Every day, <strong style="color:#fff">7 winners of $50</strong> are chosen from active players under code JAKE, and winners are <strong style="color:#fff">paid out daily</strong>. To keep it rewarding for the most active players, the giveaway roles have higher requirements. See <strong style="color:#fff">#1000-daily-gw</strong> in the Discord for the details.</div>
     <ul class="bonus-steps">
       <li><div class="step-num">1</div><span>Play on Stake under code <strong>JAKE</strong></span></li>
       <li><div class="step-num">2</div><span>Hold a giveaway role (requirements in <strong>#1000-daily-gw</strong>)</span></li>
-      <li><div class="step-num">3</div>5 winners drawn and paid out every day</li>
+      <li><div class="step-num">3</div>7 winners drawn and paid out every day</li>
     </ul>
     <a href="https://discord.com/invite/jakethedegen" target="_blank" class="btn-primary" style="background:var(--accent);color:#000;">Join Discord Giveaway</a>
     </div>

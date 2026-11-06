@@ -766,9 +766,24 @@
 const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/1SW5j8VUSEcbj2Te9naiFB_zQzpwyjWnsjKyMxcM5l90/export?format=csv&gid=235680015';
 const SHEET_CSV_PREV = 'https://docs.google.com/spreadsheets/d/1SW5j8VUSEcbj2Te9naiFB_zQzpwyjWnsjKyMxcM5l90/export?format=csv&gid=1502602180';
 const DISPLAY_ROWS = 110;
-/* Prize table from the October 2026 board onwards (set by Jake). Top 3 get 10% / 7.5% / 5% lossback,
-   4th-10th get 5% lossback (added 26 Oct 2026). */
+/* Prize table from the November 2026 board onwards (set by Jake): lossback for the top 3 only --
+   1st 10%, 2nd 7.5%, 3rd 5%. 4th-10th are cash only. */
 const _LB_PRIZES = [
+  {cash:20000,lb:'10%'},{cash:10000,lb:'7.5%'},{cash:5000,lb:'5%'},
+  4000,3500,3000,2500,2250,2000,1650,
+  1400,1300,1250,1125,1000,950,875,750,700,675,
+  650,600,550,450,400,350,325,300,275,250,
+  225,200,195,190,180,175,170,165,160,155,
+  150,145,140,135,130,125,120,115,110,105,
+  100,100,100,100,100,100,100,100,100,100,
+  90,90,90,90,90,90,90,90,90,90,
+  75,75,75,75,75,75,75,75,75,75,
+  60,60,60,60,60,60,60,60,60,60,
+  50,50,50,50,50,50,50,50,50,50
+];
+/* The October 2026 board: top 3 got 10% / 7.5% / 5% lossback and 4th-10th got 5% lossback.
+   Still used for the "Previous Month" view of that board. */
+const _LB_PRIZES_OCT = [
   {cash:20000,lb:'10%'},{cash:10000,lb:'7.5%'},{cash:5000,lb:'5%'},
   {cash:4000,lb:'5%'},{cash:3500,lb:'5%'},{cash:3000,lb:'5%'},{cash:2500,lb:'5%'},{cash:2250,lb:'5%'},{cash:2000,lb:'5%'},{cash:1650,lb:'5%'},
   1400,1300,1250,1125,1000,950,875,750,700,675,
@@ -798,13 +813,16 @@ const _LB_PRIZES_OLD = [
   25,25,25,25,25,25,25,25,25,25,
   25
 ];
-const _LB_NEW_PRIZES_FROM = Date.UTC(2026, 9, 1, 0, 0, 0); /* Oct 1 2026 -- the October board was the first with the new prizes */
+const _LB_NEW_PRIZES_FROM = Date.UTC(2026, 9, 1, 0, 0, 0);  /* Oct 1 2026 -- the October board was the first with the October prizes */
+const _LB_NOV_PRIZES_FROM = Date.UTC(2026, 10, 1, 0, 0, 0); /* Nov 1 2026 -- lossback for the top 3 only from the November board */
 function _prizeTable(){
   if(_currentTab !== 'previous') return _LB_PRIZES;
   try{
     const w = _raceWindow(); /* the Previous Month tab is the board before the sheet's current one */
-    const lastReset = new Date(w.start); /* the previous board ended when the sheet's current board started */
-    return (lastReset.getTime() <= _LB_NEW_PRIZES_FROM + 6*3600*1000) ? _LB_PRIZES_OLD : _LB_PRIZES;
+    const lastReset = new Date(w.start).getTime(); /* the previous board ended when the sheet's current board started */
+    if (lastReset <= _LB_NEW_PRIZES_FROM + 6*3600*1000) return _LB_PRIZES_OLD;   /* previous = September */
+    if (lastReset <= _LB_NOV_PRIZES_FROM + 6*3600*1000) return _LB_PRIZES_OCT;   /* previous = October */
+    return _LB_PRIZES;
   }catch(e){ return _LB_PRIZES; }
 }
 let _liveData=null, _prevData=null, _liveMode=false, _prevMode=false, _lbObs=null, _currentTab='current';
