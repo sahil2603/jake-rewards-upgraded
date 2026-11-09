@@ -250,3 +250,6 @@ html.jm-leaving #jm-veil{animation:jmVeilIn .3s ease forwards}
 
 /* small phones: page titles like "$75,000 LEADERBOARD" were wider than the screen */
 @media (max-width:480px){.page-hero h1{font-size:clamp(1.8rem,9vw,2.5rem);letter-spacing:1.5px;overflow-wrap:anywhere}}
+
+/* keep the closing CTA off the screen edges on tablets */
+.pg-start{max-width:min(1100px,calc(100% - 2rem))}

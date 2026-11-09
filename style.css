@@ -796,3 +796,40 @@ img{max-width:100%;}
 .footer-socials a.fs-kick:hover .kick-icon{background:#53FC18;}
 .footer-socials a.fs-kick:hover .kick-icon path{fill:#000;}
 .footer-socials a.fs-youtube:hover svg{fill:#FF0000;}
+
+/* ════════════════════════════════════════
+   NAV v3 (Nov 2026): every page listed on its own, no dropdown
+════════════════════════════════════════ */
+.nav-links{gap:1.25rem}
+.nav-links>li>a{font-size:.8rem;letter-spacing:.2px;white-space:nowrap;padding:.35rem 0}
+.nav-links a em{font-style:normal;font-weight:800;color:var(--gold);transition:text-shadow .25s}
+.nav-links>li>a:hover em,.nav-links>li>a.active em{text-shadow:0 0 10px rgba(252,194,0,.8)}
+.nav-hamburger{width:42px;height:42px;border-radius:10px;border:1px solid rgba(252,194,0,.25)!important;background:rgba(252,194,0,.06)!important;font-size:1.15rem!important;line-height:1}
+.mobile-nav{max-height:calc(100dvh - 70px);overflow-y:auto;padding:.6rem 1.2rem 1rem;gap:2px;background:rgba(10,13,19,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.mobile-nav a{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem .9rem!important;border-radius:10px;border-bottom:none!important;font-size:.95rem}
+.mobile-nav a em{font-style:normal;font:400 1.05rem/1 var(--font-display);letter-spacing:1px;color:var(--gold);padding:.25rem .55rem;border-radius:6px;background:rgba(252,194,0,.08);border:1px solid rgba(252,194,0,.22)}
+.mobile-nav a.active{background:rgba(252,194,0,.08);color:#fff;box-shadow:inset 3px 0 0 var(--gold)}
+.mobile-nav.open a{animation:jrMob .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 35ms)}
+@keyframes jrMob{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+/* compact: keep the header content inside a centred 1240px band instead of edge to edge */
+.nav{padding-left:max(1.6rem,calc((100% - 1240px) / 2));padding-right:max(1.6rem,calc((100% - 1240px) / 2))}
+.nav-links{gap:1.6rem}
+/* logo | links (truly centred) | Discord, so the links never drift to one side */
+@media(min-width:1101px){.nav{display:grid;grid-template-columns:1fr auto 1fr;column-gap:1.2rem}.nav-logo{justify-self:start}.nav-cta{justify-self:end}}
+/* tablets in landscape / small laptops: Discord shrinks to an icon instead of disappearing */
+@media(max-width:1300px){.nav-links{gap:1.1rem}.nav-cta{font-size:0;gap:0;padding:.62rem;border-radius:10px}.nav-cta svg{width:18px;height:18px}}
+@media(max-width:1100px){.nav-links,.nav-cta{display:none}.nav-hamburger{display:block}}
+#mobile-bottom-nav .mbn-item span:last-child{white-space:nowrap}
+
+/* ════════════════════════════════════════
+   FAIR-PLAY NOTICE (every page, above the footer)
+════════════════════════════════════════ */
+.jr-deny{position:relative;z-index:1;max-width:1100px;margin:0 auto 3rem;padding:1rem 1.3rem;display:flex;align-items:center;gap:1rem;border-radius:14px;background:linear-gradient(90deg,rgba(255,92,92,.10),rgba(255,92,92,.03) 60%,transparent);border:1px solid rgba(255,110,110,.28);color:var(--text)}
+.jr-deny svg{flex:none;width:30px;height:30px;color:#ff7a7a}
+.jr-deny p{margin:0;font-size:.92rem;line-height:1.5;color:#e9d6d6}
+.jr-deny b{color:#fff;font-family:var(--font-head);font-weight:800;margin-right:.35rem}
+@media(max-width:1180px){.jr-deny{margin:0 1rem 2.5rem}}
+@media(prefers-reduced-motion:reduce){.mobile-nav.open a{animation:none}}
+/* Syne's default figures read like letters ("$5oo"); use lining figures in the nav and the new pages */
+.nav-links,.mobile-nav,#mobile-bottom-nav,.footer-col,.jr-lbnote,body.pg-lossback *,body.pg-free100 *,body.pg-giveaway *{font-feature-settings:"lnum"}
+.footer-responsible{align-self:start}
