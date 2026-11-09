@@ -97,7 +97,7 @@
     '.lb-tabs', '.countdown-bar', '.lb-pool-card', '.cutoff-banner', '.lb-podium-wrap', '.lb-table-wrap', '.wager-rules', '.claim-notice',
     '.refer-update-banner', '.refer-section-label', '.rg-card', '.ref-step', '.refer-cta', '.refer-fine',
     '.stream-info', '.stream-card', '.paid-inner', '.legal-wrap',
-    '.footer-brand', '.footer-col', '.footer-responsible', '.footer-disclaimer'
+    '.footer-brand', '.footer-col', '.footer-responsible', '.footer-disclaimer', '.jr-rv', '.jr-deny'
   ].join(',');
   var els = [].slice.call(document.querySelectorAll(REVEAL)).filter(function(el){ return !el.matches(OWN) && !el.closest('.hero') && !el.closest('#mobile-bottom-nav'); });
   document.querySelectorAll('.section-header h2, .page-hero h1').forEach(split);
@@ -160,7 +160,7 @@
     /* crossing gold marquee bands, between the rewards grid and "how it works" */
     var how = document.querySelector('.how-section');
     if(how){
-      var items = ['Code <b>JAKE</b>', '$75,000 Monthly Leaderboard', '$500 Daily Giveaway', 'Rank-Up Rewards', 'Lossback', 'Refer a Friend', 'Over $1,000,000 Given Away'];
+      var items = ['Code <b>JAKE</b>', '$75,000 Monthly Leaderboard', '$350 Daily Giveaway', 'Rank-Up Rewards', 'Lossback', 'Refer a Friend', 'Over $1,000,000 Given Away'];
       var row = items.map(function(t){ return '<span>' + t.replace(/<\/?b>/g, '') + '</span><i>✦</i>'; }).join('');
       var wrap = document.createElement('div'); wrap.className = 'jm-bands'; wrap.setAttribute('aria-hidden', 'true');
       wrap.innerHTML = '<div class="jm-band b"><div class="jm-mq-track"><div class="jm-mq-row">' + row + '</div><div class="jm-mq-row">' + row + '</div><div class="jm-mq-row">' + row + '</div></div></div>'
@@ -315,7 +315,7 @@
   }
   function state(el, kind){ if(!el._jm){ el._jm = { el: el, kind: kind, cx: 0, cy: 0, tx: 0, ty: 0, on: true }; active.push(el._jm); } el._jm.on = true; return el._jm; }
   if(FINE && !RM){
-    var TILT = '.rh-card,.reward-card,.hub-card,.tier-card,.bonus-card,.social-card,.lb-pool-card,.refer-hero-card,.rg-card,.how-step,.hs-card';
+    var TILT = '.rh-card,.reward-card,.hub-card,.tier-card,.bonus-card,.social-card,.lb-pool-card,.refer-hero-card,.rg-card,.how-step,.hs-card,.jr-tilt';
     var MAG = '.btn-primary,.btn-ghost,.nav-cta,.code-copy-btn,.asb-cta,.stream-watch-btn';
     document.querySelectorAll(TILT).forEach(function(c){ if(c.parentNode) c.parentNode.style.perspective = '1100px'; });
     document.addEventListener('pointermove', function(e){
