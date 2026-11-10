@@ -160,7 +160,7 @@
     /* crossing gold marquee bands, between the rewards grid and "how it works" */
     var how = document.querySelector('.how-section');
     if(how){
-      var items = ['Code <b>JAKE</b>', '$75,000 Monthly Leaderboard', '$350 Daily Giveaway', 'Rank-Up Rewards', 'Lossback', 'Refer a Friend', 'Over $1,000,000 Given Away'];
+      var items = ['Code <b>JAKE</b>', '$75,000 Monthly Leaderboard', '$100 Daily Giveaway', 'Rank-Up Rewards', 'Lossback', 'Refer a Friend', 'Over $1,000,000 Given Away'];
       var row = items.map(function(t){ return '<span>' + t.replace(/<\/?b>/g, '') + '</span><i>✦</i>'; }).join('');
       var wrap = document.createElement('div'); wrap.className = 'jm-bands'; wrap.setAttribute('aria-hidden', 'true');
       wrap.innerHTML = '<div class="jm-band b"><div class="jm-mq-track"><div class="jm-mq-row">' + row + '</div><div class="jm-mq-row">' + row + '</div><div class="jm-mq-row">' + row + '</div></div></div>'
